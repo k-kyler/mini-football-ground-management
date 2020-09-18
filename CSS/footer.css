@@ -1,0 +1,87 @@
+.footer {
+	background-color: #1a1f16;
+	padding: 2rem;
+}
+
+.footer-content {
+	color: white;
+}
+
+.logo-team {
+	height: 2.5rem;
+}
+
+.logo {
+	padding-top: 3rem;
+}
+
+.footer-item .item-title {
+	font-size: 1.3rem;
+}
+
+.footer-item span {
+	font-weight: 700;
+	font-size: 1rem;
+}
+
+.footer-item {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+.footer-item p {
+	cursor: pointer;
+}
+
+.footer-item p:hover {
+	color: #94ECBE;
+}
+
+.logo span:hover {
+	cursor: pointer;
+	color: #94ECBE;
+}
+
+.footer-item .item-title {
+	pointer-events: none;
+}
+
+.footer-socialnetworks ul {
+	display: flex;
+	list-style-type: none;
+	text-decoration: none;
+}
+
+.footer-socialnetworks li a {
+	color: white;
+	font-size: 0.7rem;
+	padding: 0 2rem 0 0;
+}
+
+.footer-socialnetworks li a:hover {
+	color: #94ECBE;
+}
+
+.footer-copyright {
+	color:#818282;
+	font-size: 0.7rem;
+	pointer-events: none;
+	margin-top: 2rem;
+}
+
+.footer-line {
+	margin: 1.2rem 0;
+	height: 0.05rem;
+	background-color: white;
+}
+
+.footer-content-2 {
+	padding: 0 11rem;
+}
+
+.footer-license {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
