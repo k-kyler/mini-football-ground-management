@@ -9,7 +9,7 @@
         <div class="row">
             <div class="footer-item logo col-4">
                 <img src="./Images/code.png" class="logo-team">
-                <span>KHV Team</span>
+                <span>KHV Dev</span>
             </div>
 
             <div class="footer-item col-4">
