@@ -9,18 +9,8 @@
     </head>
 
     <body>
-        <!-- Header -->
-        <?php
-            require_once('header.php');
-        ?>
-
-        
-
-        <!-- Footer -->
-        <?php
-            require_once('footer.php');
-		?>
 		
+    
 		<!-- Font Awesome -->
 		<script src="https://kit.fontawesome.com/a65ad4e019.js" crossorigin="anonymous"></script>
     </body>

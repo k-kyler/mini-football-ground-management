@@ -3,9 +3,16 @@
 }
 
 body {
+    display: flex;
+    height: 100%;
+    flex-direction: column;
     padding: 0;
     margin: 0;
     font-family: "Roboto", "Times New Roman", Arial, Helvetica, sans-serif;
+}
+
+.wrapper {
+    flex: 1 0 auto;
 }
 
 .row::after {
@@ -31,3 +38,4 @@ body {
 .col-10 { width: 83.33%; }
 .col-11 { width: 91.66%; }
 .col-12 { width: 100%; }
+
