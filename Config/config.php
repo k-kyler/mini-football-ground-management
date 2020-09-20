@@ -1,6 +1,6 @@
 <?php
     // Call functions
-    require_once('../Functions/functions.php');
+    require_once(realpath(dirname(__FILE__) . '/..') . '/Functions/functions.php');
 
     // Create access to MySQL database
     session_start();
