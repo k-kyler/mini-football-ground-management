@@ -10,4 +10,10 @@
             return $conn;
         }
     }
+
+    function getImages($db) {
+        $sqlQuery = "select * from images";
+
+        return $db -> query($sqlQuery);
+    }
 ?>
