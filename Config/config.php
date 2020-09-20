@@ -1,0 +1,12 @@
+<?php
+    // Call functions
+    require_once('../Functions/functions.php');
+
+    // Create access to MySQL database
+    session_start();
+    define('SERVER', '127.0.0.1');
+    define('USER', 'kkyler');
+    define('PASS', '123456');
+    define('ROOT', dirname(__FILE__));
+    define('HOST', 'http://localhost:81');
+?>
