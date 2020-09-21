@@ -9,12 +9,10 @@
     </head>
 
     <body>
-		
-    
-		  <!-- Font Awesome -->
-		  <script src="https://kit.fontawesome.com/a65ad4e019.js" crossorigin="anonymous"></script>
+		  	<!-- Font Awesome -->
+		  	<script src="https://kit.fontawesome.com/a65ad4e019.js" crossorigin="anonymous"></script>
 
-      <!-- jQuery -->
-      <script src="jquery-3.5.1.js"></script>
+            <!-- jQuery -->
+            <script src="jquery-3.5.1.js"></script>
     </body>
 </html>
