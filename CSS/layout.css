@@ -3,6 +3,7 @@
 }
 
 body {
+    background-color: #d3e3d26e;
     display: flex;
     height: 100%;
     flex-direction: column;
