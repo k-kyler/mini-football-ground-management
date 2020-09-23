@@ -72,8 +72,8 @@
 }
 
 .footer-line {
-	margin: 0.5rem 0;
-	height: 0.05rem;
+	margin: 10px 0;
+	height: 1px;
 	background-color: #797272;
 }
 
