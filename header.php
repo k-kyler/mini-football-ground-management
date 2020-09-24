@@ -12,7 +12,7 @@
             <div class="banner-text">Sân bóng mini KHV</div>
         </div>
 
-        <a class="user-login" href="#">
+        <a class="user-login" href="login.php">
             <img src="./Images/user-logo.png">
 
             <div class="login">Đăng nhập</div>
