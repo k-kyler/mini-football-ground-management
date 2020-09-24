@@ -23,5 +23,5 @@ function sliderMain() {
     slides[index - 1].style.display = "block";
     dots[index - 1].className += " active";
 
-    setTimeout(sliderMain, 7000);
+    setTimeout(sliderMain, 5000);
 }
