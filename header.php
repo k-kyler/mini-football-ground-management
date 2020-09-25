@@ -15,7 +15,13 @@
         <a class="user-login" href="login.php">
             <img src="./Images/user-logo.png">
 
-            <div class="login">Đăng nhập</div>
+            <?php
+                if (isset($_SESSION['username'])) {
+                    ?>
+                        <div class="login"><?= $_SESSION['username'] ?></div>
+                    <?php
+                }
+            ?>
         </a>
     </div>
 

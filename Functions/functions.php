@@ -16,4 +16,24 @@
 
         return $db -> query($sqlQuery);
     }
+
+    function getUserByName($db, $username) {
+        $sqlQuery = "select * from users where user_name = ?";
+
+        $stm = $db ->prepare($sqlQuery);
+        $stm -> bind_param('s', $username);
+        $status = $stm -> execute();
+
+        if ($status) {
+            $data = $stm -> get_result();
+
+            return $data;
+        }
+
+        else {
+            $stm -> close();
+
+            return null;
+        }
+    }
 ?>
