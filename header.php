@@ -21,6 +21,12 @@
                         <div class="login"><?= $_SESSION['username'] ?></div>
                     <?php
                 }
+
+                else {
+                    ?>
+                        <div class="login">Đăng nhập</div>
+                    <?php
+                }
             ?>
         </a>
     </div>
