@@ -11,6 +11,9 @@
     // Config
     require_once('./Config/config.php');
 
+    // Login validate
+    require_once('./Validates/login-validate.php');
+
     // Login processing
     if (isset($_POST['submit'])) {
         // Data from form
@@ -18,16 +21,8 @@
         $passwordInput = $_POST['password'];
 
         // Validate login data
-        // Remove HTML tags
-        $usernameInput = strip_tags($usernameInput);
-        $passwordInput = strip_tags($passwordInput);
-
-        // Remove specified characters
-        $usernameInput = addslashes($usernameInput);
-        $passwordInput = addslashes($passwordInput);
-
-        // Encoded password
-        $passwordInput = md5($passwordInput);
+        $usernameInput = userNameValidate($usernameInput);
+        $passwordInput = passwordValidate($passwordInput);
 
         // Compare with data from database
         $db = getDatabase();
