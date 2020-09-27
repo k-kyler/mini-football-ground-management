@@ -1,15 +1,14 @@
 .slider-container {
     width: 100%;
-    height: 100%;
     overflow: hidden;
     position: relative;
-    border-radius: 10px;
 }
 
 .slider-main {
     width: 100%;
     overflow: hidden;
     max-height: 25rem;
+    border-radius: 10px;
 }
 
 .slide {
