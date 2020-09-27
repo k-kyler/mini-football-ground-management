@@ -89,7 +89,7 @@
 
                 <input type="submit" value="Đăng nhập" name="submit">
 
-                <a href="#">Chưa có tài khoản?</a>
+                <a href="register.php">Chưa có tài khoản?</a>
             </form>
         </div>
     <?php
