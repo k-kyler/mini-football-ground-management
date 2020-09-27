@@ -12,7 +12,7 @@
     require_once('./Config/config.php');
 
     // Login validate
-    require_once('./Validates/login-validate.php');
+    require_once('./Validates/login-register-validate.php');
 
     // Login processing
     if (isset($_POST['submit'])) {
