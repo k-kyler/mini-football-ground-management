@@ -36,4 +36,54 @@
             return null;
         }
     }
+
+    function checkAndUploadRegisterData($usernameInput, $passwordInput, $emailInput, $phoneInput) {
+        $db = getDatabase();
+
+        $u = mysqli_escape_string($db, $usernameInput);
+        $p = mysqli_escape_string($db, $passwordInput);
+        $e = mysqli_escape_string($db, $emailInput);
+        $ph = mysqli_escape_string($db, $phoneInput);
+
+        $getUserName = $db -> query("select user_name from users where user_name = '$u'");
+        $getUserEmail = $db -> query("select user_email from users where user_email = '$e'");
+        $getUserPhone = $db -> query("select user_phone from users where user_phone = '$ph'");
+
+        if ($getUserName -> num_rows > 0) {
+            ?>
+                <style>
+                    .register-username-input::placeholder {
+                        color: red;
+                    }
+                </style>
+            <?php
+        }
+
+        else if ($getUserEmail -> num_rows > 0) {
+            ?>
+                <style>
+                    .register-email-input::placeholder {
+                        color: red;
+                    }
+                </style>
+            <?php
+        }
+
+        else if ($getUserPhone -> num_rows > 0) {
+            ?>
+                <style>
+                    .register-phone-input::placeholder {
+                        color: red;
+                    }
+                </style>
+            <?php
+        }
+
+        else {
+            $uploadRegisterData = "insert into users (user_name, user_password, user_email, user_phone) values ('$u', '$p', '$e', '$ph')";
+            $result = $db -> query($uploadRegisterData);
+
+            header("Location: login.php");
+        }
+    }
 ?>
