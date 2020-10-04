@@ -32,7 +32,7 @@
             ?>
                 <style>
                     .username-input::placeholder {
-                        color: rgb(145, 255, 0);
+                        color: red;
                     }
                 </style>
             <?php
@@ -52,7 +52,7 @@
                 ?>
                     <style>
                         .username-input::placeholder {
-                            color: rgb(145, 255, 0);
+                            color: red;
                         }
                     </style>
                 <?php
@@ -62,7 +62,7 @@
                 ?>
                     <style>
                         .password-input::placeholder {
-                            color: rgb(145, 255, 0);
+                            color: red;
                         }
                     </style>
                 <?php
