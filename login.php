@@ -45,6 +45,7 @@
 
             if ($user_name == $usernameInput && $user_password == $passwordInput && $usernameInput != "" && $passwordInput != "") {
                 $_SESSION['username'] = $user_name;
+
                 header("Location: index.php");
             }
     
