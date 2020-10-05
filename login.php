@@ -24,51 +24,8 @@
         $usernameInput = userNameValidate($usernameInput);
         $passwordInput = passwordValidate($passwordInput);
 
-        // Compare with data from database
-        $db = getDatabase();
-        $userInfo = getUserByName($db, $usernameInput);
-
-        if ($userInfo -> num_rows == 0) {
-            ?>
-                <style>
-                    .username-input::placeholder {
-                        color: red;
-                    }
-                </style>
-            <?php
-        }
-
-        else {
-            $data = $userInfo -> fetch_assoc();
-            $user_name = $data['user_name'];
-            $user_password = $data['user_password'];
-
-            if ($user_name == $usernameInput && $user_password == $passwordInput && $usernameInput != "" && $passwordInput != "") {
-                $_SESSION['username'] = $user_name;
-
-                header("Location: index.php");
-            }
-    
-            else if ($user_name != $usernameInput || $usernameInput == "") {
-                ?>
-                    <style>
-                        .username-input::placeholder {
-                            color: red;
-                        }
-                    </style>
-                <?php
-            }
-    
-            else if ($user_password != $passwordInput || $passwordInput == "") {
-                ?>
-                    <style>
-                        .password-input::placeholder {
-                            color: red;
-                        }
-                    </style>
-                <?php
-            }
-        }
+        // Call login
+        login($usernameInput, $passwordInput);
     }
 
     ?>
