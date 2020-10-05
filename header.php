@@ -20,10 +20,6 @@
                     ?>
                         <div class="login"><?= $_SESSION['username'] ?></div>
                     <?php
-
-                    ?>
-                        <script>alert("Đăng nhập thành công!");</script>
-                    <?php
                 }
 
                 else {
