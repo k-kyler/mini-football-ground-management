@@ -88,13 +88,14 @@
         }
     }
 
-    function checkAndUploadRegisterData($usernameInput, $passwordInput, $emailInput, $phoneInput) {
+    function checkAndUploadRegisterData($usernameInput, $passwordInput, $emailInput, $phoneInput, $realName) {
         $db = getDatabase();
 
         $u = mysqli_escape_string($db, $usernameInput);
         $p = mysqli_escape_string($db, $passwordInput);
         $e = mysqli_escape_string($db, $emailInput);
-        $ph = mysqli_escape_string($db, $phoneInput);
+        $e = mysqli_escape_string($db, $emailInput);
+        $r = mysqli_escape_string($db, $realName);
 
         $getUserName = $db -> query("select user_name from users where user_name = '$u'");
         $getUserEmail = $db -> query("select user_email from users where user_email = '$e'");
@@ -131,7 +132,7 @@
         }
 
         else {
-            $uploadRegisterData = "insert into users (user_name, user_password, user_email, user_phone) values ('$u', '$p', '$e', '$ph')";
+            $uploadRegisterData = "insert into users (user_name, user_password, user_email, user_phone, user_realname) values ('$u', '$p', '$e', '$ph', '$r')";
             $result = $db -> query($uploadRegisterData);
 
             header("Location: login.php");

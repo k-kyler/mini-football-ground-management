@@ -21,13 +21,14 @@
         $passwordInput = $_POST['password'];
         $emailInput = $_POST['email'];
         $phoneInput = $_POST['phone'];
+        $realNameInput = $_POST['realname'];
 
         // Validate register data
         $usernameInput = userNameValidate($usernameInput);
         $passwordInput = passwordValidate($passwordInput);
 
         // Check and upload data to database
-        checkAndUploadRegisterData($usernameInput, $passwordInput, $emailInput, $phoneInput);
+        checkAndUploadRegisterData($usernameInput, $passwordInput, $emailInput, $phoneInput, $realNameInput);
     }
 
     ?>
@@ -41,6 +42,9 @@
             <h1>Đăng ký tại đây!</h1>
 
             <form method="POST">
+                <p>Họ tên</p>
+                <input required type="text" name="realname">
+
                 <p>Tên đăng nhập</p>
                 <input required type="text" name="username" placeholder="Tên đăng nhập đã tồn tại" class="register-username-input">
 
