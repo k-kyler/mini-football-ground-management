@@ -94,7 +94,7 @@
         $u = mysqli_escape_string($db, $usernameInput);
         $p = mysqli_escape_string($db, $passwordInput);
         $e = mysqli_escape_string($db, $emailInput);
-        $e = mysqli_escape_string($db, $emailInput);
+        $ph = mysqli_escape_string($db, $phoneInput);
         $r = mysqli_escape_string($db, $realName);
 
         $getUserName = $db -> query("select user_name from users where user_name = '$u'");
