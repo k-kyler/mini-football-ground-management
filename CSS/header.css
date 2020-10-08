@@ -32,6 +32,7 @@
 .user-login img {
     height: 3rem;
     border-radius: 50%;
+    margin-right: 0.5rem;
 }
 
 .header-banner {
@@ -46,15 +47,15 @@
     display: flex;
     align-items: center;
     text-decoration: none;
+    color: #69ae58ba;
 }
 
 .login {
     padding-left: 0.6rem;
-    color: #69ae58ba;
     font-weight: 600;
 }
 
-.user-login:hover .login {
+.user-login:hover, .user-detail a:hover {
     color: #676f65ba;
 }
 
@@ -97,5 +98,26 @@
 }
 
 .nav-item-dropdown:hover .ground-type-dropdown {
+    display: block;
+}
+
+.login i {
+    font-size: 0.8rem;
+    margin-left: 0.3rem;
+}
+
+.user-detail {
+    display: none;
+    position: absolute;
+    padding: 1rem;
+    margin-left: 0.5rem;
+}
+
+.user-detail a {
+    text-decoration: none;
+    color: #69ae58ba;   
+}
+
+.login:hover .user-detail {
     display: block;
 }

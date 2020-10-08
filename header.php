@@ -13,17 +13,28 @@
         </div>
 
         <a class="user-login" href="login.php">
-            <img src="./Images/user-logo.png">
 
             <?php
                 if (isset($_SESSION['username'])) {
                     ?>
-                        <div class="login"><?= $_SESSION['username'] ?></div>
+                        <div class="login">
+                            <img src="./Images/user-logo.png">
+        
+                            <?= $_SESSION['username'] ?>
+                            
+                            <i class="fas fa-chevron-down"></i>
+
+                            <div class="user-detail">
+                                <a href="logout.php">Đăng xuất</a>
+                            </div>
+                        </div>
                     <?php
                 }
 
                 else {
                     ?>
+                        <img src="./Images/user-logo.png">
+
                         <div class="login">Đăng nhập</div>
                     <?php
                 }
