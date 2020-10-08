@@ -55,9 +55,13 @@
             $data = $userInfo -> fetch_assoc();
             $user_name = $data['user_name'];
             $user_password = $data['user_password'];
+            $user_type = $data['user_type'];
 
             if ($user_name == $usernameInput && $user_password == $passwordInput && $usernameInput != "" && $passwordInput != "") {
-                $_SESSION['username'] = $user_name;
+                session_start();
+
+                $_SESSION['user_name'] = $user_name;
+                $_SESSION['user_type'] = $user_type;
 
                 header("Location: index.php");
             }

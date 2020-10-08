@@ -15,17 +15,45 @@
         <a class="user-login" href="login.php">
 
             <?php
-                if (isset($_SESSION['username'])) {
+                if (isset($_SESSION['user_name']) && isset($_SESSION['user_type']) && $_SESSION['user_type'] == 'admin') {
                     ?>
                         <div class="login">
                             <img src="./Images/user-logo.png">
         
-                            <?= $_SESSION['username'] ?>
+                            <?= $_SESSION['user_name'] ?>
                             
                             <i class="fas fa-chevron-down"></i>
 
                             <div class="user-detail">
-                                <a href="logout.php">Đăng xuất</a>
+                                <a href="admin.php">
+                                    <p>Quản lý</p>
+                                </a>
+
+                                <a href="logout.php">
+                                    <p>Đăng xuất</p>
+                                </a>
+                            </div>
+                        </div>
+                    <?php
+                }
+
+                else if (isset($_SESSION['user_name']) && isset($_SESSION['user_type']) && $_SESSION['user_type'] == 'staff') {
+                    ?>
+                        <div class="login">
+                            <img src="./Images/user-logo.png">
+        
+                            <?= $_SESSION['user_name'] ?>
+                            
+                            <i class="fas fa-chevron-down"></i>
+
+                            <div class="user-detail">
+                                <a href="staff.php">
+                                    <p>Quản lý</p>
+                                </a>
+
+                                <a href="logout.php">
+                                    <p>Đăng xuất</p>
+                                </a>
                             </div>
                         </div>
                     <?php
