@@ -34,6 +34,12 @@
                                 </a>
                             </div>
                         </div>
+
+                        <script>
+                            $(document).ready(function() {
+                                $(".user-login").attr('href', 'javascript:void(0)');
+                            });
+                        </script>
                     <?php
                 }
 
@@ -56,6 +62,12 @@
                                 </a>
                             </div>
                         </div>
+
+                        <script>
+                            $(document).ready(function() {
+                                $(".user-login").attr('href', 'javascript:void(0)');
+                            });
+                        </script>
                     <?php
                 }
 
