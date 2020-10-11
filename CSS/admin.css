@@ -1,0 +1,82 @@
+.admin-background {
+    background: url("./Images/admin-background.jpg");
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.admin {
+    margin-bottom: 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.5rem 0;
+}
+
+.admin-logout a {
+    border: none;
+    background-color: #ea402a;
+    padding: 0.3rem;
+    color: white;
+    cursor: pointer;
+    border-radius: 3px;
+    text-decoration: none;
+}
+
+.admin-container {
+    padding: 1rem;
+    position: absolute;
+    color: white;
+    background-color: black;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    box-sizing: border-box;
+    width: 90%;
+    height: 85%;
+    opacity: 0.9;
+    border-radius: 5px;
+}
+
+.date-picker {
+    margin-bottom: 2rem;
+}
+
+.date-picker input[type="submit"], .date-picker input[type="text"] {
+    padding: 0.3rem;
+    border: none;
+    border-radius: 3px;
+}
+
+.date-picker input[type="submit"] {
+    background-color: #1d8ac2;
+    color: white;
+    cursor: pointer;
+}
+
+.booking-title, .empty-message {
+    text-align: center;
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+
+.booking-list {
+    overflow-x: auto;
+    margin-top: 1rem;
+}
+
+.booking-list table {
+    width: 100%;
+    color: white;
+}
+
+.booking-list th, td {
+    text-align: left;
+}
+
+.table-empty-message {
+    padding-top: 5%;
+    text-align: center;    
+}
