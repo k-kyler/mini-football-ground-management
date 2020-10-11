@@ -138,4 +138,10 @@
             header("Location: login.php");
         }
     }
+
+    function getBookingDetails($db) {
+        $sqlQuery = "select * from bookingdetails";
+
+        return $db -> query($sqlQuery);
+    }
 ?>
