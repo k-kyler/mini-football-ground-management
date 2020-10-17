@@ -84,7 +84,7 @@
 
     <div class="header-nav">
         <ul class="nav-items">
-            <a href="#">
+            <a href="index.php">
                 <li>Trang chủ</li>
             </a>
             
