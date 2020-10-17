@@ -1,0 +1,97 @@
+.admin-management-container, .admin-menu {
+    padding: 1rem;
+    color: white;
+    background-color: black;
+    opacity: 0.9;
+    border-radius: 5px;
+}
+
+.admin-menu {
+    height: 30rem;
+}
+
+.admin-management-container {
+    height: 100%;
+}
+
+.date-picker {
+    margin-bottom: 3rem;
+}
+
+.date-picker label {
+    font-weight: bold;
+}
+
+.date-picker input[type="submit"], .date-picker input[type="text"] {
+    padding: 0.3rem;
+    border: none;
+    border-radius: 3px;
+}
+
+.date-picker input[type="submit"] {
+    background-color: #1d8ac2;
+    color: white;
+    cursor: pointer;
+}
+
+.date-picker input[type="submit"]:hover {
+    opacity: 0.8;
+    transition: all 0.4s;
+}
+
+.booking-title, .empty-message {
+    text-align: center;
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+
+.booking-list {
+    overflow: auto;
+    margin-top: 1rem;
+}
+
+.booking-list table {
+    width: 100%;
+    color: white;
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+
+.booking-list th, td {
+    text-align: left;
+    padding: 0.8rem;
+    white-space: nowrap;
+}
+
+.table-empty-message {
+    padding-top: 5%;
+    text-align: center;    
+}
+
+.pay-button {
+    color: white;
+    padding: 0.5rem 0.3rem;
+    border-radius: 3px;
+    text-decoration: none;
+    border: none;
+    cursor: pointer;
+    background-color: rgb(245, 56, 56);
+}
+
+.pay-button:hover {
+    opacity: 0.8;
+    transition: all 0.4s;
+}
+
+.day-profit {
+    margin-top: 3rem;
+}
+
+.day-profit span {
+    color: rgb(243, 26, 26);
+}
+
+.payment-finish {
+    color: #50d96d;
+    font-weight: bold;
+}
