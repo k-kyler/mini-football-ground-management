@@ -26,7 +26,7 @@
                     </div>
 
                     <!-- Content -->
-                    <div class="col-8">
+                    <div class="col-8 col-0">
                         <!-- Slider main -->
                         <div class="slider-container">
                             <div class="slider-main" id="sliderMain">
