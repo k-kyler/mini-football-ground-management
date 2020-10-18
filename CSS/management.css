@@ -1,0 +1,136 @@
+.admin-background {
+    background: url("./Images/admin-background.jpg");
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    position: absolute;
+
+}
+
+.management-header {
+    background-color: black;
+    opacity: 0.8;
+    height: 5rem;
+    color: white;
+    display: flex;
+    padding: 2rem;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.management-header img {
+    height: 3rem;
+    padding-right: 0.5rem;
+}
+
+.company-logo {
+    pointer-events: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.company-name {
+    font-weight: bold;
+}
+
+.header-control {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.management-title {
+    font-size: 1.5rem;
+    font-weight: 500;
+    cursor: pointer;
+}
+
+.header-control .fa-chevron-down {
+    transition: all 0.4s ease-in-out 0s;
+}
+
+.header-control:hover .fa-chevron-down {
+    transform: rotate(-90deg);
+    transition: all 0.25s ease-in-out 0.2s;
+}
+
+.management-options {
+    padding-left: 2rem;
+    display: none;
+    transition: all 3s ease-in-out 0s;
+}
+
+.header-control:hover .management-options {
+    display: block;
+    transition: all 1s ease-in-out 1.5s;
+}
+
+.management-options a {
+    text-decoration: none;
+    color: white;
+    padding-left: 1rem;
+}
+
+.management-options a:hover {
+    opacity: 0.7;
+    transition: all 0.3s ease-in-out;
+}
+
+.admin-menu, .management {
+    background-color: black;
+    opacity: 0.8;
+    border-radius: 4px;
+}
+
+.admin-menu {
+    height: 100%;
+}
+
+.management {
+    height: 30rem;
+}
+
+.admin-menu-header {
+    pointer-events: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-top: 1rem;
+    color: white;
+}
+
+.admin-menu-header i {
+    font-size: 0.95rem;
+}
+
+.menu-title {
+    padding-right: 0.5rem;
+    font-weight: bold;
+}
+
+.admin-menu-list ul {
+    list-style-type: none;
+    padding-left: 0;
+}
+
+.admin-menu-list li {
+    padding: 1rem 2.5rem;
+    background-color: #50d96d;
+}
+
+.admin-menu-list li:not(last-child) {
+    border-bottom: 1px solid grey;
+}
+
+.admin-menu-list a {
+    color: white;
+    text-decoration: none;
+}
+
+.admin-menu-list a:hover {
+    color: yellow;
+    transition: all 0.3s ease;
+}
