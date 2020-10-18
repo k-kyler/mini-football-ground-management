@@ -55,8 +55,8 @@
 }
 
 .login {
-    padding-left: 0.6rem;
     font-weight: 600;
+    padding-right: 0.5rem;
 }
 
 .user-login:hover, .user-detail a:hover {
@@ -113,8 +113,6 @@
 .user-detail {
     display: none;
     position: absolute;
-    padding: 0 2.7rem;
-    text-align: center;
 }
 
 .user-detail a {
@@ -122,6 +120,14 @@
     color: #69ae58ba;   
 }
 
+.user-detail div:first-child {
+    padding-top: 1rem;
+}
+
 .login:hover .user-detail {
     display: block;
+}
+
+.login i {
+    padding-right: 0.5rem;
 }

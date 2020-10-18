@@ -15,39 +15,65 @@
         <a class="user-login" href="login.php">
 
             <?php
-                if (isset($_SESSION['user_name']) && isset($_SESSION['user_type']) && ($_SESSION['user_type'] == 'admin' || $_SESSION['user_type'] == 'staff')) {
-                    ?>
-                        <div class="login">
-                            <img src="./Images/user-logo.png">
-        
-                            <?= $_SESSION['user_name'] ?>
-                            
-                            <i class="fas fa-chevron-down"></i>
+                if (isset($_SESSION['user_name']) && isset($_SESSION['user_type'])) {
+                    if ($_SESSION['user_type'] == 'admin' || $_SESSION['user_type'] == 'staff') {
+                        ?>
+                            <div class="login">
+                                <?= $_SESSION['user_name'] ?>
 
-                            <div class="user-detail">
-                                <a href="management.php">
-                                    <p>Quản lý</p>
-                                </a>
+                                <i class="fas fa-chevron-down"></i>
 
-                                <a href="logout.php">
-                                    <p>Đăng xuất</p>
-                                </a>
+                                <img src="./Images/user-logo.png">
+            
+                                <div class="user-detail">
+                                    <a href="management.php">
+                                        <div>Quản lý</div>
+                                    </a>
+
+                                    <a href="logout.php">
+                                        <div>Đăng xuất</div>
+                                    </a>
+                                </div>
                             </div>
-                        </div>
 
-                        <script>
-                            $(document).ready(function() {
-                                $(".user-login").attr('href', 'javascript:void(0)');
-                            });
-                        </script>
-                    <?php
+                            <script>
+                                $(document).ready(function() {
+                                    $(".user-login").attr('href', 'javascript:void(0)');
+                                });
+                            </script>
+                        <?php
+                    }
+                    
+                    else {
+                        ?>
+                            <div class="login">
+                                <?= $_SESSION['user_name'] ?>
+
+                                <i class="fas fa-chevron-down"></i>
+
+                                <img src="./Images/user-logo.png">
+            
+                                <div class="user-detail">
+                                    <a href="logout.php">
+                                        <div>Đăng xuất</div>
+                                    </a>
+                                </div>
+                            </div>
+
+                            <script>
+                                $(document).ready(function() {
+                                    $(".user-login").attr('href', 'javascript:void(0)');
+                                });
+                            </script>
+                        <?php
+                    }
                 }
 
                 else {
                     ?>
-                        <img src="./Images/user-logo.png">
-
                         <div class="login">Đăng nhập</div>
+
+                        <img src="./Images/user-logo.png">
                     <?php
                 }
             ?>
