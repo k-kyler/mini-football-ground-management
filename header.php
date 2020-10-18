@@ -15,7 +15,7 @@
         <a class="user-login" href="login.php">
 
             <?php
-                if (isset($_SESSION['user_name']) && isset($_SESSION['user_type']) && $_SESSION['user_type'] == 'admin') {
+                if (isset($_SESSION['user_name']) && isset($_SESSION['user_type']) && ($_SESSION['user_type'] == 'admin' || $_SESSION['user_type'] == 'staff')) {
                     ?>
                         <div class="login">
                             <img src="./Images/user-logo.png">
@@ -25,35 +25,7 @@
                             <i class="fas fa-chevron-down"></i>
 
                             <div class="user-detail">
-                                <a href="admin.php">
-                                    <p>Quản lý</p>
-                                </a>
-
-                                <a href="logout.php">
-                                    <p>Đăng xuất</p>
-                                </a>
-                            </div>
-                        </div>
-
-                        <script>
-                            $(document).ready(function() {
-                                $(".user-login").attr('href', 'javascript:void(0)');
-                            });
-                        </script>
-                    <?php
-                }
-
-                else if (isset($_SESSION['user_name']) && isset($_SESSION['user_type']) && $_SESSION['user_type'] == 'staff') {
-                    ?>
-                        <div class="login">
-                            <img src="./Images/user-logo.png">
-        
-                            <?= $_SESSION['user_name'] ?>
-                            
-                            <i class="fas fa-chevron-down"></i>
-
-                            <div class="user-detail">
-                                <a href="staff.php">
+                                <a href="management.php">
                                     <p>Quản lý</p>
                                 </a>
 
