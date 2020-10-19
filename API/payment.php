@@ -14,6 +14,6 @@
 
         $result = $db -> query($sqlQuery);
 
-        header("Location: ../booking.php?datechoose=$bookingDate");
+        header("Location: ../management.php?datechoose=$bookingDate&m=bookingground_payment");
     }
 ?>
