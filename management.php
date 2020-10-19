@@ -42,7 +42,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-3 col-right-0">
-                    <div class="admin-menu">
+                    <div class="admin-menu-management">
                         <div class="admin-menu-header">
                             <div class="menu-title">MENU</div>
                             <i class="fas fa-bars"></i>
@@ -68,7 +68,19 @@
 
                 <div class="col-9">
                     <div class="management">
-
+                        <?php
+                            if (isset($_GET['m'])) {
+                                if ($_GET['m'] == "bookingground_payment") {
+                                    require_once('./booking.php');
+                                }
+                            }
+    
+                            else {
+                                ?>
+                                    <div class="empty-function-message">Bạn chưa chọn chức năng để hiển thị...</div>
+                                <?php
+                            }
+                        ?>
                     </div>
                 </div>
             </div>            

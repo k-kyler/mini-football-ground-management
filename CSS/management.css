@@ -79,13 +79,13 @@
     transition: all 0.3s ease-in-out;
 }
 
-.admin-menu, .management {
+.admin-menu-management, .management {
     background-color: black;
     opacity: 0.8;
     border-radius: 4px;
 }
 
-.admin-menu {
+.admin-menu-management {
     height: 100%;
 }
 
@@ -133,4 +133,12 @@
 .admin-menu-list a:hover {
     color: yellow;
     transition: all 0.3s ease;
+}
+
+.empty-function-message {
+    color: white;
+    text-align: center;
+    padding-top: 10%;
+    font-size: 1.2rem;
+    font-weight: bold;
 }
