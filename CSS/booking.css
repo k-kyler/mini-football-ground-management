@@ -1,16 +1,9 @@
-.admin-management-container, .admin-menu {
+.admin-management-container {
     padding: 1rem;
     color: white;
     background-color: black;
     opacity: 0.9;
     border-radius: 5px;
-}
-
-.admin-menu {
-    height: 30rem;
-}
-
-.admin-management-container {
     height: 100%;
 }
 
@@ -68,30 +61,49 @@
     text-align: center;    
 }
 
-.pay-button {
+.add-button, .delete-button, .edit-button, .pay-button {
     color: white;
-    padding: 0.5rem 0.3rem;
+    padding: 0.4rem;
+    text-align: center;
+    width: 100%;
     border-radius: 3px;
     text-decoration: none;
     border: none;
     cursor: pointer;
-    background-color: rgb(245, 56, 56);
+    background-color: rgb(38, 241, 38);
+    display: block;
 }
 
-.pay-button:hover {
+.add-button, .delete-button, .edit-button, .pay-button:not(:last-child) {
+    margin-right: 1.5rem;
+}
+
+.delete-button {
+    background-color: rgb(238, 34, 34);
+}
+
+.edit-button {
+    background-color: #1d8ac2;
+}
+
+.pay-button {
+    background-color: rgb(133, 33, 233);
+}
+
+.pay-button:hover, .delete-button:hover, .edit-button:hover, .add-button:hover {
     opacity: 0.8;
     transition: all 0.4s;
 }
 
 .day-profit {
-    margin-top: 3rem;
+    margin-top: 2rem;
 }
 
 .day-profit span {
     color: rgb(243, 26, 26);
 }
 
-.payment-finish {
-    color: #50d96d;
-    font-weight: bold;
+.management-area {
+    display: flex;
+    margin: 2.5rem 0;
 }

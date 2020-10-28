@@ -6,7 +6,6 @@
     background-position: center;
     background-repeat: no-repeat;
     position: absolute;
-
 }
 
 .management-header {
@@ -83,10 +82,6 @@
     background-color: black;
     opacity: 0.8;
     border-radius: 4px;
-}
-
-.admin-menu-management {
-    height: 100%;
 }
 
 .management {

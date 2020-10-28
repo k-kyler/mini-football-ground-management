@@ -45,7 +45,7 @@
 
             <!-- Booking ground & Payment processing -->
             <?php
-                // If user click on Chọn button
+                // User click on Chọn button
                 if (isset($_POST['submit'])) {                                    
                     ?>
                         <!-- Booking title -->
@@ -62,8 +62,9 @@
                                     <th>Thời gian bắt đầu</th>
                                     <th>Thời gian kết thúc</th>
                                     <th>Tổng thời gian (phút)</th>
-                                    <th>Tổng tiền</th>
-                                    <th>Trạng thái</th>
+                                    <th>Phí đặt sân</th>
+                                    <th>Phí phụ thu</th>
+                                    <th>Tổng chi phí</th>
                                 </tr>
                                 
                                 <!-- Get booking list data -->
@@ -83,12 +84,12 @@
                                             $bookingStart = $data['booking_start'];
                                             $bookingEnd = $data['booking_end'];
                                             $bookingTotaltime = $data['booking_totaltime'];
-                                            $bookingTotalmoney = $data['booking_totalmoney'];
+                                            $bookingCost = $data['booking_cost'];
                                             $bookingDate = $data['booking_date'];
-                                            $bookingStatus = $data['booking_status'];
+                                            // $bookingStatus = $data['booking_status'];
                                             
                                             if ($bookingDate == $_POST['dateChoose']) {
-                                                $totalDayProfit += $bookingTotalmoney;
+                                                $totalDayProfit += $bookingCost;
 
                                                 ?>
                                                     <tr>
@@ -99,22 +100,9 @@
                                                         <td><?= $bookingStart ?></td>
                                                         <td><?= $bookingEnd ?></td>
                                                         <td><?= $bookingTotaltime ?></td>
-                                                        <td><?= number_format($bookingTotalmoney) ?></td>
-                                                        <td>
-                                                            <?php
-                                                                if ($bookingStatus == "isPaid") {
-                                                                    ?>
-                                                                        <div class="payment-finish">Đã thanh toán</div>
-                                                                    <?php
-                                                                }
-
-                                                                else {
-                                                                    ?>
-                                                                        <a href="./API/payment.php?bookingid=<?= $bookingId ?>&bookingdate=<?= $bookingDate ?>" class="pay-button">Thanh toán</a>
-                                                                    <?php
-                                                                }
-                                                            ?>
-                                                        </td>
+                                                        <td><?= number_format($bookingCost) ?></td>
+                                                        <td></td>
+                                                        <td><?= number_format($bookingCost) ?></td>
                                                     </tr>
                                                 <?php
                                             }
@@ -133,6 +121,14 @@
                             }
                         ?>
                         
+                        <!-- Management area -->
+                        <div class="management-area">
+                            <a href="./API/add.php?bookingid=<?= $bookingId ?>&bookingdate=<?= $bookingDate ?>" class="add-button">Thêm</a>
+                            <a href="./API/edit.php?bookingid=<?= $bookingId ?>&bookingdate=<?= $bookingDate ?>" class="edit-button">Chỉnh sửa</a>
+                            <a href="./API/delete.php?bookingid=<?= $bookingId ?>&bookingdate=<?= $bookingDate ?>" class="delete-button">Xóa</a>
+                            <a href="./API/payment.php?bookingid=<?= $bookingId ?>&bookingdate=<?= $bookingDate ?>" class="pay-button">Thanh toán</a>
+                        </div>
+
                         <!-- Display day profit -->
                         <div class="day-profit">
                             Tổng doanh thu của ngày: 
@@ -158,8 +154,9 @@
                                     <th>Thời gian bắt đầu</th>
                                     <th>Thời gian kết thúc</th>
                                     <th>Tổng thời gian (phút)</th>
-                                    <th>Tổng tiền</th>
-                                    <th>Trạng thái</th>
+                                    <th>Phí đặt sân</th>
+                                    <th>Phí phụ thu</th>
+                                    <th>Tổng chi phí</th>
                                 </tr>
                                 
                                 <!-- Get booking list data -->
@@ -179,12 +176,12 @@
                                             $bookingStart = $data['booking_start'];
                                             $bookingEnd = $data['booking_end'];
                                             $bookingTotaltime = $data['booking_totaltime'];
-                                            $bookingTotalmoney = $data['booking_totalmoney'];
+                                            $bookingCost = $data['booking_cost'];
                                             $bookingDate = $data['booking_date'];
-                                            $bookingStatus = $data['booking_status'];
+                                            // $bookingStatus = $data['booking_status'];
                                             
                                             if ($bookingDate == $_GET['datechoose']) {
-                                                $totalDayProfit += $bookingTotalmoney;
+                                                $totalDayProfit += $bookingCost;
 
                                                 ?>
                                                     <tr>
@@ -195,22 +192,9 @@
                                                         <td><?= $bookingStart ?></td>
                                                         <td><?= $bookingEnd ?></td>
                                                         <td><?= $bookingTotaltime ?></td>
-                                                        <td><?= number_format($bookingTotalmoney) ?></td>
-                                                        <td>
-                                                            <?php
-                                                                if ($bookingStatus == "isPaid") {
-                                                                    ?>
-                                                                        <div class="payment-finish">Đã thanh toán</div>
-                                                                    <?php
-                                                                }
-
-                                                                else {
-                                                                    ?>
-                                                                        <a href="./API/payment.php?bookingid=<?= $bookingId ?>&bookingdate=<?= $bookingDate ?>" class="pay-button">Thanh toán</a>
-                                                                    <?php
-                                                                }
-                                                            ?>
-                                                        </td>
+                                                        <td><?= number_format($bookingCost) ?></td>
+                                                        <td></td>
+                                                        <td><?= number_format($bookingCost) ?></td>
                                                     </tr>
                                                 <?php
                                             }
@@ -228,6 +212,14 @@
                                 <?php
                             }
                         ?>
+
+                        <!-- Management area -->
+                        <div class="management-area">
+                            <a href="./API/add.php?bookingid=<?= $bookingId ?>&bookingdate=<?= $bookingDate ?>" class="add-button">Thêm</a>
+                            <a href="./API/edit.php?bookingid=<?= $bookingId ?>&bookingdate=<?= $bookingDate ?>" class="edit-button">Chỉnh sửa</a>
+                            <a href="./API/delete.php?bookingid=<?= $bookingId ?>&bookingdate=<?= $bookingDate ?>" class="delete-button">Xóa</a>
+                            <a href="./API/payment.php?bookingid=<?= $bookingId ?>&bookingdate=<?= $bookingDate ?>" class="pay-button">Thanh toán</a>
+                        </div>
                         
                         <!-- Display day profit -->
                         <div class="day-profit">
