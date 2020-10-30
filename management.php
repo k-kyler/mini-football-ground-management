@@ -12,11 +12,8 @@
     require_once('./Config/config.php');
 
     ?>
-        <!-- Admin page background -->
-        <div class="admin-background"></div>
-
-        <!-- Staff page background -->
-        <!-- ... -->
+        <!-- Page background -->
+        <div class="management-background"></div>
 
         <!-- Management header -->
         <div class="management-header">
@@ -39,7 +36,7 @@
         </div>
 
         <!-- Management container -->
-        <div class="container">
+        <div class="management-container">
             <div class="row">
                 <div class="col-3 col-right-0">
                     <div class="admin-menu-management">

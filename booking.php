@@ -55,6 +55,7 @@
                         <div class="booking-list">
                             <table>
                                 <tr>
+                                    <th></th>
                                     <th>STT</th>
                                     <th>Tên khách hàng</th>
                                     <th>Số điện thoại</th>
@@ -73,7 +74,7 @@
                                     $bookingDetailsData = getBookingDetails($db);
 
                                     if ($bookingDetailsData != null && $bookingDetailsData -> num_rows > 0) {
-                                        $count = 0;
+                                        $number = 0;
                                         $totalDayProfit = 0;
                                         
                                         while ($data = $bookingDetailsData -> fetch_assoc()) {
@@ -93,7 +94,20 @@
 
                                                 ?>
                                                     <tr>
-                                                        <td><?= $count += 1 ?></td>
+                                                        <td class="table-action">
+                                                            <a href="./API/edit.php?bookingid=<?= $bookingId ?>&bookingdate=<?= $bookingDate ?>">
+                                                                <i class="fas fa-edit"></i>
+                                                            </a>
+
+                                                            <a href="./API/delete.php?bookingid=<?= $bookingId ?>&bookingdate=<?= $bookingDate ?>">
+                                                                <i class="far fa-trash-alt"></i>                                                        
+                                                            </a>
+
+                                                            <a href="./API/payment.php?bookingid=<?= $bookingId ?>&bookingdate=<?= $bookingDate ?>">
+                                                                <i class="fas fa-shopping-cart"></i>
+                                                            </a>
+                                                        </td>
+                                                        <td><?= $number += 1 ?></td>
                                                         <td><?= $bookingName ?></td>
                                                         <td><?= $bookingPhone ?></td>
                                                         <td><?= $bookingGround ?></td>
@@ -101,7 +115,7 @@
                                                         <td><?= $bookingEnd ?></td>
                                                         <td><?= $bookingTotaltime ?></td>
                                                         <td><?= number_format($bookingCost) ?></td>
-                                                        <td></td>
+                                                        <td>0</td>
                                                         <td><?= number_format($bookingCost) ?></td>
                                                     </tr>
                                                 <?php
@@ -121,19 +135,18 @@
                             }
                         ?>
                         
-                        <!-- Management area -->
-                        <div class="management-area">
+                        <!-- Add & profit area -->
+                        <div class="add-and-profit-area">
                             <a href="./API/add.php?bookingid=<?= $bookingId ?>&bookingdate=<?= $bookingDate ?>" class="add-button">Thêm</a>
-                            <a href="./API/edit.php?bookingid=<?= $bookingId ?>&bookingdate=<?= $bookingDate ?>" class="edit-button">Chỉnh sửa</a>
-                            <a href="./API/delete.php?bookingid=<?= $bookingId ?>&bookingdate=<?= $bookingDate ?>" class="delete-button">Xóa</a>
-                            <a href="./API/payment.php?bookingid=<?= $bookingId ?>&bookingdate=<?= $bookingDate ?>" class="pay-button">Thanh toán</a>
+                        
+                            <!-- Display day profit -->
+                            <div class="day-profit">
+                                Tổng doanh thu của ngày: 
+                                <span><?= number_format($totalDayProfit) ?>đ</span>
+                            </div>
                         </div>
 
-                        <!-- Display day profit -->
-                        <div class="day-profit">
-                            Tổng doanh thu của ngày: 
-                            <span><?= number_format($totalDayProfit) ?>đ</span>
-                        </div>
+                        
                     <?php
                 }
 
@@ -193,7 +206,7 @@
                                                         <td><?= $bookingEnd ?></td>
                                                         <td><?= $bookingTotaltime ?></td>
                                                         <td><?= number_format($bookingCost) ?></td>
-                                                        <td></td>
+                                                        <td>0</td>
                                                         <td><?= number_format($bookingCost) ?></td>
                                                     </tr>
                                                 <?php

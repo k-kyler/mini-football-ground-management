@@ -61,49 +61,42 @@
     text-align: center;    
 }
 
-.add-button, .delete-button, .edit-button, .pay-button {
+.add-button {
     color: white;
-    padding: 0.4rem;
-    text-align: center;
-    width: 100%;
+    padding: 0.5rem 1.5rem;
     border-radius: 3px;
     text-decoration: none;
     border: none;
     cursor: pointer;
     background-color: rgb(38, 241, 38);
-    display: block;
 }
 
-.add-button, .delete-button, .edit-button, .pay-button:not(:last-child) {
-    margin-right: 1.5rem;
-}
-
-.delete-button {
-    background-color: rgb(238, 34, 34);
-}
-
-.edit-button {
-    background-color: #1d8ac2;
-}
-
-.pay-button {
-    background-color: rgb(133, 33, 233);
-}
-
-.pay-button:hover, .delete-button:hover, .edit-button:hover, .add-button:hover {
+.add-button:hover {
     opacity: 0.8;
     transition: all 0.4s;
 }
 
-.day-profit {
-    margin-top: 2rem;
-}
-
 .day-profit span {
-    color: rgb(243, 26, 26);
+    color: red;
 }
 
-.management-area {
+.add-and-profit-area {
+    padding: 1.5rem 0;
     display: flex;
-    margin: 2.5rem 0;
+    justify-content: space-between;
+    align-items: center;
 }
+
+.table-action a {
+    text-decoration: none;
+    color: white;
+}
+
+.table-action a:hover {
+    opacity: 0.7;
+    transition: all 0.4s;
+}
+
+.table-action a:not(:last-child) {
+    margin-right: 0.5rem;
+} 
