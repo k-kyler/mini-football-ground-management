@@ -1,11 +1,11 @@
 .admin-background {
-    background: url("./Images/admin-background.jpg");
-    width: 100%;
+    background-image: url("./Images/admin-background.jpg");
     height: 100%;
+    width: 100%;
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
-    position: absolute;
+    position: fixed;
 }
 
 .management-header {
