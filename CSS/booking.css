@@ -17,7 +17,7 @@
 .date-picker input[type="submit"], .date-picker input[type="text"] {
     padding: 0.3rem;
     border: none;
-    border-radius: 3px;
+    border-radius: 2px;
 }
 
 .date-picker input[type="submit"] {
@@ -67,7 +67,6 @@
     color: white;
     padding: 0.5rem 1rem;
     border-radius: 3px;
-    text-decoration: none;
     border: none;
     cursor: pointer;
     background-color: rgb(38, 241, 38);
@@ -100,4 +99,17 @@
 
 .table-action a:not(:last-child) {
     margin-right: 0.5rem;
-} 
+}
+
+.add-booking-form {
+    /* width: 25rem;
+    height: 25rem;
+    background-color: white;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    box-sizing: border-box;
+    position: absolute;
+    border-radius: 5px; */
+    display: none;
+}

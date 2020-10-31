@@ -64,7 +64,7 @@
                                     <th>Thời gian kết thúc</th>
                                     <th>Tổng thời gian (phút)</th>
                                     <th>Phí đặt sân</th>
-                                    <th>Phí phụ thu</th>
+                                    <th>Phí dịch vụ</th>
                                     <th>Tổng chi phí</th>
                                 </tr>
                                 
@@ -151,8 +151,8 @@
                         
                         <!-- Add & profit area -->
                         <div class="add-and-profit-area">
-                            <a href="./API/add.php?bookingid=<?= $bookingId ?>&bookingdate=<?= $bookingDate ?>" class="add-button">Thêm</a>
-
+                            <button id="addButton" class="add-button">Thêm</button>
+                            
                             <?php
                                 if (isset($totalDayProfit)) {
                                     ?>
@@ -197,7 +197,7 @@
                                     <th>Thời gian kết thúc</th>
                                     <th>Tổng thời gian (phút)</th>
                                     <th>Phí đặt sân</th>
-                                    <th>Phí phụ thu</th>
+                                    <th>Phí dịch vụ</th>
                                     <th>Tổng chi phí</th>
                                 </tr>
                                 
@@ -319,7 +319,22 @@
                 }
             ?>
         </div>
+
+
+
+
+        <!-- Add booking form -->
+        <div class="add-booking-form" title="Thêm lịch đặt sân" id="addBookingForm">
+            <!-- <form method="POST" action=".API/add.php?bookingdate=<?= $bookingDate ?>">
+                <input type="radio" name="oldUser" id="">
+                <label for="oldUser">Chọn người dùng có sẵn</label>
+                <br>
+                <input type="radio" name="newUser" id="">
+                <label for="newUser">Nhập người dùng mới</label>
+            </form> -->
+        </div>
     <?php
 ?>
 
 <script src="./JS/date-picker.js"></script>
+<script src="./JS/add-form.js"></script>

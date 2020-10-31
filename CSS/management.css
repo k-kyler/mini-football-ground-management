@@ -10,7 +10,7 @@
 
 .management-header {
     background-color: black;
-    opacity: 0.8;
+    opacity: 0.85;
     height: 5rem;
     color: white;
     display: flex;
@@ -81,7 +81,7 @@
 
 .admin-menu-management, .management {
     background-color: black;
-    opacity: 0.8;
+    opacity: 0.85;
     border-radius: 4px;
 }
 
@@ -115,10 +115,6 @@
 .admin-menu-list li {
     padding: 1rem 2.5rem;
     background-color: #50d96d;
-}
-
-.admin-menu-list li:not(last-child) {
-    border-bottom: 1px solid grey;
 }
 
 .admin-menu-list a {
