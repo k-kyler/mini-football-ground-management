@@ -17,7 +17,7 @@
         return $db -> query($sqlQuery);
     }
 
-    function getUserByName($db, $username) {
+    function getUserByUserName($db, $username) {
         $sqlQuery = "select * from users where user_name = ?";
 
         $stm = $db ->prepare($sqlQuery);
@@ -39,7 +39,7 @@
 
     function login($usernameInput, $passwordInput) {
         $db = getDatabase();
-        $userInfo = getUserByName($db, $usernameInput);
+        $userInfo = getUserByUserName($db, $usernameInput);
 
         if ($userInfo -> num_rows == 0) {
             ?>
@@ -97,7 +97,7 @@
         $ph = mysqli_escape_string($db, $phoneInput);
         $r = mysqli_escape_string($db, $realName);
 
-        $getUserName = $db -> query("select user_name from users where user_name = '$u'");
+        $getUserByUserName = $db -> query("select user_name from users where user_name = '$u'");
         $getUserEmail = $db -> query("select user_email from users where user_email = '$e'");
         $getUserPhone = $db -> query("select user_phone from users where user_phone = '$ph'");
 
@@ -143,5 +143,49 @@
         $sqlQuery = "select * from bookingdetails";
 
         return $db -> query($sqlQuery);
+    }
+
+    function getUserById($id) {
+        $db = getDatabase();
+
+        $sqlQuery = "select * from users where user_id = ?";
+
+        $stm = $db ->prepare($sqlQuery);
+        $stm -> bind_param('s', $id);
+        $status = $stm -> execute();
+
+        if ($status) {
+            $data = $stm -> get_result();
+
+            return $data;
+        }
+
+        else {
+            $stm -> close();
+
+            return null;
+        }
+    }
+
+    function getGroundById($id) {
+        $db = getDatabase();
+
+        $sqlQuery = "select * from grounds where ground_id = ?";
+
+        $stm = $db ->prepare($sqlQuery);
+        $stm -> bind_param('s', $id);
+        $status = $stm -> execute();
+
+        if ($status) {
+            $data = $stm -> get_result();
+
+            return $data;
+        }
+
+        else {
+            $stm -> close();
+
+            return null;
+        }
     }
 ?>

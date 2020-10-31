@@ -79,18 +79,34 @@
                                         
                                         while ($data = $bookingDetailsData -> fetch_assoc()) {
                                             $bookingId = $data['booking_id'];
-                                            $bookingName = $data['booking_name'];
-                                            $bookingPhone = $data['booking_phone'];
-                                            $bookingGround = $data['booking_ground'];
+                                            $userId = $data['user_id'];
+                                            $groundId = $data['ground_id'];
                                             $bookingStart = $data['booking_start'];
                                             $bookingEnd = $data['booking_end'];
-                                            $bookingTotaltime = $data['booking_totaltime'];
-                                            $bookingCost = $data['booking_cost'];
                                             $bookingDate = $data['booking_date'];
-                                            // $bookingStatus = $data['booking_status'];
+
+                                            // Calculate booking total time in minutes
+                                            $bookingStartTime = strtotime($bookingStart);
+                                            $bookingEndTime = strtotime($bookingEnd);
+                                            $diff = abs($bookingStartTime - $bookingEndTime);
+                                            $bookingTotaltime = $diff / 60;
+
+                                            // Calculate booking cost, 1 min = 3.000đ
+                                            $bookingCost = $bookingTotaltime * 3000;
+
+                                            // Get user data
+                                            $getUserData = getUserById($userId);
+                                            $userData = $getUserData -> fetch_assoc();
+                                            $userRealName = $userData['user_realname'];
+                                            $userPhone = $userData['user_phone'];
+
+                                            // Get ground data
+                                            $getGroundData = getGroundById($groundId);
+                                            $groundData = $getGroundData -> fetch_assoc();
+                                            $groundName = $groundData['ground_name'];
                                             
                                             if ($bookingDate == $_POST['dateChoose']) {
-                                                $totalDayProfit += $bookingCost;
+                                                // $totalDayProfit += $bookingCost;
 
                                                 ?>
                                                     <tr>
@@ -98,8 +114,8 @@
                                                             <a href="./API/edit.php?bookingid=<?= $bookingId ?>&bookingdate=<?= $bookingDate ?>">
                                                                 <i class="fas fa-edit"></i>
                                                             </a>
-
-                                                            <a href="./API/delete.php?bookingid=<?= $bookingId ?>&bookingdate=<?= $bookingDate ?>">
+                                                            
+                                                            <a onclick="return confirm('Bạn có chắc chắn muốn xóa?');" href="./API/delete.php?bookingid=<?= $bookingId ?>&bookingdate=<?= $bookingDate ?>">
                                                                 <i class="far fa-trash-alt"></i>                                                        
                                                             </a>
 
@@ -107,17 +123,24 @@
                                                                 <i class="fas fa-shopping-cart"></i>
                                                             </a>
                                                         </td>
+
                                                         <td><?= $number += 1 ?></td>
-                                                        <td><?= $bookingName ?></td>
-                                                        <td><?= $bookingPhone ?></td>
-                                                        <td><?= $bookingGround ?></td>
+                                                        <td><?= $userRealName ?></td>
+                                                        <td><?= $userPhone ?></td>
+                                                        <td><?= $groundName ?></td>
                                                         <td><?= $bookingStart ?></td>
                                                         <td><?= $bookingEnd ?></td>
                                                         <td><?= $bookingTotaltime ?></td>
                                                         <td><?= number_format($bookingCost) ?></td>
                                                         <td>0</td>
-                                                        <td><?= number_format($bookingCost) ?></td>
+                                                        <td><?= number_format($bookingCost + 0) ?></td>
                                                     </tr>
+                                                <?php
+                                            }
+
+                                            else {
+                                                ?>  
+                                                    <div class="table-empty-message">Không tìm thấy kết quả...</div>
                                                 <?php
                                             }
                                         }
@@ -125,32 +148,37 @@
                                 ?>
                             </table>
                         </div>
-
-                        <?php
-                            // Display error message if data don't have in your database
-                            if ($bookingDate != $_POST['dateChoose']) {
-                                ?>  
-                                    <div class="table-empty-message">Không tìm thấy kết quả...</div>
-                                <?php
-                            }
-                        ?>
                         
                         <!-- Add & profit area -->
                         <div class="add-and-profit-area">
                             <a href="./API/add.php?bookingid=<?= $bookingId ?>&bookingdate=<?= $bookingDate ?>" class="add-button">Thêm</a>
-                        
-                            <!-- Display day profit -->
-                            <div class="day-profit">
-                                Tổng doanh thu của ngày: 
-                                <span><?= number_format($totalDayProfit) ?>đ</span>
-                            </div>
-                        </div>
 
-                        
+                            <?php
+                                if (isset($totalDayProfit)) {
+                                    ?>
+                                        <!-- Display day profit -->
+                                        <div class="day-profit">
+                                            Tổng doanh thu của ngày: 
+                                            <span><?= number_format($totalDayProfit) ?>đ</span>
+                                        </div>
+                                    <?php
+                                }
+
+                                else {
+                                    ?>
+                                    <!-- Display day profit -->
+                                    <div class="day-profit">
+                                        Tổng doanh thu của ngày: 
+                                        <span>0đ</span>
+                                    </div>
+                                <?php
+                                }
+                            ?>
+                        </div>
                     <?php
                 }
 
-                // Redirect data after payment
+                // Redirect data after using API 
                 else if (isset($_GET['datechoose'])) {                                    
                     ?>
                         <!-- Booking title -->
@@ -160,6 +188,7 @@
                         <div class="booking-list">
                             <table>
                                 <tr>
+                                    <th></th>
                                     <th>STT</th>
                                     <th>Tên khách hàng</th>
                                     <th>Số điện thoại</th>
@@ -183,32 +212,68 @@
                                         
                                         while ($data = $bookingDetailsData -> fetch_assoc()) {
                                             $bookingId = $data['booking_id'];
-                                            $bookingName = $data['booking_name'];
-                                            $bookingPhone = $data['booking_phone'];
-                                            $bookingGround = $data['booking_ground'];
+                                            $userId = $data['user_id'];
+                                            $groundId = $data['ground_id'];
                                             $bookingStart = $data['booking_start'];
                                             $bookingEnd = $data['booking_end'];
-                                            $bookingTotaltime = $data['booking_totaltime'];
-                                            $bookingCost = $data['booking_cost'];
                                             $bookingDate = $data['booking_date'];
-                                            // $bookingStatus = $data['booking_status'];
+
+                                            // Calculate booking total time
+                                            $bookingStartTime = strtotime($bookingStart);
+                                            $bookingEndTime = strtotime($bookingEnd);
+                                            $diff = abs($bookingStartTime - $bookingEndTime);
+                                            $bookingTotaltime = $diff / 60;
+
+                                            // Calculate booking cost, 1 min = 3.000đ
+                                            $bookingCost = $bookingTotaltime * 3000;
+
+                                            // Get user data
+                                            $getUserData = getUserById($userId);
+                                            $userData = $getUserData -> fetch_assoc();
+                                            $userRealName = $userData['user_realname'];
+                                            $userPhone = $userData['user_phone'];
+
+                                            // Get ground data
+                                            $getGroundData = getGroundById($groundId);
+                                            $groundData = $getGroundData -> fetch_assoc();
+                                            $groundName = $groundData['ground_name'];
                                             
                                             if ($bookingDate == $_GET['datechoose']) {
-                                                $totalDayProfit += $bookingCost;
+                                                // $totalDayProfit += $bookingCost;
 
                                                 ?>
                                                     <tr>
-                                                        <td><?= $count += 1 ?></td>
-                                                        <td><?= $bookingName ?></td>
-                                                        <td><?= $bookingPhone ?></td>
-                                                        <td><?= $bookingGround ?></td>
+                                                        <td class="table-action">
+                                                            <a href="./API/edit.php?bookingid=<?= $bookingId ?>&bookingdate=<?= $bookingDate ?>">
+                                                                <i class="fas fa-edit"></i>
+                                                            </a>
+
+                                                            <a onclick="return confirm('Bạn có chắc chắn muốn xóa?');" href="./API/delete.php?bookingid=<?= $bookingId ?>&bookingdate=<?= $bookingDate ?>">
+                                                                <i class="far fa-trash-alt"></i>                                                        
+                                                            </a>
+
+                                                            <a href="./API/payment.php?bookingid=<?= $bookingId ?>&bookingdate=<?= $bookingDate ?>">
+                                                                <i class="fas fa-shopping-cart"></i>
+                                                            </a>
+                                                        </td>
+
+                                                        <td><?= $number += 1 ?></td>
+                                                        <td><?= $userRealName ?></td>
+                                                        <td><?= $userPhone ?></td>
+                                                        <td><?= $groundName ?></td>
                                                         <td><?= $bookingStart ?></td>
                                                         <td><?= $bookingEnd ?></td>
                                                         <td><?= $bookingTotaltime ?></td>
                                                         <td><?= number_format($bookingCost) ?></td>
                                                         <td>0</td>
-                                                        <td><?= number_format($bookingCost) ?></td>
+                                                        <td><?= number_format($bookingCost + 0) ?></td>
                                                     </tr>
+                                                <?php
+                                            }
+
+                                            else {
+                                                ?>  
+                                                    <div class="table-empty-message">Không tìm thấy kết quả...</div>
                                                 <?php
                                             }
                                         }
@@ -217,32 +282,36 @@
                             </table>
                         </div>
 
-                        <?php
-                            // Display error message if data don't have in your database
-                            if ($bookingDate != $_GET['datechoose']) {
-                                ?>  
-                                    <div class="table-empty-message">Không tìm thấy kết quả...</div>
-                                <?php
-                            }
-                        ?>
-
-                        <!-- Management area -->
-                        <div class="management-area">
+                        <!-- Add & profit area -->
+                        <div class="add-and-profit-area">
                             <a href="./API/add.php?bookingid=<?= $bookingId ?>&bookingdate=<?= $bookingDate ?>" class="add-button">Thêm</a>
-                            <a href="./API/edit.php?bookingid=<?= $bookingId ?>&bookingdate=<?= $bookingDate ?>" class="edit-button">Chỉnh sửa</a>
-                            <a href="./API/delete.php?bookingid=<?= $bookingId ?>&bookingdate=<?= $bookingDate ?>" class="delete-button">Xóa</a>
-                            <a href="./API/payment.php?bookingid=<?= $bookingId ?>&bookingdate=<?= $bookingDate ?>" class="pay-button">Thanh toán</a>
-                        </div>
                         
-                        <!-- Display day profit -->
-                        <div class="day-profit">
-                            Tổng doanh thu của ngày: 
-                            <span><?= number_format($totalDayProfit) ?>đ</span>
+                            <?php
+                                if (isset($totalDayProfit)) {
+                                    ?>
+                                        <!-- Display day profit -->
+                                        <div class="day-profit">
+                                            Tổng doanh thu của ngày: 
+                                            <span><?= number_format($totalDayProfit) ?>đ</span>
+                                        </div>
+                                    <?php
+                                }
+
+                                else {
+                                    ?>
+                                    <!-- Display day profit -->
+                                    <div class="day-profit">
+                                        Tổng doanh thu của ngày: 
+                                        <span>0đ</span>
+                                    </div>
+                                <?php
+                                }
+                            ?>
                         </div>
                     <?php
                 }
 
-                // Display error message if no day is chosen
+                // Display error message if no date is chosen
                 else {
                     ?>
                         <div class="empty-message">Bạn chưa chọn ngày để xem</div>

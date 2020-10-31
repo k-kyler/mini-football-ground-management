@@ -4,11 +4,10 @@
     background-color: black;
     opacity: 0.9;
     border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
     height: 100%;
-}
-
-.date-picker {
-    margin-bottom: 3rem;
 }
 
 .date-picker label {
@@ -38,9 +37,12 @@
     font-weight: bold;
 }
 
+.empty-message {
+    flex-grow: 1;
+}
+
 .booking-list {
     overflow: auto;
-    margin-top: 1rem;
 }
 
 .booking-list table {
@@ -57,13 +59,13 @@
 }
 
 .table-empty-message {
-    padding-top: 5%;
+    padding-bottom: 1%;
     text-align: center;    
 }
 
 .add-button {
     color: white;
-    padding: 0.5rem 1.5rem;
+    padding: 0.5rem 1rem;
     border-radius: 3px;
     text-decoration: none;
     border: none;
@@ -77,11 +79,10 @@
 }
 
 .day-profit span {
-    color: red;
+    color: rgb(38, 241, 38);
 }
 
 .add-and-profit-area {
-    padding: 1.5rem 0;
     display: flex;
     justify-content: space-between;
     align-items: center;

@@ -45,6 +45,7 @@
     font-size: 1.5rem;
     font-weight: 500;
     cursor: pointer;
+    text-transform: capitalize;
 }
 
 .header-control .fa-chevron-down {
@@ -85,7 +86,7 @@
 }
 
 .management {
-    height: 25rem;
+    height: 100%;
 }
 
 .admin-menu-header {

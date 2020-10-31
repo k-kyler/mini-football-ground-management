@@ -24,7 +24,7 @@
 
             <div class="header-control">
                 <div class="management-title">
-                    Admin Dashboard
+                    <?= $_SESSION['user_type'] ?> Dashboard
                     <i class="fas fa-chevron-down"></i>
                 </div>
 
