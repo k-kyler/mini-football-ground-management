@@ -9,20 +9,21 @@
         <!-- Layout style -->
         <link rel="stylesheet" href="./CSS/layout.css?v=<?php echo time(); ?>">
 
-        <!-- jQuery UI style -->
-        <link rel="stylesheet" href="./Libraries/jQuery/jquery-ui.css">
-
         <!-- Font Awesome -->
         <link rel="stylesheet" href="./Libraries/FontAwesome/css/all.css">
-    </head>
-
-    <body>
-
 
         <!-- jQuery -->
         <script src="./Libraries/jQuery/jquery-3.5.1.js"></script>
 
+        <!-- jQuery UI style -->
+        <link rel="stylesheet" href="./Libraries/jQuery/jquery-ui.css">
+        <link rel="stylesheet" href="./Libraries/jQuery/jquery-ui.theme.css">
+
         <!-- jQuery UI -->
         <script src="./Libraries/jQuery/jquery-ui.js"></script>
+    </head>
+
+    <body>
+
     </body>
 </html>
