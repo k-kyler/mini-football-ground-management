@@ -111,7 +111,7 @@
                                                 ?>
                                                     <tr>
                                                         <td class="table-action">
-                                                            <a href="./API/edit.php?bookingid=<?= $bookingId ?>&bookingdate=<?= $bookingDate ?>">
+                                                            <a onclick="return confirm('Bạn muốn chỉnh sửa?');" href="./API/edit.php?bookingid=<?= $bookingId ?>&bookingdate=<?= $bookingDate ?>">
                                                                 <i class="fas fa-edit"></i>
                                                             </a>
                                                             
@@ -119,7 +119,7 @@
                                                                 <i class="far fa-trash-alt"></i>                                                        
                                                             </a>
 
-                                                            <a href="./API/payment.php?bookingid=<?= $bookingId ?>&bookingdate=<?= $bookingDate ?>">
+                                                            <a onclick="return confirm('Bạn muốn thanh toán?');" href="./API/payment.php?bookingid=<?= $bookingId ?>&bookingdate=<?= $bookingDate ?>">
                                                                 <i class="fas fa-shopping-cart"></i>
                                                             </a>
                                                         </td>
@@ -243,16 +243,16 @@
 
                                                 ?>
                                                     <tr>
-                                                        <td class="table-action">
-                                                            <a href="./API/edit.php?bookingid=<?= $bookingId ?>&bookingdate=<?= $bookingDate ?>">
+                                                    <td class="table-action">
+                                                            <a onclick="return confirm('Bạn muốn chỉnh sửa?');" href="./API/edit.php?bookingid=<?= $bookingId ?>&bookingdate=<?= $bookingDate ?>">
                                                                 <i class="fas fa-edit"></i>
                                                             </a>
-
+                                                            
                                                             <a onclick="return confirm('Bạn có chắc chắn muốn xóa?');" href="./API/delete.php?bookingid=<?= $bookingId ?>&bookingdate=<?= $bookingDate ?>">
                                                                 <i class="far fa-trash-alt"></i>                                                        
                                                             </a>
 
-                                                            <a href="./API/payment.php?bookingid=<?= $bookingId ?>&bookingdate=<?= $bookingDate ?>">
+                                                            <a onclick="return confirm('Bạn muốn thanh toán?');" href="./API/payment.php?bookingid=<?= $bookingId ?>&bookingdate=<?= $bookingDate ?>">
                                                                 <i class="fas fa-shopping-cart"></i>
                                                             </a>
                                                         </td>
@@ -320,21 +320,143 @@
             ?>
         </div>
 
-
-
-
         <!-- Add booking form -->
         <div class="add-booking-form" title="Thêm lịch đặt sân" id="addBookingForm">
-            <!-- <form method="POST" action=".API/add.php?bookingdate=<?= $bookingDate ?>">
-                <input type="radio" name="oldUser" id="">
-                <label for="oldUser">Chọn người dùng có sẵn</label>
+            <!-- Choose type of users to display correct input form -->
+            <input type="radio" id="oldUser">
+            <label for="oldUser">Chọn người dùng có sẵn</label>
+            <br>
+            <input type="radio" id="newUser">
+            <label for="newUser">Nhập người dùng mới</label>
+            <br>
+            <br>
+
+            <!-- Input form for adding new user -->
+            <form method="POST" action=".API/add-new.php?bookingdate=<?= $bookingDate ?>" id="addNew">
                 <br>
-                <input type="radio" name="newUser" id="">
-                <label for="newUser">Nhập người dùng mới</label>
-            </form> -->
+                <label for="">Nhập tên: </label>
+                <input type="text">
+            </form>
+
+            <!-- Input form for adding old user -->
+            <form method="POST" action=".API/add-old.php?bookingdate=<?= $bookingDate ?>" id="addOld">
+                <!-- Select user real name -->
+                <br>
+                <label for="selectUserName">Chọn tên: </label>
+                <select id="selectUserName">
+                    <?php
+                        $usersData = getUsers($db);
+
+                        if ($usersData != null && $usersData -> num_rows > 0) {
+                            while ($data = $usersData -> fetch_assoc()) {
+                                $realName = $data['user_realname'];
+                                $phone = $data['user_phone'];
+
+                                if ($realName) {
+                                    ?>
+                                        <option><?= $realName . " - " . $phone ?></option>
+                                    <?php
+                                }
+                            }
+                        }
+                    ?>
+                </select>
+
+                <!-- Select ground -->
+                <br>
+                <br>
+                <label for="selectGround">Chọn sân: </label>
+                <select id="selectGround">
+                    <?php
+                        $groundsData = getGrounds($db);
+
+                        if ($groundsData != null && $groundsData -> num_rows > 0) {
+                            while ($data = $groundsData -> fetch_assoc()) {
+                                $groundName = $data['ground_name'];
+
+                                if ($groundName) {
+                                    ?>
+                                        <option><?= $groundName ?></option>
+                                    <?php
+                                }
+                            }
+                        }
+                    ?>
+                </select>
+
+                <!-- Select time start -->
+                <br>
+                <br>
+                <label for="selectTimeStart">Thời gian bắt đầu: </label>
+                <select>
+                    <?php
+                        for ($i = 7; $i <= 21; $i++) { 
+                            ?>
+                                <option><?= $i ?></option>
+                            <?php
+                        }
+                    ?>
+                </select>
+
+                :
+
+                <select>
+                    <?php
+                        for ($i=0; $i < 12; $i++) { 
+                            if ($i < 2) {
+                                ?>
+                                    <option><?= "0" . $i * 5 ?></option>
+                                <?php
+                            }
+
+                            else {
+                                ?>
+                                    <option><?= $i * 5 ?></option>
+                                <?php
+                            }
+                        }
+                    ?>
+                </select>
+
+                <!-- Select time end -->
+                <br>
+                <br>
+                <label for="selectTimeStart">Thời gian kết thúc: </label>
+                <select>
+                    <?php
+                        for ($i = 7; $i <= 21; $i++) { 
+                            ?>
+                                <option><?= $i ?></option>
+                            <?php
+                        }
+                    ?>
+                </select>
+
+                :
+
+                <select>
+                    <?php
+                        for ($i=0; $i < 12; $i++) { 
+                            if ($i < 2) {
+                                ?>
+                                    <option><?= "0" . $i * 5 ?></option>
+                                <?php
+                            }
+
+                            else {
+                                ?>
+                                    <option><?= $i * 5 ?></option>
+                                <?php
+                            }
+                        }
+                    ?>
+                </select>
+            </form>
         </div>
+
+        
     <?php
 ?>
 
 <script src="./JS/date-picker.js"></script>
-<script src="./JS/add-form.js"></script>
+<script src="./JS/add-booking-form.js"></script>

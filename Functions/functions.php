@@ -188,4 +188,16 @@
             return null;
         }
     }
+
+    function getUsers($db) {
+        $sqlQuery = "select * from users";
+
+        return $db -> query($sqlQuery);
+    }
+
+    function getGrounds($db) {
+        $sqlQuery = "select * from grounds";
+
+        return $db -> query($sqlQuery);
+    }
 ?>

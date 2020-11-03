@@ -134,3 +134,7 @@
     font-size: 1.2rem;
     font-weight: bold;
 }
+
+.admin-menu-list a:not(:last-of-type) li {
+    border-bottom: 1px solid whitesmoke;
+}
