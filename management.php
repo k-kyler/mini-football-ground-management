@@ -29,6 +29,9 @@
                 </div>
 
                 <div class="management-options">
+                    <a href="management.php?m=bookingground_payment">Quản lý đặt sân và thanh toán</a>
+                    <a href="management.php?m=usermanagement">Quản lý người dùng</a>
+                    <a href="management.php?m=profitreport">Thống kê doanh thu</a>
                     <a href="index.php">Về trang chủ</a>
                     <a href="logout.php">Đăng xuất</a>
                 </div>
@@ -38,32 +41,7 @@
         <!-- Management container -->
         <div class="management-container">
             <div class="row">
-                <div class="col-3 col-right-0">
-                    <div class="admin-menu-management">
-                        <div class="admin-menu-header">
-                            <div class="menu-title">MENU</div>
-                            <i class="fas fa-bars"></i>
-                        </div>
-
-                        <div class="admin-menu-list">
-                            <ul>
-                                <a href="management.php?m=bookingground_payment">
-                                    <li>Quản lý đặt sân và thanh toán</li>
-                                </a>
-
-                                <a href="management.php?m=usermanagement">
-                                    <li>Quản lý người dùng</li>
-                                </a>
-
-                                <a href="management.php?m=profitreport">
-                                    <li>Thống kê doanh thu</li>
-                                </a>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-9">
+                <div class="col-12">
                     <div class="management">
                         <?php
                             if (isset($_GET['m'])) {

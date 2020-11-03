@@ -39,6 +39,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    padding: 2rem 0;
 }
 
 .management-title {
@@ -79,52 +80,14 @@
     transition: all 0.3s ease-in-out;
 }
 
-.admin-menu-management, .management {
+.management {
     background-color: black;
     opacity: 0.85;
-    border-radius: 4px;
+    border-radius: 12px;
 }
 
 .management {
     height: 100%;
-}
-
-.admin-menu-header {
-    pointer-events: none;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding-top: 1rem;
-    color: white;
-}
-
-.admin-menu-header i {
-    font-size: 0.95rem;
-}
-
-.menu-title {
-    padding-right: 0.5rem;
-    font-weight: bold;
-}
-
-.admin-menu-list ul {
-    list-style-type: none;
-    padding-left: 0;
-}
-
-.admin-menu-list li {
-    padding: 1rem 2.5rem;
-    background-color: #50d96d;
-}
-
-.admin-menu-list a {
-    color: white;
-    text-decoration: none;
-}
-
-.admin-menu-list a:hover {
-    color: yellow;
-    transition: all 0.3s ease;
 }
 
 .empty-function-message {
@@ -133,8 +96,4 @@
     padding-top: 10%;
     font-size: 1.2rem;
     font-weight: bold;
-}
-
-.admin-menu-list a:not(:last-of-type) li {
-    border-bottom: 1px solid whitesmoke;
 }
