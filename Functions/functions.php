@@ -200,4 +200,48 @@
 
         return $db -> query($sqlQuery);
     }
+
+    function getIdByUserRealName($userRealName) {
+        $db = getDatabase();
+
+        $sqlQuery = "select * from users where user_realname = ?";
+
+        $stm = $db ->prepare($sqlQuery);
+        $stm -> bind_param('s', $userRealName);
+        $status = $stm -> execute();
+
+        if ($status) {
+            $data = $stm -> get_result();
+
+            return $data;
+        }
+
+        else {
+            $stm -> close();
+
+            return null;
+        }
+    }
+
+    function getIdByGroundName($groundName) {
+        $db = getDatabase();
+
+        $sqlQuery = "select * from grounds where ground_name = ?";
+
+        $stm = $db ->prepare($sqlQuery);
+        $stm -> bind_param('s', $groundName);
+        $status = $stm -> execute();
+
+        if ($status) {
+            $data = $stm -> get_result();
+
+            return $data;
+        }
+
+        else {
+            $stm -> close();
+
+            return null;
+        }
+    }
 ?>

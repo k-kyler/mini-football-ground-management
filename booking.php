@@ -11,7 +11,7 @@
     // Config
     require_once('./Config/config.php');
 
-    ?>      
+    ?>
         <!-- Admin management content -->
         <div class="admin-management-container">
             <!-- Date picker processing -->
@@ -207,7 +207,7 @@
                                     $bookingDetailsData = getBookingDetails($db);
 
                                     if ($bookingDetailsData != null && $bookingDetailsData -> num_rows > 0) {
-                                        $count = 0;
+                                        $number = 0;
                                         $totalDayProfit = 0;
                                         
                                         while ($data = $bookingDetailsData -> fetch_assoc()) {
@@ -284,8 +284,8 @@
 
                         <!-- Add & profit area -->
                         <div class="add-and-profit-area">
-                            <a href="./API/add.php?bookingid=<?= $bookingId ?>&bookingdate=<?= $bookingDate ?>" class="add-button">Thêm</a>
-                        
+                            <button id="addButton" class="add-button">Thêm</button>
+                            
                             <?php
                                 if (isset($totalDayProfit)) {
                                     ?>
@@ -332,18 +332,24 @@
             <br>
 
             <!-- Input form for adding new user -->
-            <form method="POST" action=".API/add-new.php?bookingdate=<?= $bookingDate ?>" id="addNew">
+            <form method="POST" action="API/add-booking.php?typeuser=new&bookingdate=<?= $bookingDate ?>" id="addNew">
                 <br>
                 <label for="">Nhập tên: </label>
                 <input type="text">
+
+                
+
+                <br>
+                <br>
+                <input type="submit" name="newSubmit" class="new-submit" value="Xác nhận">
             </form>
 
             <!-- Input form for adding old user -->
-            <form method="POST" action=".API/add-old.php?bookingdate=<?= $bookingDate ?>" id="addOld">
+            <form method="POST" action="API/add-booking.php?typeuser=old&bookingdate=<?= $bookingDate ?>" id="addOld">
                 <!-- Select user real name -->
                 <br>
-                <label for="selectUserName">Chọn tên: </label>
-                <select id="selectUserName">
+                <select name="selectUserRealName" id="selectUserRealName" style="width: 100%;">
+                    <option selected="true">(Chọn tên)</option>
                     <?php
                         $usersData = getUsers($db);
 
@@ -365,8 +371,8 @@
                 <!-- Select ground -->
                 <br>
                 <br>
-                <label for="selectGround">Chọn sân: </label>
-                <select id="selectGround">
+                <label>Chọn sân: </label>
+                <select name="selectGround">
                     <?php
                         $groundsData = getGrounds($db);
 
@@ -387,8 +393,8 @@
                 <!-- Select time start -->
                 <br>
                 <br>
-                <label for="selectTimeStart">Thời gian bắt đầu: </label>
-                <select>
+                <label>Thời gian bắt đầu: </label>
+                <select name="selectTimeStart-1">
                     <?php
                         for ($i = 7; $i <= 21; $i++) { 
                             ?>
@@ -400,7 +406,7 @@
 
                 :
 
-                <select>
+                <select name="selectTimeStart-2">
                     <?php
                         for ($i=0; $i < 12; $i++) { 
                             if ($i < 2) {
@@ -421,8 +427,8 @@
                 <!-- Select time end -->
                 <br>
                 <br>
-                <label for="selectTimeStart">Thời gian kết thúc: </label>
-                <select>
+                <label>Thời gian kết thúc: </label>
+                <select name="selectTimeEnd-1"> 
                     <?php
                         for ($i = 7; $i <= 21; $i++) { 
                             ?>
@@ -434,7 +440,7 @@
 
                 :
 
-                <select>
+                <select name="selectTimeEnd-2">
                     <?php
                         for ($i=0; $i < 12; $i++) { 
                             if ($i < 2) {
@@ -451,6 +457,10 @@
                         }
                     ?>
                 </select>
+                
+                <br>
+                <br>
+                <input type="submit" name="oldSubmit" class="old-submit" value="Xác nhận">
             </form>
         </div>
 
@@ -458,5 +468,5 @@
     <?php
 ?>
 
-<script src="./JS/date-picker.js"></script>
-<script src="./JS/add-booking-form.js"></script>
+<script src="./JS/date-picker.js?v=<?php echo time(); ?>"></script>
+<script src="./JS/add-booking-form.js?v=<?php echo time(); ?>"></script>

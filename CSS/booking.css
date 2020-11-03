@@ -104,3 +104,21 @@
 .add-booking-form, #addNew, #addOld {
     display: none;
 }
+
+.old-submit, .new-submit {
+    background-color: #dc3545;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+    color: white;
+    cursor: pointer;
+}
+
+.new-submit {
+    background-color: #23d1c8;
+}
+
+.old-submit:hover, .new-submit:hover {
+    opacity: 0.85;
+    transition: all 0.4s;
+}
