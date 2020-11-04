@@ -4,6 +4,9 @@
     ?>
 </style>
 
+<script src="./JS/date-picker.js?v=<?php echo time(); ?>"></script>
+<script src="./JS/check-date-choose.js?v=<?php echo time(); ?>"></script>
+
 <?php
     // Layout
     require_once('layout.php');
@@ -16,25 +19,25 @@
         <div class="admin-management-container">
             <!-- Date picker processing -->
             <div class="date-picker">
-                <form action="" method="POST">
-                    <label for="dateChoose">Chọn ngày:</label>
+                <form action="" method="POST" name="dateChooseInput" onsubmit=" return checkDateChoose();">
+                    <label>Chọn ngày:</label>
     
                     <?php 
                         if (isset($_POST['submit'])) {
                             ?>
-                                <input type="text" id="dateChoose" name="dateChoose" value="<?= $_POST['dateChoose'] ?>">
+                                <input type="text" placeholder="dd/mm/yyyy" class="date" id="dateChoose" autocomplete="off" name="dateChoose" value="<?= $_POST['dateChoose'] ?>">
                             <?php
                         }
 
                         else if (isset($_GET['datechoose'])) {
                             ?>
-                                <input type="text" id="dateChoose" name="dateChoose" value="<?= $_GET['datechoose'] ?>">
+                                <input type="text" placeholder="dd/mm/yyyy" class="date" id="dateChoose" autocomplete="off" name="dateChoose" value="<?= $_GET['datechoose'] ?>">
                             <?php
                         }
 
                         else {
                             ?>
-                                <input type="text" id="dateChoose" name="dateChoose">
+                                <input type="text" placeholder="dd/mm/yyyy" class="date" id="dateChoose" autocomplete="off" name="dateChoose">
                             <?php
                         }
                     ?>
@@ -120,7 +123,7 @@
                                                             </a>
 
                                                             <a onclick="return confirm('Bạn muốn thanh toán?');" href="./API/payment.php?bookingid=<?= $bookingId ?>&bookingdate=<?= $bookingDate ?>">
-                                                                <i class="fas fa-shopping-cart"></i>
+                                                                <i class="fas fa-coins"></i>
                                                             </a>
                                                         </td>
 
@@ -135,12 +138,6 @@
                                                         <td>0</td>
                                                         <td><?= number_format($bookingCost + 0) ?></td>
                                                     </tr>
-                                                <?php
-                                            }
-
-                                            else {
-                                                ?>  
-                                                    <div class="table-empty-message">Không tìm thấy kết quả...</div>
                                                 <?php
                                             }
                                         }
@@ -253,7 +250,7 @@
                                                             </a>
 
                                                             <a onclick="return confirm('Bạn muốn thanh toán?');" href="./API/payment.php?bookingid=<?= $bookingId ?>&bookingdate=<?= $bookingDate ?>">
-                                                                <i class="fas fa-shopping-cart"></i>
+                                                                <i class="fas fa-coins"></i>
                                                             </a>
                                                         </td>
 
@@ -268,12 +265,6 @@
                                                         <td>0</td>
                                                         <td><?= number_format($bookingCost + 0) ?></td>
                                                     </tr>
-                                                <?php
-                                            }
-
-                                            else {
-                                                ?>  
-                                                    <div class="table-empty-message">Không tìm thấy kết quả...</div>
                                                 <?php
                                             }
                                         }
@@ -320,6 +311,8 @@
             ?>
         </div>
 
+
+
         <!-- Add booking form -->
         <div class="add-booking-form" title="Thêm lịch đặt sân" id="addBookingForm">
             <!-- Choose type of users to display correct input form -->
@@ -332,7 +325,7 @@
             <br>
 
             <!-- Input form for adding new user -->
-            <form method="POST" action="API/add-booking.php?typeuser=new&bookingdate=<?= $bookingDate ?>" id="addNew">
+            <form method="POST" action="API/add-booking.php?typeuser=new" id="addNew">
                 <br>
                 <label for="">Nhập tên: </label>
                 <input type="text">
@@ -345,11 +338,12 @@
             </form>
 
             <!-- Input form for adding old user -->
-            <form method="POST" action="API/add-booking.php?typeuser=old&bookingdate=<?= $bookingDate ?>" id="addOld">
+            <form method="POST" action="API/add-booking.php?typeuser=old" id="addOld">
                 <!-- Select user real name -->
                 <br>
                 <select name="selectUserRealName" id="selectUserRealName" style="width: 100%;">
                     <option selected="true">(Chọn tên)</option>
+                    
                     <?php
                         $usersData = getUsers($db);
 
@@ -367,6 +361,11 @@
                         }
                     ?>
                 </select>
+
+                <br>
+                <br>
+                <label>Chọn ngày: </label>
+                <input type="text" class="date" placeholder="dd/mm/yyyy" autocomplete="off" name="dateChooseForm">
 
                 <!-- Select ground -->
                 <br>
@@ -468,5 +467,4 @@
     <?php
 ?>
 
-<script src="./JS/date-picker.js?v=<?php echo time(); ?>"></script>
 <script src="./JS/add-booking-form.js?v=<?php echo time(); ?>"></script>

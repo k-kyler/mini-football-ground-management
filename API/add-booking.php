@@ -1,10 +1,8 @@
 <?php
     require_once('../Config/config.php');
 
-    if (isset($_GET['bookingdate']) && isset($_GET['typeuser'])) {
+    if (isset($_GET['typeuser'])) {
         $db = getDatabase();
-
-        $bookingDate = $_GET['bookingdate'];
 
         if (isset($_POST['oldSubmit']) && $_GET['typeuser'] == "old") {
             $userRealName = $_POST['selectUserRealName'];
@@ -12,6 +10,7 @@
 
             $groundName = $_POST['selectGround'];
 
+            $bookingDate = $_POST['dateChooseForm'];
         
             // Generate booking id
             $bookingId = uniqid();
@@ -42,12 +41,13 @@
             $sqlQuery = "insert into bookingdetails (booking_id, user_id, ground_id, booking_start, booking_end, booking_date) values ('$bookingId', '$userId', '$groundId', '$bookingStart', '$bookingEnd', '$bookingDate')";
 
             $result = $db -> query($sqlQuery);
+
+            header("Location: ../management.php?m=bookingground_payment&datechoose=$bookingDate");
         }
 
         else if (isset($_POST['newSubmit']) && $_GET['typeuser'] == "new") {
 
         }
 
-        header("Location: ../management.php?m=bookingground_payment&datechoose=$bookingDate");
     }
 ?>

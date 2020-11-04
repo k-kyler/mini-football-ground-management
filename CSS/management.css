@@ -84,16 +84,14 @@
     background-color: black;
     opacity: 0.85;
     border-radius: 12px;
-}
-
-.management {
     height: 100%;
+
 }
 
 .empty-function-message {
     color: white;
     text-align: center;
-    padding-top: 10%;
+    padding: 3rem 0;
     font-size: 1.2rem;
     font-weight: bold;
 }
