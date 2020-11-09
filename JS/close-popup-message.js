@@ -6,4 +6,12 @@ $(document).ready(function() {
     $(".booking-success span").click(function() {
         $(".booking-success").css("display", "none");
     });
+
+    $(".login-success span").click(function() {
+        $(".login-success").css("display", "none");
+    });
+
+    $(".register-success span").click(function() {
+        $(".register-success").css("display", "none");
+    });
 });

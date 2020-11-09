@@ -91,6 +91,9 @@
     function checkAndUploadRegisterData($usernameInput, $passwordInput, $emailInput, $phoneInput, $realName) {
         $db = getDatabase();
 
+        $userIdGenerate = uniqid();
+
+        $ui = mysqli_escape_string($db, $userIdGenerate);
         $u = mysqli_escape_string($db, $usernameInput);
         $p = mysqli_escape_string($db, $passwordInput);
         $e = mysqli_escape_string($db, $emailInput);
@@ -132,7 +135,7 @@
         }
 
         else {
-            $uploadRegisterData = "insert into users (user_name, user_password, user_email, user_phone, user_realname) values ('$u', '$p', '$e', '$ph', '$r')";
+            $uploadRegisterData = "insert into users (user_id, user_name, user_password, user_email, user_phone, user_realname) values ('$ui', '$u', '$p', '$e', '$ph', '$r')";
             $result = $db -> query($uploadRegisterData);
 
             header("Location: login.php");

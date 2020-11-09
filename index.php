@@ -1,6 +1,7 @@
 <style>
     <?php 
         require_once('./CSS/slider-main.css');
+        require_once('./CSS/main.css');
     ?>
 </style>
 
@@ -74,10 +75,23 @@
 
     // Footer
     require_once('footer.php');
+
+    // Handling success message when login
+    if (isset($_SESSION['login-success'])) {
+        ?>
+            <div class="login-success">
+                <p><?= $_SESSION['login-success'] ?></p>
+                <span>&times;</span>
+            </div>
+        <?php
+
+        unset($_SESSION['login-success']);
+    }
 ?>
 
 <script>
     <?php 
-        require_once('./JS/slider-main.js'); 
+        require_once('./JS/slider-main.js');
+        require_once('./JS/close-popup-message.js');
     ?>
 </script>

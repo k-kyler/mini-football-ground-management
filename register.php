@@ -29,6 +29,8 @@
 
         // Check and upload data to database
         checkAndUploadRegisterData($usernameInput, $passwordInput, $emailInput, $phoneInput, $realNameInput);
+
+        $_SESSION['register-success'] = "Đăng ký thành công!";
     }
 
     ?>

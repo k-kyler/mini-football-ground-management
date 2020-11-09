@@ -93,3 +93,28 @@
 .password-input::placeholder {
   color: black;
 }
+
+.register-success {
+  background-color: #d4edda;
+  color: #155724;
+  border-color: #c3e6cb;
+  width: 20rem;
+  display: flex;
+  border-radius: 4px;
+  padding: 0rem 0.7rem;
+  font-size: 1.1rem;
+  font-weight: 400;
+  justify-content: space-between;
+  align-items: center;
+  position: fixed;
+  bottom: 0.6rem;
+  right: 0.6rem;
+}
+
+.register-success span {
+  cursor: pointer;
+}
+
+.register-success span:hover {
+  opacity: 0.7;
+}

@@ -26,6 +26,8 @@
 
         // Call login
         login($usernameInput, $passwordInput);
+
+        $_SESSION['login-success'] = "Đăng nhập thành công!";
     }
 
     ?>
@@ -50,5 +52,25 @@
                 <a href="register.php">Chưa có tài khoản?</a>
             </form>
         </div>
+
+        <!-- Handling register success message -->
+        <?php
+            if (isset($_SESSION['register-success'])) {
+                ?>
+                    <div class="register-success">
+                        <p><?= $_SESSION['register-success'] ?></p>
+                        <span>&times;</span>
+                    </div>
+                <?php
+
+                unset($_SESSION['register-success']);
+            }
+        ?>
     <?php
 ?>
+
+<script>
+    <?php 
+        require_once('./JS/close-popup-message.js');
+    ?>
+</script>
