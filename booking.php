@@ -5,7 +5,7 @@
 </style>
 
 <script src="./JS/date-picker.js?v=<?php echo time(); ?>"></script>
-<script src="./JS/check-date-choose.js?v=<?php echo time(); ?>"></script>
+<script src="./JS/close-popup-message.js?v=<?php echo time(); ?>"></script>
 
 <?php
     // Layout
@@ -19,25 +19,25 @@
         <div class="admin-management-container">
             <!-- Date picker processing -->
             <div class="date-picker">
-                <form action="" method="POST" name="dateChooseInput" onsubmit=" return checkDateChoose();">
+                <form action="" method="POST" name="dateChooseInput">
                     <label>Chọn ngày:</label>
     
                     <?php 
                         if (isset($_POST['submit'])) {
                             ?>
-                                <input type="text" placeholder="dd/mm/yyyy" class="date" id="dateChoose" autocomplete="off" name="dateChoose" value="<?= $_POST['dateChoose'] ?>">
+                                <input type="text" required placeholder="dd/mm/yyyy" class="date" id="dateChoose" autocomplete="off" name="dateChoose" value="<?= $_POST['dateChoose'] ?>">
                             <?php
                         }
 
                         else if (isset($_GET['datechoose'])) {
                             ?>
-                                <input type="text" placeholder="dd/mm/yyyy" class="date" id="dateChoose" autocomplete="off" name="dateChoose" value="<?= $_GET['datechoose'] ?>">
+                                <input type="text" required placeholder="dd/mm/yyyy" class="date" id="dateChoose" autocomplete="off" name="dateChoose" value="<?= $_GET['datechoose'] ?>">
                             <?php
                         }
 
                         else {
                             ?>
-                                <input type="text" placeholder="dd/mm/yyyy" class="date" id="dateChoose" autocomplete="off" name="dateChoose">
+                                <input type="text" required placeholder="dd/mm/yyyy" class="date" id="dateChoose" autocomplete="off" name="dateChoose">
                             <?php
                         }
                     ?>
@@ -338,11 +338,11 @@
             </form>
 
             <!-- Input form for adding old user -->
-            <form method="POST" action="API/add-booking.php?typeuser=old" id="addOld">
+            <form method="POST" action="API/add-booking.php?typeuser=old" name="addBooking" id="addOld">
                 <!-- Select user real name -->
                 <br>
-                <select name="selectUserRealName" id="selectUserRealName" style="width: 100%;">
-                    <option selected="true">(Chọn tên)</option>
+                <select required name="selectUserRealName" id="selectUserRealName" style="width: 100%;">
+                    <option class="user-realname" selected="true" value="">(Chọn tên)</option>
                     
                     <?php
                         $usersData = getUsers($db);
@@ -354,7 +354,7 @@
 
                                 if ($realName) {
                                     ?>
-                                        <option><?= $realName . " - " . $phone ?></option>
+                                        <option class="user-realname"><?= $realName . " - " . $phone ?></option>
                                     <?php
                                 }
                             }
@@ -362,10 +362,29 @@
                     ?>
                 </select>
 
+                <!-- Select date -->
                 <br>
                 <br>
                 <label>Chọn ngày: </label>
-                <input type="text" class="date" placeholder="dd/mm/yyyy" autocomplete="off" name="dateChooseForm">
+                <?php 
+                    if (isset($_POST['submit'])) {
+                        ?>
+                            <input type="text" required placeholder="dd/mm/yyyy" class="date" autocomplete="off" name="dateChooseForm" value="<?= $_POST['dateChoose'] ?>">
+                        <?php
+                    }
+
+                    else if (isset($_GET['datechoose'])) {
+                        ?>
+                            <input type="text" required placeholder="dd/mm/yyyy" class="date" autocomplete="off" name="dateChooseForm" value="<?= $_GET['datechoose'] ?>">
+                        <?php
+                    }
+
+                    else {
+                        ?>
+                            <input type="text" required placeholder="dd/mm/yyyy" class="date" autocomplete="off" name="dateChooseForm">
+                        <?php
+                    }
+                ?>
 
                 <!-- Select ground -->
                 <br>
@@ -459,11 +478,37 @@
                 
                 <br>
                 <br>
-                <input type="submit" name="oldSubmit" class="old-submit" value="Xác nhận">
+                <input type="submit" name="oldSubmit" id="oldSubmit" class="old-submit" value="Xác nhận">
             </form>
         </div>
 
         
+
+
+        <!-- Handling success & error message of booking -->
+        <?php
+            if (isset($_SESSION['booking-error'])) {
+                ?>
+                    <div class="booking-error">
+                        <p><?= $_SESSION['booking-error'] ?></p>
+                        <span>&times;</span>
+                    </div>
+                <?php
+
+                unset($_SESSION['booking-error']);
+            }
+
+            if (isset($_SESSION['booking-success'])) {
+                ?>
+                    <div class="booking-success">
+                        <p><?= $_SESSION['booking-success'] ?></p>
+                        <span>&times;</span>
+                    </div>
+                <?php
+
+                unset($_SESSION['booking-success']);
+            }
+        ?>
     <?php
 ?>
 
