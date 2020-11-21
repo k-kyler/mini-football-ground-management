@@ -1,1 +1,1 @@
-This is my web app project in learning Software Engineering
+This is my web project in learning Software Engineering
