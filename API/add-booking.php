@@ -37,11 +37,13 @@
 
             // Check time start & end
             $checkBookingTimes = true;
+            $checkBookingPhone = true;
             $bookingDetailsData = getBookingDetails($db);
 
             if ($bookingDetailsData != null && $bookingDetailsData -> num_rows > 0) {
                 while ($data = $bookingDetailsData -> fetch_assoc()) {
                     $groundId = $data['ground_id'];
+                    $userIdInDatabase = $data['user_id'];
                     $bookingStart = $data['booking_start'];
                     $bookingEnd = $data['booking_end'];
                     $bookingDate = $data['booking_date'];
@@ -62,12 +64,20 @@
                     else if ($bookingDate == $bookingDateSelected && $groundName == $groundNameSelected && strtotime($timeEnd) > strtotime($bookingStart) && strtotime($timeEnd) < strtotime($bookingEnd)) {
                         $checkBookingTimes = false;
                     }
+
+                    else if ($userIdInDatabase == $userId && $bookingDate == $bookingDateSelected) {
+                        $checkBookingPhone = false;
+                    }
                 }
             }
 
             // Check and insert into database
             if ($checkBookingTimes == false) {
                 $_SESSION['booking-error'] = "Khung giờ đặt sân bị trùng!";
+            }
+
+            else if ($checkBookingPhone == false) {
+                $_SESSION['booking-error'] = "Số điện thoại đã được dùng!";
             }
 
             else {
@@ -133,11 +143,13 @@
 
             // Check time start & end
             $checkBookingTimes = true;
+            $checkBookingPhone = true;
             $bookingDetailsData = getBookingDetails($db);
 
             if ($bookingDetailsData != null && $bookingDetailsData -> num_rows > 0) {
                 while ($data = $bookingDetailsData -> fetch_assoc()) {
                     $groundId = $data['ground_id'];
+                    $userIdInDatabase = $data['user_id'];
                     $bookingStart = $data['booking_start'];
                     $bookingEnd = $data['booking_end'];
                     $bookingDate = $data['booking_date'];
@@ -158,12 +170,20 @@
                     else if ($bookingDate == $bookingDateSelected && $groundName == $groundNameSelected && strtotime($timeEnd) > strtotime($bookingStart) && strtotime($timeEnd) < strtotime($bookingEnd)) {
                         $checkBookingTimes = false;
                     }
+
+                    else if ($userIdInDatabase == $userId && $bookingDate == $bookingDateSelected) {
+                        $checkBookingPhone = false;
+                    }
                 }
             }
 
             // Check and insert into database
             if ($checkBookingTimes == false) {
                 $_SESSION['booking-error'] = "Khung giờ đặt sân bị trùng!";
+            }
+
+            else if ($checkBookingPhone == false) {
+                $_SESSION['booking-error'] = "Số điện thoại đã được dùng!";
             }
 
             else {
