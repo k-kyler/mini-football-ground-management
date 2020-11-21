@@ -204,13 +204,13 @@
         return $db -> query($sqlQuery);
     }
 
-    function getIdByUserRealName($userRealName) {
+    function getIdByUserPhone($userPhone) {
         $db = getDatabase();
 
-        $sqlQuery = "select * from users where user_realname = ?";
+        $sqlQuery = "select * from users where user_phone = ?";
 
         $stm = $db ->prepare($sqlQuery);
-        $stm -> bind_param('s', $userRealName);
+        $stm -> bind_param('s', $userPhone);
         $status = $stm -> execute();
 
         if ($status) {

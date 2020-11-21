@@ -115,7 +115,7 @@
 }
 
 .new-submit {
-    background-color: #23d1c8;
+    background-color: #20b8b0;
 }
 
 .old-submit:hover, .new-submit:hover {
@@ -152,4 +152,8 @@
 
 .booking-error span:hover, .booking-success span:hover {
     opacity: 0.7;
+}
+
+#addNew input[name="newRealName"], #addNew input[type="tel"] {
+    width: 11rem;
 }

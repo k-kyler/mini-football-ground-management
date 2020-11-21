@@ -326,11 +326,130 @@
 
             <!-- Input form for adding new user -->
             <form method="POST" action="API/add-booking.php?typeuser=new" id="addNew">
+                <!-- Enter name -->
                 <br>
-                <label for="">Nhập tên: </label>
-                <input type="text">
+                <label>Nhập tên: </label>
+                <input required type="text" name="newRealName">
 
+                <!-- Enter phone -->
+                <br>
+                <br>
+                <label>Số điện thoại: </label>
+                <input required type="tel" pattern="[0-9]{10}" name="newPhone">
                 
+                <!-- Select date -->
+                <br>
+                <br>
+                <label>Chọn ngày: </label>
+                <?php 
+                    if (isset($_POST['submit'])) {
+                        ?>
+                            <input type="text" required placeholder="dd/mm/yyyy" class="date" autocomplete="off" name="dateChooseForm" value="<?= $_POST['dateChoose'] ?>">
+                        <?php
+                    }
+
+                    else if (isset($_GET['datechoose'])) {
+                        ?>
+                            <input type="text" required placeholder="dd/mm/yyyy" class="date" autocomplete="off" name="dateChooseForm" value="<?= $_GET['datechoose'] ?>">
+                        <?php
+                    }
+
+                    else {
+                        ?>
+                            <input type="text" required placeholder="dd/mm/yyyy" class="date" autocomplete="off" name="dateChooseForm">
+                        <?php
+                    }
+                ?>
+
+                <!-- Select ground -->
+                <br>
+                <br>
+                <label>Chọn sân: </label>
+                <select name="selectGround">
+                    <?php
+                        $groundsData = getGrounds($db);
+
+                        if ($groundsData != null && $groundsData -> num_rows > 0) {
+                            while ($data = $groundsData -> fetch_assoc()) {
+                                $groundName = $data['ground_name'];
+
+                                if ($groundName) {
+                                    ?>
+                                        <option><?= $groundName ?></option>
+                                    <?php
+                                }
+                            }
+                        }
+                    ?>
+                </select>
+
+                <!-- Select time start -->
+                <br>
+                <br>
+                <label>Thời gian bắt đầu: </label>
+                <select name="selectTimeStart-1">
+                    <?php
+                        for ($i = 7; $i <= 21; $i++) { 
+                            ?>
+                                <option><?= $i ?></option>
+                            <?php
+                        }
+                    ?>
+                </select>
+
+                :
+
+                <select name="selectTimeStart-2">
+                    <?php
+                        for ($i=0; $i < 12; $i++) { 
+                            if ($i < 2) {
+                                ?>
+                                    <option><?= "0" . $i * 5 ?></option>
+                                <?php
+                            }
+
+                            else {
+                                ?>
+                                    <option><?= $i * 5 ?></option>
+                                <?php
+                            }
+                        }
+                    ?>
+                </select>
+
+                <!-- Select time end -->
+                <br>
+                <br>
+                <label>Thời gian kết thúc: </label>
+                <select name="selectTimeEnd-1"> 
+                    <?php
+                        for ($i = 7; $i <= 21; $i++) { 
+                            ?>
+                                <option><?= $i ?></option>
+                            <?php
+                        }
+                    ?>
+                </select>
+
+                :
+
+                <select name="selectTimeEnd-2">
+                    <?php
+                        for ($i=0; $i < 12; $i++) { 
+                            if ($i < 2) {
+                                ?>
+                                    <option><?= "0" . $i * 5 ?></option>
+                                <?php
+                            }
+
+                            else {
+                                ?>
+                                    <option><?= $i * 5 ?></option>
+                                <?php
+                            }
+                        }
+                    ?>
+                </select>
 
                 <br>
                 <br>
