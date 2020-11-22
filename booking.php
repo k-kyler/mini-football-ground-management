@@ -397,7 +397,7 @@
                 
                 <br>
                 <br>
-                <input type="submit" name="deleteSubmit" id="deleteSubmit" class="delete-submit" value="Xóa">
+                <input type="submit" onclick="return confirm('Bạn có chắc chắn muốn xóa?');" name="deleteSubmit" id="deleteSubmit" class="delete-submit" value="Xóa">
             </form>
         </div>
 
