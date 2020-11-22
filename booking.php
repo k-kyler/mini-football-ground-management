@@ -58,7 +58,6 @@
                         <div class="booking-list">
                             <table>
                                 <tr>
-                                    <th></th>
                                     <th>STT</th>
                                     <th>Tên khách hàng</th>
                                     <th>Số điện thoại</th>
@@ -113,20 +112,6 @@
 
                                                 ?>
                                                     <tr>
-                                                        <td class="table-action">
-                                                            <a onclick="return confirm('Bạn muốn chỉnh sửa?');" href="./API/edit.php?bookingid=<?= $bookingId ?>&bookingdate=<?= $bookingDate ?>">
-                                                                <i class="fas fa-edit"></i>
-                                                            </a>
-                                                            
-                                                            <a onclick="return confirm('Bạn có chắc chắn muốn xóa?');" href="./API/delete.php?bookingid=<?= $bookingId ?>&bookingdate=<?= $bookingDate ?>">
-                                                                <i class="far fa-trash-alt"></i>                                                        
-                                                            </a>
-
-                                                            <a onclick="return confirm('Bạn muốn thanh toán?');" href="./API/payment.php?bookingid=<?= $bookingId ?>&bookingdate=<?= $bookingDate ?>">
-                                                                <i class="fas fa-coins"></i>
-                                                            </a>
-                                                        </td>
-
                                                         <td><?= $number += 1 ?></td>
                                                         <td><?= $userRealName ?></td>
                                                         <td><?= $userPhone ?></td>
@@ -146,9 +131,25 @@
                             </table>
                         </div>
                         
-                        <!-- Add & profit area -->
-                        <div class="add-and-profit-area">
-                            <button id="addButton" class="add-button">Thêm</button>
+                        <!-- Controller & profit area -->
+                        <div class="controller-and-profit-area">
+                            <div class="management-controller">
+                                <a id="addButton" class="controller-button" href="javascript:void(0)">
+                                    <i class="fas fa-user-plus"></i>
+                                </a>
+
+                                <a id="editButton" class="controller-button" href="javascript:void(0)">
+                                    <i class="fas fa-edit"></i>
+                                </a>
+                                
+                                <a id="deleteButton" class="controller-button" href="javascript:void(0)">
+                                    <i class="far fa-trash-alt"></i>                                                        
+                                </a>
+
+                                <a id="payButton" class="controller-button" href="javascript:void(0)">
+                                    <i class="fas fa-coins"></i>
+                                </a>
+                            </div>
                             
                             <?php
                                 if (isset($totalDayProfit)) {
@@ -185,7 +186,6 @@
                         <div class="booking-list">
                             <table>
                                 <tr>
-                                    <th></th>
                                     <th>STT</th>
                                     <th>Tên khách hàng</th>
                                     <th>Số điện thoại</th>
@@ -240,20 +240,6 @@
 
                                                 ?>
                                                     <tr>
-                                                    <td class="table-action">
-                                                            <a onclick="return confirm('Bạn muốn chỉnh sửa?');" href="./API/edit.php?bookingid=<?= $bookingId ?>&bookingdate=<?= $bookingDate ?>">
-                                                                <i class="fas fa-edit"></i>
-                                                            </a>
-                                                            
-                                                            <a onclick="return confirm('Bạn có chắc chắn muốn xóa?');" href="./API/delete.php?bookingid=<?= $bookingId ?>&bookingdate=<?= $bookingDate ?>">
-                                                                <i class="far fa-trash-alt"></i>                                                        
-                                                            </a>
-
-                                                            <a onclick="return confirm('Bạn muốn thanh toán?');" href="./API/payment.php?bookingid=<?= $bookingId ?>&bookingdate=<?= $bookingDate ?>">
-                                                                <i class="fas fa-coins"></i>
-                                                            </a>
-                                                        </td>
-
                                                         <td><?= $number += 1 ?></td>
                                                         <td><?= $userRealName ?></td>
                                                         <td><?= $userPhone ?></td>
@@ -274,8 +260,24 @@
                         </div>
 
                         <!-- Add & profit area -->
-                        <div class="add-and-profit-area">
-                            <button id="addButton" class="add-button">Thêm</button>
+                        <div class="controller-and-profit-area">
+                            <div class="management-controller">
+                                <a id="addButton" class="controller-button" href="javascript:void(0)">
+                                    <i class="fas fa-user-plus"></i>
+                                </a>
+
+                                <a id="editButton" class="controller-button" href="javascript:void(0)">
+                                    <i class="fas fa-edit"></i>
+                                </a>
+                                
+                                <a id="deleteButton" class="controller-button" href="javascript:void(0)">
+                                    <i class="far fa-trash-alt"></i>                                                        
+                                </a>
+
+                                <a id="payButton" class="controller-button" href="javascript:void(0)">
+                                    <i class="fas fa-coins"></i>
+                                </a>
+                            </div>
                             
                             <?php
                                 if (isset($totalDayProfit)) {
@@ -312,6 +314,267 @@
         </div>
 
 
+
+        
+        <!-- Delete booking form -->
+        <div class="delete-booking-form" title="Xóa lịch đặt sân" id="deleteBookingForm">
+            <form method="POST" action="API/delete.php">
+                <!-- Select user real name -->
+                <br>
+                <select required name="selectUserRealName" id="selectUserRealNameDelete" style="width: 100%;">
+                    <option class="user-realname" selected="true" value="">(Chọn tên)</option>
+                    
+                    <?php
+                        $bookingDetailsEditData = getBookingDetails($db);
+
+                        if (isset($_POST['dateChoose'])) {
+                            if ($bookingDetailsEditData != null && $bookingDetailsEditData -> num_rows > 0) {
+                                while ($data = $bookingDetailsEditData -> fetch_assoc()) {
+                                    $userIdentity = $data['user_id'];
+                                    $bookingDateEdit = $data['booking_date'];
+    
+                                    // Get user detail by id
+                                    $getUserData = getUserById($userIdentity);
+                                    $userData = $getUserData -> fetch_assoc();
+                                    $userRealName = $userData['user_realname'];
+                                    $userPhone = $userData['user_phone'];
+    
+                                    if ($bookingDateEdit == $_POST['dateChoose']) {
+                                        ?>
+                                            <option class="user-realname"><?= $userRealName . " - " . $userPhone ?></option>
+                                        <?php
+                                    }
+                                }
+                            }
+                        }
+                        
+                        else if (isset($_GET['datechoose'])) {
+                            if ($bookingDetailsEditData != null && $bookingDetailsEditData -> num_rows > 0) {
+                                while ($data = $bookingDetailsEditData -> fetch_assoc()) {
+                                    $userIdentity = $data['user_id'];
+                                    $bookingDateEdit = $data['booking_date'];
+    
+                                    // Get user detail by id
+                                    $getUserData = getUserById($userIdentity);
+                                    $userData = $getUserData -> fetch_assoc();
+                                    $userRealName = $userData['user_realname'];
+                                    $userPhone = $userData['user_phone'];
+    
+                                    if ($bookingDateEdit == $_GET['datechoose']) {
+                                        ?>
+                                            <option class="user-realname"><?= $userRealName . " - " . $userPhone ?></option>
+                                        <?php
+                                    }
+                                }
+                            }
+                        }
+                    ?>
+                </select>
+
+                <!-- Date -->
+                <br>
+                <br>
+                <label>Ngày: </label>
+                <?php 
+                    if (isset($_POST['submit'])) {
+                        ?>
+                            <input type="text" required placeholder="dd/mm/yyyy" class="date" autocomplete="off" name="dateChooseForm" value="<?= $_POST['dateChoose'] ?>">
+                        <?php
+                    }
+
+                    else if (isset($_GET['datechoose'])) {
+                        ?>
+                            <input type="text" required placeholder="dd/mm/yyyy" class="date" autocomplete="off" name="dateChooseForm" value="<?= $_GET['datechoose'] ?>">
+                        <?php
+                    }
+
+                    else {
+                        ?>
+                            <input type="text" required placeholder="dd/mm/yyyy" class="date" autocomplete="off" name="dateChooseForm">
+                        <?php
+                    }
+                ?>
+                
+                <br>
+                <br>
+                <input type="submit" name="deleteSubmit" id="deleteSubmit" class="delete-submit" value="Xóa">
+            </form>
+        </div>
+
+        <!-- Edit booking form -->
+        <div class="edit-booking-form" title="Chỉnh sửa lịch đặt sân" id="editBookingForm">
+            <form method="POST" action="API/edit.php">
+                <!-- Select user real name -->
+                <br>
+                <select required name="selectUserRealName" id="selectUserRealNameEdit" style="width: 100%;">
+                    <option class="user-realname" selected="true" value="">(Chọn tên)</option>
+                    
+                    <?php
+                        $bookingDetailsEditData = getBookingDetails($db);
+
+                        if (isset($_POST['dateChoose'])) {
+                            if ($bookingDetailsEditData != null && $bookingDetailsEditData -> num_rows > 0) {
+                                while ($data = $bookingDetailsEditData -> fetch_assoc()) {
+                                    $userIdentity = $data['user_id'];
+                                    $bookingDateEdit = $data['booking_date'];
+    
+                                    // Get user detail by id
+                                    $getUserData = getUserById($userIdentity);
+                                    $userData = $getUserData -> fetch_assoc();
+                                    $userRealName = $userData['user_realname'];
+                                    $userPhone = $userData['user_phone'];
+    
+                                    if ($bookingDateEdit == $_POST['dateChoose']) {
+                                        ?>
+                                            <option class="user-realname"><?= $userRealName . " - " . $userPhone ?></option>
+                                        <?php
+                                    }
+                                }
+                            }
+                        }
+                        
+                        else if (isset($_GET['datechoose'])) {
+                            if ($bookingDetailsEditData != null && $bookingDetailsEditData -> num_rows > 0) {
+                                while ($data = $bookingDetailsEditData -> fetch_assoc()) {
+                                    $userIdentity = $data['user_id'];
+                                    $bookingDateEdit = $data['booking_date'];
+    
+                                    // Get user detail by id
+                                    $getUserData = getUserById($userIdentity);
+                                    $userData = $getUserData -> fetch_assoc();
+                                    $userRealName = $userData['user_realname'];
+                                    $userPhone = $userData['user_phone'];
+    
+                                    if ($bookingDateEdit == $_GET['datechoose']) {
+                                        ?>
+                                            <option class="user-realname"><?= $userRealName . " - " . $userPhone ?></option>
+                                        <?php
+                                    }
+                                }
+                            }
+                        }
+                    ?>
+                </select>
+
+                <!-- Select date -->
+                <br>
+                <br>
+                <label>Ngày: </label>
+                <?php 
+                    if (isset($_POST['submit'])) {
+                        ?>
+                            <input type="text" required placeholder="dd/mm/yyyy" class="date" autocomplete="off" name="dateChooseForm" value="<?= $_POST['dateChoose'] ?>">
+                        <?php
+                    }
+
+                    else if (isset($_GET['datechoose'])) {
+                        ?>
+                            <input type="text" required placeholder="dd/mm/yyyy" class="date" autocomplete="off" name="dateChooseForm" value="<?= $_GET['datechoose'] ?>">
+                        <?php
+                    }
+
+                    else {
+                        ?>
+                            <input type="text" required placeholder="dd/mm/yyyy" class="date" autocomplete="off" name="dateChooseForm">
+                        <?php
+                    }
+                ?>
+
+                <!-- Select ground -->
+                <br>
+                <br>
+                <label>Sân: </label>
+                <select name="selectGround">
+                    <?php
+                        $groundsData = getGrounds($db);
+
+                        if ($groundsData != null && $groundsData -> num_rows > 0) {
+                            while ($data = $groundsData -> fetch_assoc()) {
+                                $groundName = $data['ground_name'];
+
+                                if ($groundName) {
+                                    ?>
+                                        <option><?= $groundName ?></option>
+                                    <?php
+                                }
+                            }
+                        }
+                    ?>
+                </select>
+
+                <!-- Select time start -->
+                <br>
+                <br>
+                <label>Thời gian bắt đầu: </label>
+                <select name="selectTimeStart-1">
+                    <?php
+                        for ($i = 7; $i <= 21; $i++) { 
+                            ?>
+                                <option><?= $i ?></option>
+                            <?php
+                        }
+                    ?>
+                </select>
+
+                :
+
+                <select name="selectTimeStart-2">
+                    <?php
+                        for ($i=0; $i < 12; $i++) { 
+                            if ($i < 2) {
+                                ?>
+                                    <option><?= "0" . $i * 5 ?></option>
+                                <?php
+                            }
+
+                            else {
+                                ?>
+                                    <option><?= $i * 5 ?></option>
+                                <?php
+                            }
+                        }
+                    ?>
+                </select>
+
+                <!-- Select time end -->
+                <br>
+                <br>
+                <label>Thời gian kết thúc: </label>
+                <select name="selectTimeEnd-1"> 
+                    <?php
+                        for ($i = 7; $i <= 21; $i++) { 
+                            ?>
+                                <option><?= $i ?></option>
+                            <?php
+                        }
+                    ?>
+                </select>
+
+                :
+
+                <select name="selectTimeEnd-2">
+                    <?php
+                        for ($i=0; $i < 12; $i++) { 
+                            if ($i < 2) {
+                                ?>
+                                    <option><?= "0" . $i * 5 ?></option>
+                                <?php
+                            }
+
+                            else {
+                                ?>
+                                    <option><?= $i * 5 ?></option>
+                                <?php
+                            }
+                        }
+                    ?>
+                </select>
+                
+                <br>
+                <br>
+                <input type="submit" name="editSubmit" id="editSubmit" class="edit-submit" value="Cập nhật">
+            </form>
+        </div>
 
         <!-- Add booking form -->
         <div class="add-booking-form" title="Thêm lịch đặt sân" id="addBookingForm">
@@ -601,9 +864,6 @@
             </form>
         </div>
 
-        
-
-
         <!-- Handling success & error message of booking -->
         <?php
             if (isset($_SESSION['booking-error'])) {
@@ -632,3 +892,5 @@
 ?>
 
 <script src="./JS/add-booking-form.js?v=<?php echo time(); ?>"></script>
+<script src="./JS/edit-booking-form.js?v=<?php echo time(); ?>"></script>
+<script src="./JS/delete-booking-form.js?v=<?php echo time(); ?>"></script>

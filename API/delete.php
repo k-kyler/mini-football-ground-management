@@ -1,14 +1,29 @@
 <?php
     require_once('../Config/config.php');
 
-    if (isset($_GET['bookingid']) && isset($_GET['bookingdate'])) {
+    if (isset($_POST['deleteSubmit'])) {
         $db = getDatabase();
 
-        $bookingDate = $_GET['bookingdate'];
-        $bookingId = $_GET['bookingid'];
-        $bookingId = mysqli_escape_string($db, $bookingId);
+        // Current booking user real name and phone
+        $userRealNameAndPhone = $_POST['selectUserRealName'];
 
-        $sqlQuery = "delete from bookingdetails where booking_id = '$bookingId'";
+        // Get current booking user phone
+        $userRealNameAndPhone = strrev($userRealNameAndPhone);
+        $userPhone = strrev(substr($userRealNameAndPhone, 0, strpos($userRealNameAndPhone, " - ")));
+
+        // Get current booking user id by phone
+        $getUserData = getIdByUserPhone($userPhone);
+        $userData = $getUserData -> fetch_assoc();
+        $userId = $userData['user_id'];
+
+        // Current booking date
+        $bookingDate = $_POST['dateChooseForm'];
+
+        // Delete from database
+        $bookingDateDelete = mysqli_escape_string($db, $bookingDate);
+        $userId = mysqli_escape_string($db, $userId);
+
+        $sqlQuery = "delete from bookingdetails where user_id = '$userId' and booking_date = '$bookingDateDelete'";
 
         $result = $db -> query($sqlQuery);
 

@@ -42,7 +42,9 @@
 }
 
 .booking-list {
-    overflow: auto;
+    overflow-y: scroll;
+    height: 14rem;
+    overflow-x: auto;
 }
 
 .booking-list table {
@@ -63,49 +65,39 @@
     text-align: center;    
 }
 
-.add-button {
-    color: white;
-    padding: 0.5rem 1rem;
-    border-radius: 3px;
-    border: none;
-    cursor: pointer;
-    background-color: rgb(38, 241, 38);
-}
-
-.add-button:hover {
-    opacity: 0.8;
-    transition: all 0.4s;
+.management-controller {
+    padding: 0.5rem;
 }
 
 .day-profit span {
     color: rgb(38, 241, 38);
 }
 
-.add-and-profit-area {
+.controller-and-profit-area {
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
 
-.table-action a {
+.controller-button {
     text-decoration: none;
     color: white;
 }
 
-.table-action a:hover {
+.controller-button:hover {
     opacity: 0.7;
     transition: all 0.4s;
 }
 
-.table-action a:not(:last-child) {
-    margin-right: 0.5rem;
+.controller-button:not(:last-child) {
+    margin-right: 1rem;
 }
 
-.add-booking-form, #addNew, #addOld {
+.add-booking-form, .edit-booking-form, .delete-booking-form, #addNew, #addOld {
     display: none;
 }
 
-.old-submit, .new-submit {
+.old-submit, .new-submit, .edit-submit, .delete-submit {
     background-color: #dc3545;
     border: none;
     padding: 0.5rem 1rem;
@@ -118,7 +110,15 @@
     background-color: #20b8b0;
 }
 
-.old-submit:hover, .new-submit:hover {
+.edit-submit {
+    background-color: rgb(115, 39, 214);
+}
+
+.delete-submit {
+    background-color: #dc3545;
+}
+
+.old-submit:hover, .new-submit:hover, .edit-submit:hover, .delete-submit:hover {
     opacity: 0.85;
     transition: all 0.4s;
 }
