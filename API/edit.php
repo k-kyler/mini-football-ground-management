@@ -67,9 +67,14 @@
             }
         }
 
+        // Check if start and end time are the same
+        if ($timeStart == $timeEnd) {
+            $checkBookingTimes = false;
+        }
+
         // Check and edit database
         if ($checkBookingTimes == false) {
-            $_SESSION['booking-error'] = "Khung giờ đặt sân bị trùng!";
+            $_SESSION['booking-error'] = "Khung giờ đặt sân không hợp lệ!";
         }
 
         else if ($checkBookingPhone == false) {
