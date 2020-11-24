@@ -123,7 +123,7 @@
                                                         <td><?= number_format($bookingCost) ?></td>
                                                         <td>0</td>
                                                         <td><?= number_format($bookingCost + 0) ?></td>
-                                                        <td style="color: red; font-weight: 500">Chưa thanh toán</td>
+                                                        <td style="color: red; font-weight: 600;">Chưa thanh toán</td>
 
                                                         <!-- Hidden input to store edit data -->
                                                         <input type="hidden" id="<?= 'userRealName' . $number ?>" value="<?= $userRealName ?>">
@@ -262,7 +262,7 @@
                                                         <td><?= number_format($bookingCost) ?></td>
                                                         <td>0</td>
                                                         <td><?= number_format($bookingCost + 0) ?></td>
-                                                        <td style="color: red; font-weight: 500">Chưa thanh toán</td>
+                                                        <td style="color: red; font-weight: 600">Chưa thanh toán</td>
 
                                                         <!-- Hidden input to store edit data -->
                                                         <input type="hidden" id="<?= 'userRealName' . $number ?>" value="<?= $userRealName ?>">
@@ -432,7 +432,7 @@
         </div>
         
         <!-- Delete booking form -->
-        <div class="delete-booking-form" title="Xóa lịch đặt sân" id="deleteBookingForm">
+        <div class="delete-booking-form" title="Hủy lịch đặt sân" id="deleteBookingForm">
             <form method="POST" action="API/delete.php">
                 <!-- Select user real name -->
                 <br>

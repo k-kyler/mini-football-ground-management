@@ -114,14 +114,35 @@
             // New user id
             $newUserId = uniqid();
 
-            // Insert new user data into database
+            // Check if new phone has existed
+            $checkUserNewPhone = true;
+        
             $userRealNameNew = mysqli_escape_string($db, $userRealName);
             $newPhone = mysqli_escape_string($db, $userPhone);
             $newUserId = mysqli_escape_string($db, $newUserId);
 
-            $addNewUserQuery = "insert into users (user_id, user_phone, user_realname) values ('$newUserId', '$newPhone', '$userRealNameNew')";
+            $getUserNewPhone = $db -> query("select user_phone from users where user_phone = '$newPhone'");
+
+            if ($getUserNewPhone -> num_rows > 0) {
+                $checkUserNewPhone = false;
+
+                // Get user id
+                $getUserData = getIdByUserPhone($userPhone);
+                $userData = $getUserData -> fetch_assoc();
+                $userId = $userData['user_id'];
+            }
+
+            else {
+                // Insert into the database
+                $addNewUserQuery = "insert into users (user_id, user_phone, user_realname) values ('$newUserId', '$newPhone', '$userRealNameNew')";
             
-            $addNewResult = $db -> query($addNewUserQuery);
+                $addNewResult = $db -> query($addNewUserQuery);
+
+                // Get user id
+                $getUserData = getIdByUserPhone($userPhone);
+                $userData = $getUserData -> fetch_assoc();
+                $userId = $userData['user_id'];
+            }
 
             // Ground name
             $groundNameSelected = $_POST['selectGround'];
@@ -131,11 +152,6 @@
         
             // Generate booking id
             $bookingId = uniqid();
-
-            // Get user id
-            $getUserData = getIdByUserPhone($userPhone);
-            $userData = $getUserData -> fetch_assoc();
-            $userId = $userData['user_id'];
 
             // Get ground id
             $getGroundDataSelected = getIdByGroundName($groundNameSelected);
@@ -193,6 +209,10 @@
             }
 
             else if ($checkBookingPhone == false) {
+                $_SESSION['booking-error'] = "Số điện thoại đã được dùng!";
+            }
+
+            else if ($checkUserNewPhone == false) {
                 $_SESSION['booking-error'] = "Số điện thoại đã được dùng!";
             }
 
