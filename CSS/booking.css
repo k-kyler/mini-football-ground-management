@@ -158,7 +158,9 @@
     opacity: 0.7;
 }
 
-#addNew input[name="newRealName"], #addNew input[type="tel"], #editBookingForm input[type="tel"] {
+#addNew input[name="newRealName"], 
+#addNew input[type="tel"], 
+#editBookingForm input[type="tel"],
+#editBookingForm input[name="editRealName"] {
     width: 11rem;
 }
-

@@ -4,7 +4,7 @@ $(document).ready(function() {
         $("#editBookingForm")
             .dialog({
                 autoOpen: false,
-                height: 400,
+                height: 430,
                 width: 350,
                 resizable: false,
                 modal: true,
@@ -32,6 +32,7 @@ $(document).ready(function() {
         let bookingEnd = $("#bookingEnd" + i).val();
 
         temp.push(userRealNameAndPhone);
+        temp.push(userRealName);
         temp.push(userPhone);
         temp.push(groundName);
         temp.push(bookingStart);
@@ -45,15 +46,17 @@ $(document).ready(function() {
         for (let i = 0; i < totalBookingUsersList.length; i++){
             if (totalBookingUsersList[i][0] == $("#selectUserRealNameEdit").val()) {
                 for (let j = 0; j < totalBookingUsersList[i].length; j++) {
-                    $("#editPhone").val(totalBookingUsersList[i][1]);
+                    $("#editRealName").val(totalBookingUsersList[i][1]);
 
-                    $("#selectGround").val(totalBookingUsersList[i][2]);
+                    $("#editPhone").val(totalBookingUsersList[i][2]);
 
-                    $("#selectTimeStart-1").val(totalBookingUsersList[i][3].split(":")[0]);
-                    $("#selectTimeStart-2").val(totalBookingUsersList[i][3].split(":")[1]);
+                    $("#selectGround").val(totalBookingUsersList[i][3]);
 
-                    $("#selectTimeEnd-1").val(totalBookingUsersList[i][4].split(":")[0]);
-                    $("#selectTimeEnd-2").val(totalBookingUsersList[i][4].split(":")[1]);
+                    $("#selectTimeStart-1").val(totalBookingUsersList[i][4].split(":")[0]);
+                    $("#selectTimeStart-2").val(totalBookingUsersList[i][4].split(":")[1]);
+
+                    $("#selectTimeEnd-1").val(totalBookingUsersList[i][5].split(":")[0]);
+                    $("#selectTimeEnd-2").val(totalBookingUsersList[i][5].split(":")[1]);
                 }
             }
         }

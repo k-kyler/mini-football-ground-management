@@ -7,9 +7,15 @@
         // Current booking user real name and phone
         $userRealNameAndPhone = $_POST['selectUserRealName'];
 
+        // Get current booking user real name
+        $userRealName = substr($userRealNameAndPhone, 0, strpos($userRealNameAndPhone, " - "));
+
         // Get current booking user phone
         $userRealNameAndPhone = strrev($userRealNameAndPhone);
         $userPhone = strrev(substr($userRealNameAndPhone, 0, strpos($userRealNameAndPhone, " - ")));
+
+        // Edit real name
+        $userEditRealName = $_POST['editRealName'];
 
         // Edit phone
         $userEditPhone = $_POST['editPhone'];
@@ -37,7 +43,8 @@
                 $userData = $getUserData -> fetch_assoc();
                 $userId = $userData['user_id'];
 
-                // Update new phone for user
+                // Update new phone for user if it is required 
+                $userEditRealName = mysqli_escape_string($db, $userEditRealName);
                 $userEditPhone = mysqli_escape_string($db, $userEditPhone);
                 $userEditId = mysqli_escape_string($db, $userId);
 
@@ -51,6 +58,16 @@
             $getUserData = getIdByUserPhone($userPhone);
             $userData = $getUserData -> fetch_assoc();
             $userId = $userData['user_id'];
+        }
+
+        // Check to update new user real name
+        if ($userRealName != $userEditRealName) {
+            // Update new real name for user if it is required 
+            $userEditRealName = mysqli_escape_string($db, $userEditRealName);
+            $userEditId = mysqli_escape_string($db, $userId);
+
+            $sqlQueryEditRealName = "update users set user_realname = '$userEditRealName' where user_id = '$userEditId'";
+            $res = $db -> query($sqlQueryEditRealName);
         }
 
         // Ground name select

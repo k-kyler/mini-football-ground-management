@@ -571,7 +571,13 @@
                     ?>
                 </select>
 
-                <!-- Phone -->
+                <!-- Edit real name -->
+                <br>
+                <br>
+                <label>Họ tên: </label>
+                <input required type="text" name="editRealName" id="editRealName">
+
+                <!-- Edit phone -->
                 <br>
                 <br>
                 <label>Số điện thoại: </label>
