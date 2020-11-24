@@ -164,3 +164,11 @@
 #editBookingForm input[name="editRealName"] {
     width: 11rem;
 }
+
+#payBookingForm input[type="text"] {
+    width: 9rem;
+}
+
+#payBookingForm input[type="number"] {
+    width: 3rem;
+}

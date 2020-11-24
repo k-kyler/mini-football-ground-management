@@ -65,9 +65,6 @@
                                     <th>Thời gian bắt đầu</th>
                                     <th>Thời gian kết thúc</th>
                                     <th>Tổng thời gian (phút)</th>
-                                    <th>Phí đặt sân</th>
-                                    <th>Phí dịch vụ</th>
-                                    <th>Tổng chi phí</th>
                                     <th>Trạng thái</th>
                                 </tr>
                                 
@@ -120,17 +117,16 @@
                                                         <td><?= $bookingStart ?></td>
                                                         <td><?= $bookingEnd ?></td>
                                                         <td><?= $bookingTotaltime ?></td>
-                                                        <td><?= number_format($bookingCost) ?></td>
-                                                        <td>0</td>
-                                                        <td><?= number_format($bookingCost + 0) ?></td>
                                                         <td style="color: red; font-weight: 600;">Chưa thanh toán</td>
 
-                                                        <!-- Hidden input to store edit data -->
+                                                        <!-- Hidden input to store edit & pay data -->
                                                         <input type="hidden" id="<?= 'userRealName' . $number ?>" value="<?= $userRealName ?>">
                                                         <input type="hidden" id="<?= 'userPhone' . $number ?>" value="<?= $userPhone ?>">
                                                         <input type="hidden" id="<?= 'groundName' . $number ?>" value="<?= $groundName ?>">
                                                         <input type="hidden" id="<?= 'bookingStart' . $number ?>" value="<?= $bookingStart ?>">
                                                         <input type="hidden" id="<?= 'bookingEnd' . $number ?>" value="<?= $bookingEnd ?>">
+                                                        <input type="hidden" id="<?= 'totalTime' . $number ?>" value="<?= $bookingTotaltime ?>">
+                                                        <input type="hidden" id="<?= 'groundCost' . $number ?>" value="<?= $bookingCost ?>">
                                                     </tr>
                                                 <?php
                                             }
@@ -204,9 +200,6 @@
                                     <th>Thời gian bắt đầu</th>
                                     <th>Thời gian kết thúc</th>
                                     <th>Tổng thời gian (phút)</th>
-                                    <th>Phí đặt sân</th>
-                                    <th>Phí dịch vụ</th>
-                                    <th>Tổng chi phí</th>
                                     <th>Trạng thái</th>
                                 </tr>
                                 
@@ -259,9 +252,6 @@
                                                         <td><?= $bookingStart ?></td>
                                                         <td><?= $bookingEnd ?></td>
                                                         <td><?= $bookingTotaltime ?></td>
-                                                        <td><?= number_format($bookingCost) ?></td>
-                                                        <td>0</td>
-                                                        <td><?= number_format($bookingCost + 0) ?></td>
                                                         <td style="color: red; font-weight: 600">Chưa thanh toán</td>
 
                                                         <!-- Hidden input to store edit data -->
@@ -270,6 +260,8 @@
                                                         <input type="hidden" id="<?= 'groundName' . $number ?>" value="<?= $groundName ?>">
                                                         <input type="hidden" id="<?= 'bookingStart' . $number ?>" value="<?= $bookingStart ?>">
                                                         <input type="hidden" id="<?= 'bookingEnd' . $number ?>" value="<?= $bookingEnd ?>">
+                                                        <input type="hidden" id="<?= 'totalTime' . $number ?>" value="<?= $bookingTotaltime ?>">
+                                                        <input type="hidden" id="<?= 'groundCost' . $number ?>" value="<?= $bookingCost ?>">
                                                     </tr>
                                                 <?php
                                             }
@@ -417,13 +409,144 @@
                     }
                 ?>
 
-                <!-- Additional services fee -->
+                <!-- Select ground -->
                 <br>
                 <br>
-                <label>Phí dịch vụ: </label>
-                <?php
+                <label>Sân: </label>
+                <select name="selectGround" id="selectGroundPay">
+                    <?php
+                        $groundsData = getGrounds($db);
 
-                ?>
+                        if ($groundsData != null && $groundsData -> num_rows > 0) {
+                            while ($data = $groundsData -> fetch_assoc()) {
+                                $groundName = $data['ground_name'];
+
+                                if ($groundName) {
+                                    ?>
+                                        <option><?= $groundName ?></option>
+                                    <?php
+                                }
+                            }
+                        }
+                    ?>
+                </select>
+
+                <!-- Select time start -->
+                <br>
+                <br>
+                <label>Thời gian bắt đầu: </label>
+                <select name="selectTimeStart-1" id="selectTimeStartPay-1">
+                    <?php
+                        for ($i = 7; $i <= 21; $i++) { 
+                            ?>
+                                <option><?= $i ?></option>
+                            <?php
+                        }
+                    ?>
+                </select>
+
+                :
+
+                <select name="selectTimeStart-2" id="selectTimeStartPay-2">
+                    <?php
+                        for ($i=0; $i < 12; $i++) { 
+                            if ($i < 2) {
+                                ?>
+                                    <option><?= "0" . $i * 5 ?></option>
+                                <?php
+                            }
+
+                            else {
+                                ?>
+                                    <option><?= $i * 5 ?></option>
+                                <?php
+                            }
+                        }
+                    ?>
+                </select>
+
+                <!-- Select time end -->
+                <br>
+                <br>
+                <label>Thời gian kết thúc: </label>
+                <select name="selectTimeEnd-1" id="selectTimeEndPay-1"> 
+                    <?php
+                        for ($i = 7; $i <= 21; $i++) { 
+                            ?>
+                                <option><?= $i ?></option>
+                            <?php
+                        }
+                    ?>
+                </select>
+
+                :
+
+                <select name="selectTimeEnd-2" id="selectTimeEndPay-2">
+                    <?php
+                        for ($i=0; $i < 12; $i++) { 
+                            if ($i < 2) {
+                                ?>
+                                    <option><?= "0" . $i * 5 ?></option>
+                                <?php
+                            }
+
+                            else {
+                                ?>
+                                    <option><?= $i * 5 ?></option>
+                                <?php
+                            }
+                        }
+                    ?>
+                </select>
+
+                <!-- Total time -->
+                <br>
+                <br>
+                <label>Tổng thời gian: </label>
+                <input type="text" required name="totalTime" id="totalTime">
+
+                <!-- Beverage name and cost -->
+                <br>
+                <br>
+                <label>Phí nước uống: </label>
+                <select name="selectBeverage" id="selectBeverage">
+                    <option selected="true" value="">(Thêm nước uống)</option>
+
+                    <?php
+                        $beveragesData = getBeverages($db);
+
+                        if ($beveragesData != null && $beveragesData -> num_rows > 0) {
+                            while ($data = $beveragesData -> fetch_assoc()) {
+                                $beverageName = $data['beverage_name'];
+                                $beverageCost = $data['beverage_cost'];
+
+                                if ($beverageName && $beverageCost) {
+                                    ?>
+                                        <option><?= $beverageName . ' - ' . number_format($beverageCost) ?></option>
+                                    <?php
+                                }
+                            }
+                        }
+                    ?>
+                </select>
+
+                <!-- Beverage number -->
+                <br>
+                <br>
+                <label>Số lượng: </label>
+                <input type="number" name="beverageNumber" id="beverageNumber" min="0" value="0">
+                
+                <!-- Ground cost -->
+                <br>
+                <br>
+                <label>Phí đặt sân: </label>
+                <input type="text" required name="groundCost" id="groundCost">
+
+                <!-- Total cost -->
+                <br>
+                <br>
+                <label>Tổng chi phí: </label>
+                <input type="text" required name="totalCost" id="totalCost">
                 
                 <br>
                 <br>

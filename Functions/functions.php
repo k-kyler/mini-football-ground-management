@@ -247,4 +247,10 @@
             return null;
         }
     }
+
+    function getBeverages($db) {
+        $sqlQuery = "select * from beverages";
+
+        return $db -> query($sqlQuery);
+    }
 ?>

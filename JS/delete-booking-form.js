@@ -4,7 +4,7 @@ $(document).ready(function() {
         $("#deleteBookingForm")
             .dialog({
                 autoOpen: false,
-                height: 360,
+                height: 220,
                 width: 350,
                 resizable: false,
                 modal: true,
