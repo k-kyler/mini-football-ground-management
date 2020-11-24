@@ -68,6 +68,7 @@
                                     <th>Phí đặt sân</th>
                                     <th>Phí dịch vụ</th>
                                     <th>Tổng chi phí</th>
+                                    <th>Trạng thái</th>
                                 </tr>
                                 
                                 <!-- Get booking list data -->
@@ -122,12 +123,22 @@
                                                         <td><?= number_format($bookingCost) ?></td>
                                                         <td>0</td>
                                                         <td><?= number_format($bookingCost + 0) ?></td>
+                                                        <td style="color: red; font-weight: 500">Chưa thanh toán</td>
+
+                                                        <!-- Hidden input to store edit data -->
+                                                        <input type="hidden" id="<?= 'userRealName' . $number ?>" value="<?= $userRealName ?>">
+                                                        <input type="hidden" id="<?= 'userPhone' . $number ?>" value="<?= $userPhone ?>">
+                                                        <input type="hidden" id="<?= 'groundName' . $number ?>" value="<?= $groundName ?>">
+                                                        <input type="hidden" id="<?= 'bookingStart' . $number ?>" value="<?= $bookingStart ?>">
+                                                        <input type="hidden" id="<?= 'bookingEnd' . $number ?>" value="<?= $bookingEnd ?>">
                                                     </tr>
                                                 <?php
                                             }
                                         }
                                     }
                                 ?>
+
+                                <input type="hidden" id="totalBookingUsers" value="<?= $number ?>">
                             </table>
                         </div>
                         
@@ -196,6 +207,7 @@
                                     <th>Phí đặt sân</th>
                                     <th>Phí dịch vụ</th>
                                     <th>Tổng chi phí</th>
+                                    <th>Trạng thái</th>
                                 </tr>
                                 
                                 <!-- Get booking list data -->
@@ -250,12 +262,22 @@
                                                         <td><?= number_format($bookingCost) ?></td>
                                                         <td>0</td>
                                                         <td><?= number_format($bookingCost + 0) ?></td>
+                                                        <td style="color: red; font-weight: 500">Chưa thanh toán</td>
+
+                                                        <!-- Hidden input to store edit data -->
+                                                        <input type="hidden" id="<?= 'userRealName' . $number ?>" value="<?= $userRealName ?>">
+                                                        <input type="hidden" id="<?= 'userPhone' . $number ?>" value="<?= $userPhone ?>">
+                                                        <input type="hidden" id="<?= 'groundName' . $number ?>" value="<?= $groundName ?>">
+                                                        <input type="hidden" id="<?= 'bookingStart' . $number ?>" value="<?= $bookingStart ?>">
+                                                        <input type="hidden" id="<?= 'bookingEnd' . $number ?>" value="<?= $bookingEnd ?>">
                                                     </tr>
                                                 <?php
                                             }
                                         }
                                     }
                                 ?>
+                                
+                                <input type="hidden" id="totalBookingUsers" value="<?= $number ?>">
                             </table>
                         </div>
 
@@ -314,7 +336,100 @@
         </div>
 
 
+        
 
+        <!-- Pay booking form -->
+        <div class="pay-booking-form" title="Thanh toán" id="payBookingForm">
+            <form method="POST" action="API/pay.php">
+                <!-- Select user real name -->
+                <br>
+                <select required name="selectUserRealName" id="selectUserRealNamePay" style="width: 100%;">
+                    <option class="user-realname" selected="true" value="">(Chọn tên)</option>
+                    
+                    <?php
+                        $bookingDetailsEditData = getBookingDetails($db);
+
+                        if (isset($_POST['dateChoose'])) {
+                            if ($bookingDetailsEditData != null && $bookingDetailsEditData -> num_rows > 0) {
+                                while ($data = $bookingDetailsEditData -> fetch_assoc()) {
+                                    $userIdentity = $data['user_id'];
+                                    $bookingDateEdit = $data['booking_date'];
+    
+                                    // Get user detail by id
+                                    $getUserData = getUserById($userIdentity);
+                                    $userData = $getUserData -> fetch_assoc();
+                                    $userRealName = $userData['user_realname'];
+                                    $userPhone = $userData['user_phone'];
+    
+                                    if ($bookingDateEdit == $_POST['dateChoose']) {
+                                        ?>
+                                            <option class="user-realname"><?= $userRealName . " - " . $userPhone ?></option>
+                                        <?php
+                                    }
+                                }
+                            }
+                        }
+                        
+                        else if (isset($_GET['datechoose'])) {
+                            if ($bookingDetailsEditData != null && $bookingDetailsEditData -> num_rows > 0) {
+                                while ($data = $bookingDetailsEditData -> fetch_assoc()) {
+                                    $userIdentity = $data['user_id'];
+                                    $bookingDateEdit = $data['booking_date'];
+    
+                                    // Get user detail by id
+                                    $getUserData = getUserById($userIdentity);
+                                    $userData = $getUserData -> fetch_assoc();
+                                    $userRealName = $userData['user_realname'];
+                                    $userPhone = $userData['user_phone'];
+    
+                                    if ($bookingDateEdit == $_GET['datechoose']) {
+                                        ?>
+                                            <option class="user-realname"><?= $userRealName . " - " . $userPhone ?></option>
+                                        <?php
+                                    }
+                                }
+                            }
+                        }
+                    ?>
+                </select>
+
+                <!-- Pay date -->
+                <br>
+                <br>
+                <label>Ngày: </label>
+                <?php 
+                    if (isset($_POST['submit'])) {
+                        ?>
+                            <input type="text" required placeholder="dd/mm/yyyy" class="date" autocomplete="off" name="dateChooseForm" value="<?= $_POST['dateChoose'] ?>">
+                        <?php
+                    }
+
+                    else if (isset($_GET['datechoose'])) {
+                        ?>
+                            <input type="text" required placeholder="dd/mm/yyyy" class="date" autocomplete="off" name="dateChooseForm" value="<?= $_GET['datechoose'] ?>">
+                        <?php
+                    }
+
+                    else {
+                        ?>
+                            <input type="text" required placeholder="dd/mm/yyyy" class="date" autocomplete="off" name="dateChooseForm">
+                        <?php
+                    }
+                ?>
+
+                <!-- Additional services fee -->
+                <br>
+                <br>
+                <label>Phí dịch vụ: </label>
+                <?php
+
+                ?>
+                
+                <br>
+                <br>
+                <input type="submit" onclick="return confirm('Bạn có chắc chắn muốn thanh toán?');" name="paySubmit" id="paySubmit" class="pay-submit" value="Thanh toán">
+            </form>
+        </div>
         
         <!-- Delete booking form -->
         <div class="delete-booking-form" title="Xóa lịch đặt sân" id="deleteBookingForm">
@@ -456,6 +571,12 @@
                     ?>
                 </select>
 
+                <!-- Phone -->
+                <br>
+                <br>
+                <label>Số điện thoại: </label>
+                <input required type="tel" pattern="[0-9]{10}" name="editPhone" id="editPhone">
+
                 <!-- Select date -->
                 <br>
                 <br>
@@ -484,7 +605,7 @@
                 <br>
                 <br>
                 <label>Sân: </label>
-                <select name="selectGround">
+                <select name="selectGround" id="selectGround">
                     <?php
                         $groundsData = getGrounds($db);
 
@@ -506,7 +627,7 @@
                 <br>
                 <br>
                 <label>Thời gian bắt đầu: </label>
-                <select name="selectTimeStart-1">
+                <select name="selectTimeStart-1" id="selectTimeStart-1">
                     <?php
                         for ($i = 7; $i <= 21; $i++) { 
                             ?>
@@ -518,7 +639,7 @@
 
                 :
 
-                <select name="selectTimeStart-2">
+                <select name="selectTimeStart-2" id="selectTimeStart-2">
                     <?php
                         for ($i=0; $i < 12; $i++) { 
                             if ($i < 2) {
@@ -540,7 +661,7 @@
                 <br>
                 <br>
                 <label>Thời gian kết thúc: </label>
-                <select name="selectTimeEnd-1"> 
+                <select name="selectTimeEnd-1" id="selectTimeEnd-1"> 
                     <?php
                         for ($i = 7; $i <= 21; $i++) { 
                             ?>
@@ -552,7 +673,7 @@
 
                 :
 
-                <select name="selectTimeEnd-2">
+                <select name="selectTimeEnd-2" id="selectTimeEnd-2">
                     <?php
                         for ($i=0; $i < 12; $i++) { 
                             if ($i < 2) {
@@ -894,3 +1015,4 @@
 <script src="./JS/add-booking-form.js?v=<?php echo time(); ?>"></script>
 <script src="./JS/edit-booking-form.js?v=<?php echo time(); ?>"></script>
 <script src="./JS/delete-booking-form.js?v=<?php echo time(); ?>"></script>
+<script src="./JS/pay-booking-form.js?v=<?php echo time(); ?>"></script>

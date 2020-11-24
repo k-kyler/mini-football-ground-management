@@ -11,10 +11,47 @@
         $userRealNameAndPhone = strrev($userRealNameAndPhone);
         $userPhone = strrev(substr($userRealNameAndPhone, 0, strpos($userRealNameAndPhone, " - ")));
 
-        // Get current booking user id by phone
-        $getUserData = getIdByUserPhone($userPhone);
-        $userData = $getUserData -> fetch_assoc();
-        $userId = $userData['user_id'];
+        // Edit phone
+        $userEditPhone = $_POST['editPhone'];
+
+        // Check if edit phone has existed in the database
+        $checkUserEditPhone = true;
+
+        if ($userPhone != $userEditPhone) {
+            // Compare phone of users in database
+            $userEditPhone = mysqli_escape_string($db, $userEditPhone);
+            $getUserEditPhone = $db -> query("select user_phone from users where user_phone = '$userEditPhone'");
+
+            if ($getUserEditPhone -> num_rows > 0) {
+                $checkUserEditPhone = false;
+
+                // Get current booking user id by phone
+                $getUserData = getIdByUserPhone($userPhone);
+                $userData = $getUserData -> fetch_assoc();
+                $userId = $userData['user_id'];
+            }
+
+            else {
+                // Get current booking user id by phone
+                $getUserData = getIdByUserPhone($userPhone);
+                $userData = $getUserData -> fetch_assoc();
+                $userId = $userData['user_id'];
+
+                // Update new phone for user
+                $userEditPhone = mysqli_escape_string($db, $userEditPhone);
+                $userEditId = mysqli_escape_string($db, $userId);
+
+                $sqlQueryEditPhone = "update users set user_phone = '$userEditPhone' where user_id = '$userEditId'";
+                $res = $db -> query($sqlQueryEditPhone);
+            }
+        }
+
+        else {
+            // Get current booking user id by phone
+            $getUserData = getIdByUserPhone($userPhone);
+            $userData = $getUserData -> fetch_assoc();
+            $userId = $userData['user_id'];
+        }
 
         // Ground name select
         $groundNameSelected = $_POST['selectGround'];
@@ -78,6 +115,10 @@
         }
 
         else if ($checkBookingPhone == false) {
+            $_SESSION['booking-error'] = "Số điện thoại đã được dùng!";
+        }
+
+        else if ($checkUserEditPhone == false) {
             $_SESSION['booking-error'] = "Số điện thoại đã được dùng!";
         }
 
