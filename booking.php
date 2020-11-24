@@ -340,7 +340,7 @@
 
         <!-- Pay booking form -->
         <div class="pay-booking-form" title="Thanh toán" id="payBookingForm">
-            <form method="POST" action="API/pay.php">
+            <form method="POST" action="API/pay-booking.php">
                 <!-- Select user real name -->
                 <br>
                 <select required name="selectUserRealName" id="selectUserRealNamePay" style="width: 100%;">
@@ -433,7 +433,7 @@
         
         <!-- Delete booking form -->
         <div class="delete-booking-form" title="Hủy lịch đặt sân" id="deleteBookingForm">
-            <form method="POST" action="API/delete.php">
+            <form method="POST" action="API/delete-booking.php">
                 <!-- Select user real name -->
                 <br>
                 <select required name="selectUserRealName" id="selectUserRealNameDelete" style="width: 100%;">
@@ -518,7 +518,7 @@
 
         <!-- Edit booking form -->
         <div class="edit-booking-form" title="Chỉnh sửa lịch đặt sân" id="editBookingForm">
-            <form method="POST" action="API/edit.php">
+            <form method="POST" action="API/edit-booking.php">
                 <!-- Select user real name -->
                 <br>
                 <select required name="selectUserRealName" id="selectUserRealNameEdit" style="width: 100%;">
