@@ -29,12 +29,19 @@
             $getUserEditPhone = $db -> query("select user_phone from users where user_phone = '$userEditPhone'");
 
             if ($getUserEditPhone -> num_rows > 0) {
-                $checkUserEditPhone = false;
-
                 // Get current booking user id by phone
                 $getUserData = getIdByUserPhone($userPhone);
                 $userData = $getUserData -> fetch_assoc();
                 $userId = $userData['user_id'];
+
+                // Get user id edit by edit phone
+                $getUserDataEdit = getIdByUserPhone($userEditPhone);
+                $userDataEdit = $getUserDataEdit -> fetch_assoc();
+                $userIdEdit = $userDataEdit['user_id'];
+
+                if ($userId != $userDataEdit) {
+                    $checkUserEditPhone = false;
+                }
             }
 
             else {
@@ -79,7 +86,7 @@
         $groundIdSelected = $groundDataSelected['ground_id'];
 
         // Current booking date
-        $bookingDate = $_POST['dateChooseForm'];
+        $bookingDateSelected = $_POST['dateChooseForm'];
 
         // Time start & end
         $timeStart = $_POST['selectTimeStart-1'] . ":" . $_POST['selectTimeStart-2'];
@@ -87,13 +94,12 @@
 
         // Check time start & end
         $checkBookingTimes = true;
-        $checkBookingPhone = true;
         $bookingDetailsData = getBookingDetails($db);
 
         if ($bookingDetailsData != null && $bookingDetailsData -> num_rows > 0) {
             while ($data = $bookingDetailsData -> fetch_assoc()) {
                 $groundId = $data['ground_id'];
-                $userIdInDatabase = $data['user_id'];
+                // $userIdInDatabase = $data['user_id'];
                 $bookingStart = $data['booking_start'];
                 $bookingEnd = $data['booking_end'];
                 $bookingDate = $data['booking_date'];
@@ -102,12 +108,8 @@
                 $getGroundData = getGroundById($groundId);
                 $groundData = $getGroundData -> fetch_assoc();
                 $groundName = $groundData['ground_name'];
-                
-                if ($bookingDate == $bookingDateSelected && $groundName == $groundNameSelected && $bookingStart == $timeStart && $bookingEnd == $timeEnd) {
-                    $checkBookingTimes = false;
-                }
 
-                else if ($bookingDate == $bookingDateSelected && $groundName == $groundNameSelected && strtotime($timeStart) > strtotime($bookingStart) && strtotime($timeStart) < strtotime($bookingEnd)) {
+                if ($bookingDate == $bookingDateSelected && $groundName == $groundNameSelected && strtotime($timeStart) > strtotime($bookingStart) && strtotime($timeStart) < strtotime($bookingEnd)) {
                     $checkBookingTimes = false;
                 }
 
@@ -115,24 +117,20 @@
                     $checkBookingTimes = false;
                 }
 
-                else if ($userIdInDatabase == $userId && $bookingDate == $bookingDateSelected) {
-                    $checkBookingPhone = false;
+                else if ($userIdInDatabase == $userId && $bookingDate == $bookingDateSelected && $groundName == $groundNameSelected) {
+                    $checkBookingTimes = true;
                 }
             }
         }
 
-        // Check if start and end time are the same
-        if ($timeStart == $timeEnd) {
+        // Check if start and end time are the same or start larger than end
+        if ($timeStart == $timeEnd || $timeStart > $timeEnd) {
             $checkBookingTimes = false;
         }
 
         // Check and edit database
         if ($checkBookingTimes == false) {
             $_SESSION['booking-error'] = "Khung giờ đặt sân không hợp lệ!";
-        }
-
-        else if ($checkBookingPhone == false) {
-            $_SESSION['booking-error'] = "Số điện thoại đã được dùng!";
         }
 
         else if ($checkUserEditPhone == false) {
