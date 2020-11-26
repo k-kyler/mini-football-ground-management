@@ -541,6 +541,7 @@
                 <br>
                 <label>Phí đặt sân: </label>
                 <input type="text" required name="groundCost" id="groundCost">
+                <input type="hidden" required name="groundCostTemp" id="groundCostTemp">
 
                 <!-- Total cost -->
                 <br>

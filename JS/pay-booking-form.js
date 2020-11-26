@@ -62,6 +62,7 @@ $(document).ready(function() {
                     $("#totalTime").val(totalBookingUsersList[i][4] + ' phút');
 
                     $("#groundCost").val(Intl.NumberFormat().format(totalBookingUsersList[i][5]) + ' VNĐ');
+                    $("#groundCostTemp").val(totalBookingUsersList[i][5]);
 
                     $("#totalCost").val(Intl.NumberFormat().format(totalBookingUsersList[i][5]) + ' VNĐ');
                 }
@@ -73,10 +74,10 @@ $(document).ready(function() {
     $("#selectBeverage").change(function() {
         let selectBeverage = $("#selectBeverage").val();
         let beverageNumber = $("#beverageNumber").val();
-        let groundCost = $("#groundCost").val();
+        let groundCost = $("#groundCostTemp").val();
 
         let beverageCost = parseInt(selectBeverage.split(" - ")[1]);
-        let reCalculateTotalCost = (parseInt(groundCost) + beverageCost * parseInt(beverageNumber)) * 1000;
+        let reCalculateTotalCost = parseInt(groundCost) + beverageCost * parseInt(beverageNumber) * 1000;
 
         $("#totalCost").val(Intl.NumberFormat().format(reCalculateTotalCost) + ' VNĐ');
     });
@@ -85,10 +86,10 @@ $(document).ready(function() {
     $("#beverageNumber").change(function() {
         let selectBeverage = $("#selectBeverage").val();
         let beverageNumber = $("#beverageNumber").val();
-        let groundCost = $("#groundCost").val();
+        let groundCost = $("#groundCostTemp").val();
 
         let beverageCost = parseInt(selectBeverage.split(" - ")[1]);
-        let reCalculateTotalCost = (parseInt(groundCost) + beverageCost * parseInt(beverageNumber)) * 1000;
+        let reCalculateTotalCost = parseInt(groundCost) + beverageCost * parseInt(beverageNumber) * 1000;
 
         $("#totalCost").val(Intl.NumberFormat().format(reCalculateTotalCost) + ' VNĐ');
     });
