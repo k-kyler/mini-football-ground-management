@@ -253,4 +253,26 @@
 
         return $db -> query($sqlQuery);
     }
+
+    function getBookingDetailByUserId($userId) {
+        $db = getDatabase();
+
+        $sqlQuery = "select * from bookingdetails where user_id = ?";
+
+        $stm = $db ->prepare($sqlQuery);
+        $stm -> bind_param('s', $userId);
+        $status = $stm -> execute();
+
+        if ($status) {
+            $data = $stm -> get_result();
+
+            return $data;
+        }
+
+        else {
+            $stm -> close();
+
+            return null;
+        }
+    }
 ?>
