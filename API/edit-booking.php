@@ -109,22 +109,34 @@
                 $groundData = $getGroundData -> fetch_assoc();
                 $groundName = $groundData['ground_name'];
 
-                if ($bookingDate == $bookingDateSelected && $groundName == $groundNameSelected && strtotime($timeStart) > strtotime($bookingStart) && strtotime($timeStart) < strtotime($bookingEnd)) {
+                if ($bookingDate == $bookingDateSelected && $groundName == $groundNameSelected && strtotime($timeStart) > strtotime($bookingStart) && strtotime($timeStart) < strtotime($bookingEnd) && strtotime($timeEnd) > strtotime($bookingStart) && strtotime($timeEnd) > strtotime($bookingEnd)) {
                     $checkBookingTimes = false;
                 }
 
-                else if ($bookingDate == $bookingDateSelected && $groundName == $groundNameSelected && strtotime($timeEnd) > strtotime($bookingStart) && strtotime($timeEnd) < strtotime($bookingEnd)) {
+                else if ($bookingDate == $bookingDateSelected && $groundName == $groundNameSelected && strtotime($timeEnd) > strtotime($bookingStart) && strtotime($timeEnd) < strtotime($bookingEnd) && strtotime($timeStart) < strtotime($bookingStart) && strtotime($timeStart) < strtotime($bookingEnd)) {
+                    $checkBookingTimes = false;
+                }
+
+                else if ($bookingDate == $bookingDateSelected && $groundName == $groundNameSelected && strtotime($timeStart) < strtotime($bookingStart) && strtotime($timeEnd) > strtotime($bookingEnd)) {
+                    $checkBookingTimes = false;
+                }
+
+                else if ($bookingDate == $bookingDateSelected && $groundName == $groundNameSelected && strtotime($timeStart) > strtotime($bookingStart) && strtotime($timeEnd) < strtotime($bookingEnd)) {
                     $checkBookingTimes = false;
                 }
 
                 else if ($userIdInDatabase == $userId && $bookingDate == $bookingDateSelected && $groundName == $groundNameSelected) {
                     $checkBookingTimes = true;
                 }
+
+                else if ($userIdInDatabase == $userId && $bookingDate == $bookingDateSelected && $groundName == $groundNameSelected && $bookingStart == $timeStart && $bookingEnd == $timeEnd) {
+                    $checkBookingTimes = true;
+                }
             }
         }
 
         // Check if start and end time are the same or start larger than end
-        if ($timeStart == $timeEnd || $timeStart > $timeEnd) {
+        if ($timeStart == $timeEnd || strtotime($timeStart) > strtotime($timeEnd)) {
             $checkBookingTimes = false;
         }
 

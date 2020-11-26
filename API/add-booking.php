@@ -57,11 +57,19 @@
                         $checkBookingTimes = false;
                     }
 
-                    else if ($bookingDate == $bookingDateSelected && $groundName == $groundNameSelected && strtotime($timeStart) > strtotime($bookingStart) && strtotime($timeStart) < strtotime($bookingEnd)) {
+                    else if ($bookingDate == $bookingDateSelected && $groundName == $groundNameSelected && strtotime($timeStart) > strtotime($bookingStart) && strtotime($timeStart) < strtotime($bookingEnd) && strtotime($timeEnd) > strtotime($bookingStart) && strtotime($timeEnd) > strtotime($bookingEnd)) {
+                        $checkBookingTimes = false;
+                    }
+    
+                    else if ($bookingDate == $bookingDateSelected && $groundName == $groundNameSelected && strtotime($timeEnd) > strtotime($bookingStart) && strtotime($timeEnd) < strtotime($bookingEnd) && strtotime($timeStart) < strtotime($bookingStart) && strtotime($timeStart) < strtotime($bookingEnd)) {
                         $checkBookingTimes = false;
                     }
 
-                    else if ($bookingDate == $bookingDateSelected && $groundName == $groundNameSelected && strtotime($timeEnd) > strtotime($bookingStart) && strtotime($timeEnd) < strtotime($bookingEnd)) {
+                    else if ($bookingDate == $bookingDateSelected && $groundName == $groundNameSelected && strtotime($timeStart) < strtotime($bookingStart) && strtotime($timeEnd) > strtotime($bookingEnd)) {
+                        $checkBookingTimes = false;
+                    }
+    
+                    else if ($bookingDate == $bookingDateSelected && $groundName == $groundNameSelected && strtotime($timeStart) > strtotime($bookingStart) && strtotime($timeEnd) < strtotime($bookingEnd)) {
                         $checkBookingTimes = false;
                     }
 
@@ -71,8 +79,8 @@
                 }
             }
 
-            // Check if start and end time are the same
-            if ($timeStart == $timeEnd) {
+            // Check if start and end time are the same or start larger than end
+            if ($timeStart == $timeEnd || strtotime($timeStart) > strtotime($timeEnd)) {
                 $checkBookingTimes = false;
             }
 
@@ -117,31 +125,12 @@
             // Check if new phone has existed
             $checkUserNewPhone = true;
         
-            $userRealNameNew = mysqli_escape_string($db, $userRealName);
             $newPhone = mysqli_escape_string($db, $userPhone);
-            $newUserId = mysqli_escape_string($db, $newUserId);
 
             $getUserNewPhone = $db -> query("select user_phone from users where user_phone = '$newPhone'");
 
             if ($getUserNewPhone -> num_rows > 0) {
                 $checkUserNewPhone = false;
-
-                // Get user id
-                $getUserData = getIdByUserPhone($userPhone);
-                $userData = $getUserData -> fetch_assoc();
-                $userId = $userData['user_id'];
-            }
-
-            else {
-                // Insert into the database
-                $addNewUserQuery = "insert into users (user_id, user_phone, user_realname) values ('$newUserId', '$newPhone', '$userRealNameNew')";
-            
-                $addNewResult = $db -> query($addNewUserQuery);
-
-                // Get user id
-                $getUserData = getIdByUserPhone($userPhone);
-                $userData = $getUserData -> fetch_assoc();
-                $userId = $userData['user_id'];
             }
 
             // Ground name
@@ -184,11 +173,19 @@
                         $checkBookingTimes = false;
                     }
 
-                    else if ($bookingDate == $bookingDateSelected && $groundName == $groundNameSelected && strtotime($timeStart) > strtotime($bookingStart) && strtotime($timeStart) < strtotime($bookingEnd)) {
+                    else if ($bookingDate == $bookingDateSelected && $groundName == $groundNameSelected && strtotime($timeStart) > strtotime($bookingStart) && strtotime($timeStart) < strtotime($bookingEnd) && strtotime($timeEnd) > strtotime($bookingStart) && strtotime($timeEnd) > strtotime($bookingEnd)) {
+                        $checkBookingTimes = false;
+                    }
+    
+                    else if ($bookingDate == $bookingDateSelected && $groundName == $groundNameSelected && strtotime($timeEnd) > strtotime($bookingStart) && strtotime($timeEnd) < strtotime($bookingEnd) && strtotime($timeStart) < strtotime($bookingStart) && strtotime($timeStart) < strtotime($bookingEnd)) {
                         $checkBookingTimes = false;
                     }
 
-                    else if ($bookingDate == $bookingDateSelected && $groundName == $groundNameSelected && strtotime($timeEnd) > strtotime($bookingStart) && strtotime($timeEnd) < strtotime($bookingEnd)) {
+                    else if ($bookingDate == $bookingDateSelected && $groundName == $groundNameSelected && strtotime($timeStart) < strtotime($bookingStart) && strtotime($timeEnd) > strtotime($bookingEnd)) {
+                        $checkBookingTimes = false;
+                    }
+    
+                    else if ($bookingDate == $bookingDateSelected && $groundName == $groundNameSelected && strtotime($timeStart) > strtotime($bookingStart) && strtotime($timeEnd) < strtotime($bookingEnd)) {
                         $checkBookingTimes = false;
                     }
 
@@ -198,8 +195,8 @@
                 }
             }
 
-            // Check if start and end time are the same
-            if ($timeStart == $timeEnd) {
+            // Check if start and end time are the same or start larger than end
+            if ($timeStart == $timeEnd || strtotime($timeStart) > strtotime($timeEnd)) {
                 $checkBookingTimes = false;
             }
 
@@ -217,14 +214,22 @@
             }
 
             else {
+                // Insert new user info
+                $userRealNameNew = mysqli_escape_string($db, $userRealName);
+                $newUserId = mysqli_escape_string($db, $newUserId);
+
+                $addNewUserQuery = "insert into users (user_id, user_phone, user_realname) values ('$newUserId', '$newPhone', '$userRealNameNew')";
+            
+                $addNewResult = $db -> query($addNewUserQuery);
+
+                // Insert new booking detail
                 $bookingId = mysqli_escape_string($db, $bookingId);
-                $userId = mysqli_escape_string($db, $userId);
                 $groundIdSelected = mysqli_escape_string($db, $groundIdSelected);
                 $bookingStartSelected = mysqli_escape_string($db, $timeStart);
                 $bookingEndSelected = mysqli_escape_string($db, $timeEnd);
                 $bookingDateSelected = mysqli_escape_string($db, $bookingDateSelected);
 
-                $sqlQuery = "insert into bookingdetails (booking_id, user_id, ground_id, booking_start, booking_end, booking_date) values ('$bookingId', '$userId', '$groundIdSelected', '$bookingStartSelected', '$bookingEndSelected', '$bookingDateSelected')";
+                $sqlQuery = "insert into bookingdetails (booking_id, user_id, ground_id, booking_start, booking_end, booking_date) values ('$bookingId', '$newUserId', '$groundIdSelected', '$bookingStartSelected', '$bookingEndSelected', '$bookingDateSelected')";
                 
                 $result = $db -> query($sqlQuery);
 
