@@ -99,7 +99,7 @@
         if ($bookingDetailsData != null && $bookingDetailsData -> num_rows > 0) {
             while ($data = $bookingDetailsData -> fetch_assoc()) {
                 $groundId = $data['ground_id'];
-                // $userIdInDatabase = $data['user_id'];
+                $userIdInDatabase = $data['user_id'];
                 $bookingStart = $data['booking_start'];
                 $bookingEnd = $data['booking_end'];
                 $bookingDate = $data['booking_date'];
@@ -123,14 +123,6 @@
 
                 else if ($bookingDate == $bookingDateSelected && $groundName == $groundNameSelected && strtotime($timeStart) > strtotime($bookingStart) && strtotime($timeEnd) < strtotime($bookingEnd)) {
                     $checkBookingTimes = false;
-                }
-
-                else if ($userIdInDatabase == $userId && $bookingDate == $bookingDateSelected && $groundName == $groundNameSelected) {
-                    $checkBookingTimes = true;
-                }
-
-                else if ($userIdInDatabase == $userId && $bookingDate == $bookingDateSelected && $groundName == $groundNameSelected && $bookingStart == $timeStart && $bookingEnd == $timeEnd) {
-                    $checkBookingTimes = true;
                 }
             }
         }
