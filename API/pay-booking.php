@@ -23,9 +23,21 @@
         $paymentId = uniqid();
 
         // Get booking id
-        $getBookingDetailData = getBookingDetailByUserId($userId);
-        $data = $getBookingDetailData -> fetch_assoc();
-        $bookingId = $data['booking_id'];
+        $insertBookingId = '';
+        $bookingDetailsData = getBookingDetails($db);
+
+        if ($bookingDetailsData != null && $bookingDetailsData -> num_rows > 0) {
+            while ($data = $bookingDetailsData -> fetch_assoc()) {
+                $bookingId = $data['booking_id'];
+                $bookingDate = $data['booking_date'];
+                $userIdInDatabase = $data['user_id'];
+
+                if ($bookingDate == $bookingDateSelected && $userIdInDatabase == $userId) {
+                    $insertBookingId = $bookingId;
+                    break;
+                }
+            }
+        }
 
         // Get beverage
         $selectBeverage = $_POST['selectBeverage'];
@@ -36,7 +48,6 @@
 
         // Beverage cost for insert
         $beverageCost = explode(" - ", $selectBeverage)[1];
-        // $beverageCost = numfmt_parse($beverageCost) * $beverageNumber;
         $beverageCost = str_replace(",", "", $beverageCost) * $beverageNumber;
 
         // Beverage type
@@ -45,7 +56,6 @@
         // Ground cost for insert
         $groundCost = $_POST['groundCost'];
         $groundCost = explode(" VNĐ", $groundCost)[0];
-        // $groundCost = numfmt_parse($groundCost);
         $groundCost = str_replace(",", "", $groundCost);
 
         // Total cost for insert
@@ -56,7 +66,7 @@
 
         // Insert into database
         $paymentId = mysqli_escape_string($db, $paymentId);
-        $bookingId = mysqli_escape_string($db, $bookingId);
+        $insertBookingId = mysqli_escape_string($db, $insertBookingId);
         $beverageType = mysqli_escape_string($db, $beverageType);
         $beverageCost = mysqli_escape_string($db, $beverageCost);
         $groundCost = mysqli_escape_string($db, $groundCost);
