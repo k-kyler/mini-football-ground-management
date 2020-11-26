@@ -79,7 +79,9 @@ $(document).ready(function() {
         let beverageCost = parseInt(selectBeverage.split(" - ")[1]);
         let reCalculateTotalCost = parseInt(groundCost) + beverageCost * parseInt(beverageNumber) * 1000;
 
-        $("#totalCost").val(Intl.NumberFormat().format(reCalculateTotalCost) + ' VNĐ');
+        if (selectBeverage != "") {
+            $("#totalCost").val(Intl.NumberFormat().format(reCalculateTotalCost) + ' VNĐ');
+        }
     });
 
     // Change cost when increase or decrease beverage number
@@ -91,6 +93,8 @@ $(document).ready(function() {
         let beverageCost = parseInt(selectBeverage.split(" - ")[1]);
         let reCalculateTotalCost = parseInt(groundCost) + beverageCost * parseInt(beverageNumber) * 1000;
 
-        $("#totalCost").val(Intl.NumberFormat().format(reCalculateTotalCost) + ' VNĐ');
+        if (selectBeverage != "") {
+            $("#totalCost").val(Intl.NumberFormat().format(reCalculateTotalCost) + ' VNĐ');
+        }
     });
 });
