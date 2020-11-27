@@ -1,6 +1,6 @@
 <style>
     <?php 
-        require_once('./CSS/booking.css');
+        require_once('./CSS/booking-payment.css');
     ?>
 </style>
 
@@ -15,8 +15,7 @@
     require_once('./Config/config.php');
 
     ?>
-        <!-- Admin management content -->
-        <div class="admin-management-container">
+        <div class="booking-management-container">
             <!-- Date picker processing -->
             <div class="date-picker">
                 <form action="" method="POST" name="dateChooseInput">

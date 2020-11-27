@@ -31,6 +31,7 @@
                 <div class="management-options">
                     <a href="management.php?m=bookingground_payment">Quản lý đặt sân và thanh toán</a>
                     <a href="management.php?m=usermanagement">Quản lý người dùng</a>
+                    <a href="management.php?m=beveragemanagement">Quản lý đồ uống</a>
                     <a href="management.php?m=profitreport">Thống kê doanh thu</a>
                     <a href="index.php">Về trang chủ</a>
                     <a href="logout.php">Đăng xuất</a>
@@ -49,7 +50,9 @@
                                     require_once('./booking.php');
                                 }
 
-
+                                else if ($_GET['m'] == "usermanagement") {
+                                    require_once('./user-management.php');
+                                }
                             }
     
                             else {
