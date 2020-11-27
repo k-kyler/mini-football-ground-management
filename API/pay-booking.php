@@ -73,7 +73,7 @@
         $totalCost = mysqli_escape_string($db, $totalCost);
         $paymentStatus = mysqli_escape_string($db, $paymentStatus);
 
-        $sqlQuery = "insert into payment 
+        $sqlQuery = "insert into payments 
                         (payment_id, booking_id, beverage_type, beverage_cost, ground_cost, total_cost, status) 
                         values 
                         ('$paymentId', '$bookingId', '$beverageType', '$beverageCost', '$groundCost', '$totalCost', '$paymentStatus')";

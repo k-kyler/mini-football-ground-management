@@ -253,4 +253,10 @@
 
         return $db -> query($sqlQuery);
     }
+
+    function getPayments($db) {
+        $sqlQuery = "select * from payments";
+
+        return $db -> query($sqlQuery);
+    }
 ?>

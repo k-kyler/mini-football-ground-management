@@ -104,10 +104,25 @@
                                             $getGroundData = getGroundById($groundId);
                                             $groundData = $getGroundData -> fetch_assoc();
                                             $groundName = $groundData['ground_name'];
-                                            
-                                            if ($bookingDate == $_POST['dateChoose']) {
-                                                // $totalDayProfit += $bookingCost;
 
+                                            // Get payment data
+                                            $paymentsData = getPayments($db);
+                                            $isPaid = false;
+
+                                            if ($paymentsData != null && $paymentsData -> num_rows > 0) {
+                                                while ($dataPayment = $paymentsData -> fetch_assoc()) {
+                                                    $bookingIdInPayment = $dataPayment['booking_id'];
+                                                    $totalCostInPayment = $dataPayment['total_cost'];
+                                                    $paymentStatus = $dataPayment['status'];
+
+                                                    if ($bookingIdInPayment == $bookingId) {
+                                                        $isPaid = true;
+                                                        $totalDayProfit += $totalCostInPayment;
+                                                    }
+                                                }
+                                            }
+
+                                            if ($bookingDate == $_POST['dateChoose']) {
                                                 ?>
                                                     <tr>
                                                         <td><?= $number += 1 ?></td>
@@ -117,7 +132,20 @@
                                                         <td><?= $bookingStart ?></td>
                                                         <td><?= $bookingEnd ?></td>
                                                         <td><?= $bookingTotaltime ?></td>
-                                                        <td style="color: red; font-weight: 600;">Chưa thanh toán</td>
+
+                                                        <?php
+                                                            if ($isPaid) {
+                                                                ?>
+                                                                    <td style="color: rgb(38, 241, 38); font-weight: 500;">Đã thanh toán</td>
+                                                                <?php
+                                                            }
+
+                                                            else {
+                                                                ?>
+                                                                    <td style="color: red; font-weight: 500;">Chưa thanh toán</td>
+                                                                <?php
+                                                            }
+                                                        ?>
 
                                                         <!-- Hidden input to store edit & pay data -->
                                                         <input type="hidden" id="<?= 'userRealName' . $number ?>" value="<?= $userRealName ?>">
@@ -239,10 +267,25 @@
                                             $getGroundData = getGroundById($groundId);
                                             $groundData = $getGroundData -> fetch_assoc();
                                             $groundName = $groundData['ground_name'];
+
+                                            // Get payment data
+                                            $paymentsData = getPayments($db);
+                                            $isPaid = false;
+
+                                            if ($paymentsData != null && $paymentsData -> num_rows > 0) {
+                                                while ($dataPayment = $paymentsData -> fetch_assoc()) {
+                                                    $bookingIdInPayment = $dataPayment['booking_id'];
+                                                    $totalCostInPayment = $dataPayment['total_cost'];
+                                                    $paymentStatus = $dataPayment['status'];
+
+                                                    if ($bookingIdInPayment == $bookingId) {
+                                                        $isPaid = true;
+                                                        $totalDayProfit += $totalCostInPayment;
+                                                    }
+                                                }
+                                            }
                                             
                                             if ($bookingDate == $_GET['datechoose']) {
-                                                // $totalDayProfit += $bookingCost;
-
                                                 ?>
                                                     <tr>
                                                         <td><?= $number += 1 ?></td>
@@ -252,7 +295,20 @@
                                                         <td><?= $bookingStart ?></td>
                                                         <td><?= $bookingEnd ?></td>
                                                         <td><?= $bookingTotaltime ?></td>
-                                                        <td style="color: red; font-weight: 600">Chưa thanh toán</td>
+                                                        
+                                                        <?php
+                                                            if ($isPaid) {
+                                                                ?>
+                                                                    <td style="color: rgb(38, 241, 38); font-weight: 500;">Đã thanh toán</td>
+                                                                <?php
+                                                            }
+
+                                                            else {
+                                                                ?>
+                                                                    <td style="color: red; font-weight: 500;">Chưa thanh toán</td>
+                                                                <?php
+                                                            }
+                                                        ?>
 
                                                         <!-- Hidden input to store edit data -->
                                                         <input type="hidden" id="<?= 'userRealName' . $number ?>" value="<?= $userRealName ?>">
