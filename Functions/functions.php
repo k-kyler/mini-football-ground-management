@@ -303,4 +303,26 @@
             return null;
         }
     }
+
+    function getIdByBeverageName($beverageName) {
+        $db = getDatabase();
+
+        $sqlQuery = "select * from beverages where beverage_name = ?";
+
+        $stm = $db ->prepare($sqlQuery);
+        $stm -> bind_param('s', $beverageName);
+        $status = $stm -> execute();
+
+        if ($status) {
+            $data = $stm -> get_result();
+
+            return $data;
+        }
+
+        else {
+            $stm -> close();
+
+            return null;
+        }
+    }
 ?>

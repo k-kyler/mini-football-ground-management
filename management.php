@@ -53,6 +53,10 @@
                                 else if ($_GET['m'] == "usermanagement") {
                                     require_once('./user-management.php');
                                 }
+
+                                else if ($_GET['m'] == "beveragemanagement") {
+                                    require_once('./beverage-management.php');
+                                }
                             }
     
                             else {

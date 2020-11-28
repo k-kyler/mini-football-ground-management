@@ -17,6 +17,15 @@ $(document).ready(function() {
         $(".user-management-success").css("display", "none");
     });
 
+    // Close popup message in beverage management
+    $(".beverage-management-error span").click(function() {
+        $(".beverage-management-error").css("display", "none");
+    });
+
+    $(".beverage-management-success span").click(function() {
+        $(".beverage-management-success").css("display", "none");
+    });
+
     // Close popup message when login
     $(".login-success span").click(function() {
         $(".login-success").css("display", "none");

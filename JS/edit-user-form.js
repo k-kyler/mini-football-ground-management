@@ -18,7 +18,7 @@ $(document).ready(function() {
     // Create search box in select user real name
     $('#selectUserRealNameEdit').select2();
 
-    // Get booking data from hidden input
+    // Get user data from hidden input
     let totalUsers = $("#totalUsers").val();
     let totalUsersList = [];
 
