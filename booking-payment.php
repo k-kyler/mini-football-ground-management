@@ -878,7 +878,7 @@
                 
                 <br>
                 <br>
-                <input type="submit" name="editSubmit" id="editSubmit" class="edit-submit" value="Cập nhật">
+                <input type="submit" name="editSubmit" onclick="return confirm('Bạn có chắc chắn muốn chỉnh sửa?');" id="editSubmit" class="edit-submit" value="Cập nhật">
             </form>
         </div>
 
@@ -1022,7 +1022,7 @@
 
                 <br>
                 <br>
-                <input type="submit" name="newSubmit" class="new-submit" value="Xác nhận">
+                <input type="submit" onclick="return confirm('Thêm lịch đặt?');" name="newSubmit" class="new-submit" value="Xác nhận">
             </form>
 
             <!-- Input form for adding old user -->
@@ -1166,7 +1166,7 @@
                 
                 <br>
                 <br>
-                <input type="submit" name="oldSubmit" id="oldSubmit" class="old-submit" value="Xác nhận">
+                <input type="submit" onclick="return confirm('Thêm lịch đặt?');" name="oldSubmit" id="oldSubmit" class="old-submit" value="Xác nhận">
             </form>
         </div>
 

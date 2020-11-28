@@ -18,7 +18,7 @@
 
 .users-list {
     overflow-y: scroll;
-    height: 22rem;
+    height: 17rem;
     overflow-x: auto;
 }
 
@@ -57,7 +57,7 @@
     margin-right: 1rem;
 }
 
-.add-user-form, .edit-user-form {
+.add-user-form, .edit-user-form, .delete-user-form {
     display: none;
 }
 

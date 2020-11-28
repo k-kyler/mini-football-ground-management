@@ -163,6 +163,39 @@
             </form>
         </div>
 
+        <!-- Delete user form -->
+        <div class="delete-user-form" title="Xóa người dùng" id="deleteUserForm">
+            <form method="POST" action="API/delete-user.php">
+                <!-- Select user real name -->
+                <br>
+                <select required name="selectUserRealName" id="selectUserRealNameDelete" style="width: 100%;">
+                    <option class="user-realname" selected="true" value="">(Chọn tên)</option>
+                    
+                    <?php
+                        $usersData = getUsers($db);
+
+                        if ($usersData != null && $usersData -> num_rows > 0) {
+                            while ($data = $usersData -> fetch_assoc()) {
+                                $userRealName = $data['user_realname'];
+                                $userPhone = $data['user_phone'];
+                                $userType = $data['user_type'];
+
+                                if ($userType == "") {
+                                    ?>
+                                        <option class="user-realname"><?= $userRealName . " - " . $userPhone ?></option>
+                                    <?php
+                                }
+                            }
+                        }
+                    ?>
+                </select>
+
+                <br>
+                <br>
+                <input type="submit" onclick="return confirm('Bạn có chắc chắn muốn xóa?');" name="deleteSubmit" id="deleteSubmit" class="delete-submit" value="Xóa">
+            </form>
+        </div>
+
         <!-- Handling success & error message of user management -->
         <?php
             if (isset($_SESSION['user-management-error'])) {
@@ -192,3 +225,4 @@
 
 <script src="./JS/add-user-form.js?v=<?php echo time(); ?>"></script>
 <script src="./JS/edit-user-form.js?v=<?php echo time(); ?>"></script>
+<script src="./JS/delete-user-form.js?v=<?php echo time(); ?>"></script>
