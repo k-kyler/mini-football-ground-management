@@ -4,7 +4,7 @@ $(document).ready(function() {
         $("#editUserForm")
             .dialog({
                 autoOpen: false,
-                height: 255,
+                height: 320,
                 width: 350,
                 resizable: false,
                 modal: true,
@@ -19,46 +19,36 @@ $(document).ready(function() {
     $('#selectUserRealNameEdit').select2();
 
     // Get booking data from hidden input
-    let totalBookingUsers = $("#totalBookingUsers").val();
-    let totalBookingUsersList = [];
+    let totalUsers = $("#totalUsers").val();
+    let totalUsersList = [];
 
-    // for (let i = 1; i <= totalBookingUsers; i++) {
-    //     let temp = [];
-    //     let userRealName = $("#userRealName" + i).val();
-    //     let userPhone = $("#userPhone" + i).val();
-    //     let userRealNameAndPhone = userRealName + ' - ' + userPhone;
-    //     let groundName = $("#groundName" + i).val();
-    //     let bookingStart = $("#bookingStart" + i).val();
-    //     let bookingEnd = $("#bookingEnd" + i).val();
+    for (let i = 1; i <= totalUsers; i++) {
+        let temp = [];
+        let userRealName = $("#userRealName" + i).val();
+        let userPhone = $("#userPhone" + i).val();
+        let userRealNameAndPhone = userRealName + ' - ' + userPhone;
+        let userEmail = $("#userEmail" + i).val();
 
-    //     temp.push(userRealNameAndPhone);
-    //     temp.push(userRealName);
-    //     temp.push(userPhone);
-    //     temp.push(groundName);
-    //     temp.push(bookingStart);
-    //     temp.push(bookingEnd);
+        temp.push(userRealNameAndPhone);
+        temp.push(userRealName);
+        temp.push(userPhone);
+        temp.push(userEmail);
 
-    //     totalBookingUsersList.push(temp);
-    // }
+        totalUsersList.push(temp);
+    }
 
-    // // Display edit data to edit form when choosing user
-    // $("#selectUserRealNameEdit").change(function() {
-    //     for (let i = 0; i < totalBookingUsersList.length; i++){
-    //         if (totalBookingUsersList[i][0] == $("#selectUserRealNameEdit").val()) {
-    //             for (let j = 0; j < totalBookingUsersList[i].length; j++) {
-    //                 $("#editRealName").val(totalBookingUsersList[i][1]);
+    // Display edit data to edit form when choosing user
+    $("#selectUserRealNameEdit").change(function() {
+        for (let i = 0; i < totalUsersList.length; i++){
+            if (totalUsersList[i][0] == $("#selectUserRealNameEdit").val()) {
+                for (let j = 0; j < totalUsersList[i].length; j++) {
+                    $("#editRealName").val(totalUsersList[i][1]);
 
-    //                 $("#editPhone").val(totalBookingUsersList[i][2]);
+                    $("#editPhone").val(totalUsersList[i][2]);
 
-    //                 $("#selectGround").val(totalBookingUsersList[i][3]);
-
-    //                 $("#selectTimeStart-1").val(totalBookingUsersList[i][4].split(":")[0]);
-    //                 $("#selectTimeStart-2").val(totalBookingUsersList[i][4].split(":")[1]);
-
-    //                 $("#selectTimeEnd-1").val(totalBookingUsersList[i][5].split(":")[0]);
-    //                 $("#selectTimeEnd-2").val(totalBookingUsersList[i][5].split(":")[1]);
-    //             }
-    //         }
-    //     }
-    // });
+                    $("#editEmail").val(totalUsersList[i][3]);
+                }
+            }
+        }
+    });
 }); 

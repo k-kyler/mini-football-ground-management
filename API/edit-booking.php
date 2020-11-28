@@ -39,7 +39,7 @@
                 $userDataEdit = $getUserDataEdit -> fetch_assoc();
                 $userIdEdit = $userDataEdit['user_id'];
 
-                if ($userId != $userDataEdit) {
+                if ($userId != $userIdEdit) {
                     $checkUserEditPhone = false;
                 }
             }

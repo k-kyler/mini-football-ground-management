@@ -52,11 +52,19 @@
                                             <td><?= $userPhone ?></td>
                                             <td><?= $userEmail ?></td>
                                         </tr>
+
+                                        <!-- Hidden input to store user data -->
+                                        <input type="hidden" id="<?= 'userRealName' . $number ?>" value="<?= $userRealName ?>">
+                                        <input type="hidden" id="<?= 'userPhone' . $number ?>" value="<?= $userPhone ?>">
+                                        <input type="hidden" id="<?= 'userEmail' . $number ?>" value="<?= $userEmail ?>">
                                     <?php
                                 }
                             }
                         }
                     ?>
+
+                    <!-- Hidden input to store total of users -->
+                    <input type="hidden" id="totalUsers" value="<?= $number ?>">
                 </table>
             </div>
 
@@ -113,20 +121,15 @@
                     <option class="user-realname" selected="true" value="">(Chọn tên)</option>
                     
                     <?php
-                        $bookingDetailsEditData = getBookingDetails($db);
+                        $usersData = getUsers($db);
 
-                        if ($bookingDetailsEditData != null && $bookingDetailsEditData -> num_rows > 0) {
-                            while ($data = $bookingDetailsEditData -> fetch_assoc()) {
-                                $userIdentity = $data['user_id'];
-                                $bookingDateEdit = $data['booking_date'];
+                        if ($usersData != null && $usersData -> num_rows > 0) {
+                            while ($data = $usersData -> fetch_assoc()) {
+                                $userRealName = $data['user_realname'];
+                                $userPhone = $data['user_phone'];
+                                $userType = $data['user_type'];
 
-                                // Get user detail by id
-                                $getUserData = getUserById($userIdentity);
-                                $userData = $getUserData -> fetch_assoc();
-                                $userRealName = $userData['user_realname'];
-                                $userPhone = $userData['user_phone'];
-
-                                if ($bookingDateEdit == $_POST['dateChoose']) {
+                                if ($userType == "") {
                                     ?>
                                         <option class="user-realname"><?= $userRealName . " - " . $userPhone ?></option>
                                     <?php

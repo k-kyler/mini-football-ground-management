@@ -259,4 +259,48 @@
 
         return $db -> query($sqlQuery);
     }
+
+    function getIdByUserEmail($userEmail) {
+        $db = getDatabase();
+
+        $sqlQuery = "select * from users where user_email = ?";
+
+        $stm = $db ->prepare($sqlQuery);
+        $stm -> bind_param('s', $userEmail);
+        $status = $stm -> execute();
+
+        if ($status) {
+            $data = $stm -> get_result();
+
+            return $data;
+        }
+
+        else {
+            $stm -> close();
+
+            return null;
+        }
+    }
+
+    function getEmailByUserPhone($userPhone) {
+        $db = getDatabase();
+
+        $sqlQuery = "select * from users where user_phone = ?";
+
+        $stm = $db ->prepare($sqlQuery);
+        $stm -> bind_param('s', $userPhone);
+        $status = $stm -> execute();
+
+        if ($status) {
+            $data = $stm -> get_result();
+
+            return $data;
+        }
+
+        else {
+            $stm -> close();
+
+            return null;
+        }
+    }
 ?>
