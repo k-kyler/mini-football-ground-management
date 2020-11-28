@@ -1,4 +1,4 @@
-.booking-management-container {
+.user-management-container {
     padding: 1rem;
     color: white;
     background-color: black;
@@ -10,77 +10,37 @@
     height: 100%;
 }
 
-.date-picker label {
-    font-weight: bold;
-}
-
-.date-picker input[type="submit"], .date-picker input[type="text"] {
-    padding: 0.3rem;
-    border: none;
-    border-radius: 2px;
-}
-
-.date-picker input[type="submit"] {
-    background-color: #1d8ac2;
-    color: white;
-    cursor: pointer;
-}
-
-.date-picker input[type="submit"]:hover {
-    opacity: 0.8;
-    transition: all 0.4s;
-}
-
-.booking-title, .empty-message {
+.user-management-title {
     text-align: center;
     font-size: 1.3rem;
     font-weight: bold;
 }
 
-.empty-message {
-    flex-grow: 1;
-}
-
-.booking-list {
+.users-list {
     overflow-y: scroll;
-    height: 14rem;
+    height: 22rem;
     overflow-x: auto;
 }
 
-.booking-list table {
+.users-list table {
     width: 100%;
     color: white;
     border-collapse: collapse;
     border-spacing: 0;
 }
 
-.booking-list th, td {
+.users-list th, td {
     text-align: left;
     padding: 0.8rem;
     white-space: nowrap;
 }
 
-.booking-list th {
+.users-list th {
     font-size: 1.1rem;
-}
-
-.table-empty-message {
-    padding-bottom: 1%;
-    text-align: center;    
 }
 
 .management-controller {
     padding: 0.5rem;
-}
-
-.day-profit span {
-    color: rgb(38, 241, 38);
-}
-
-.controller-and-profit-area {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
 }
 
 .controller-button {
@@ -97,11 +57,11 @@
     margin-right: 1rem;
 }
 
-.add-booking-form, .edit-booking-form, .delete-booking-form, .pay-booking-form, #addNew, #addOld {
+.add-user-form, .edit-user-form {
     display: none;
 }
 
-.old-submit, .new-submit, .edit-submit, .delete-submit, .pay-submit {
+.new-submit, .edit-submit, .delete-submit {
     background-color: #dc3545;
     border: none;
     padding: 0.5rem 1rem;
@@ -122,16 +82,12 @@
     background-color: #dc3545;
 }
 
-.pay-submit {
-    background-color: #4bbd8c;
-}
-
-.old-submit:hover, .new-submit:hover, .edit-submit:hover, .delete-submit:hover, .pay-submit:hover {
+.new-submit:hover, .edit-submit:hover, .delete-submit:hover {
     opacity: 0.85;
     transition: all 0.4s;
 }
 
-.booking-error, .booking-success {
+.user-management-error, .user-management-success {
     background-color: #f8d7da;
     color: #721c24;
     border-color: #f5c6cb;
@@ -148,31 +104,16 @@
     right: 0.6rem;
 }
 
-.booking-success {
+.user-management-success {
     background-color: #d4edda;
     color: #155724;
     border-color: #c3e6cb;
 }
 
-.booking-error span, .booking-success span {
+.user-management-error span, .user-management-success span {
     cursor: pointer;
 }
 
-.booking-error span:hover, .booking-success span:hover {
+.user-management-error span:hover, .user-management-success span:hover {
     opacity: 0.7;
-}
-
-#addNew input[name="newRealName"], 
-#addNew input[type="tel"], 
-#editBookingForm input[type="tel"],
-#editBookingForm input[name="editRealName"] {
-    width: 11rem;
-}
-
-#payBookingForm input[type="text"] {
-    width: 9rem;
-}
-
-#payBookingForm input[type="number"] {
-    width: 3rem;
 }

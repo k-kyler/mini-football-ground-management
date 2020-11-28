@@ -47,7 +47,7 @@
                         <?php
                             if (isset($_GET['m'])) {
                                 if ($_GET['m'] == "bookingground_payment") {
-                                    require_once('./booking.php');
+                                    require_once('./booking-payment.php');
                                 }
 
                                 else if ($_GET['m'] == "usermanagement") {
