@@ -105,19 +105,20 @@
                                             $groundName = $groundData['ground_name'];
 
                                             // Get payment data
-                                            $paymentsData = getPayments($db);
+                                            $getPaymentData = getPaymentByBookingId($bookingId);
                                             $isPaid = false;
 
-                                            if ($paymentsData != null && $paymentsData -> num_rows > 0) {
-                                                while ($dataPayment = $paymentsData -> fetch_assoc()) {
-                                                    $bookingIdInPayment = $dataPayment['booking_id'];
-                                                    $totalCostInPayment = $dataPayment['total_cost'];
-                                                    $paymentStatus = $dataPayment['status'];
+                                            if ($getPaymentData != null && $getPaymentData -> num_rows > 0) {
+                                                $paymentData = $getPaymentData -> fetch_assoc();
+                                                $beverageType = $paymentData['beverage_type'];
+                                                $beverageCost = $paymentData['beverage_cost'];
+                                                $totalCostInPayment = $paymentData['total_cost'];
+                                                $paymentStatus = $paymentData['status'];
+                                                $paymentDate = $paymentData['payment_date'];
 
-                                                    if ($bookingIdInPayment == $bookingId) {
-                                                        $isPaid = true;
-                                                        $totalDayProfit += $totalCostInPayment;
-                                                    }
+                                                if ($paymentStatus == "isPaid" && $paymentDate == $_POST['dateChoose']) {
+                                                    $isPaid = true;
+                                                    $totalDayProfit += $totalCostInPayment;
                                                 }
                                             }
 
@@ -136,12 +137,20 @@
                                                             if ($isPaid) {
                                                                 ?>
                                                                     <td style="color: rgb(38, 241, 38); font-weight: 500;">Đã thanh toán</td>
+
+                                                                    <!-- Hidden input to store beverage data -->
+                                                                    <input type="hidden" id="<?= 'beverageType' . $number ?>" value="<?= $beverageType ?>">
+                                                                    <input type="hidden" id="<?= 'beverageCost' . $number ?>" value="<?= $beverageCost ?>">
                                                                 <?php
                                                             }
 
                                                             else {
                                                                 ?>
                                                                     <td style="color: red; font-weight: 500;">Chưa thanh toán</td>
+
+                                                                    <!-- Hidden input to store beverage data -->
+                                                                    <input type="hidden" id="<?= 'beverageType' . $number ?>" value="">
+                                                                    <input type="hidden" id="<?= 'beverageCost' . $number ?>" value="">
                                                                 <?php
                                                             }
                                                         ?>
@@ -268,19 +277,20 @@
                                             $groundName = $groundData['ground_name'];
 
                                             // Get payment data
-                                            $paymentsData = getPayments($db);
+                                            $getPaymentData = getPaymentByBookingId($bookingId);
                                             $isPaid = false;
 
-                                            if ($paymentsData != null && $paymentsData -> num_rows > 0) {
-                                                while ($dataPayment = $paymentsData -> fetch_assoc()) {
-                                                    $bookingIdInPayment = $dataPayment['booking_id'];
-                                                    $totalCostInPayment = $dataPayment['total_cost'];
-                                                    $paymentStatus = $dataPayment['status'];
+                                            if ($getPaymentData != null && $getPaymentData -> num_rows > 0) {
+                                                $paymentData = $getPaymentData -> fetch_assoc();
+                                                $beverageType = $paymentData['beverage_type'];
+                                                $beverageCost = $paymentData['beverage_cost'];
+                                                $totalCostInPayment = $paymentData['total_cost'];
+                                                $paymentStatus = $paymentData['status'];
+                                                $paymentDate = $paymentData['payment_date'];
 
-                                                    if ($bookingIdInPayment == $bookingId) {
-                                                        $isPaid = true;
-                                                        $totalDayProfit += $totalCostInPayment;
-                                                    }
+                                                if ($paymentStatus == "isPaid" && $paymentDate == $_GET['datechoose']) {
+                                                    $isPaid = true;
+                                                    $totalDayProfit += $totalCostInPayment;
                                                 }
                                             }
                                             
@@ -299,12 +309,20 @@
                                                             if ($isPaid) {
                                                                 ?>
                                                                     <td style="color: rgb(38, 241, 38); font-weight: 500;">Đã thanh toán</td>
+
+                                                                    <!-- Hidden input to store beverage data -->
+                                                                    <input type="hidden" id="<?= 'beverageType' . $number ?>" value="<?= $beverageType ?>">
+                                                                    <input type="hidden" id="<?= 'beverageCost' . $number ?>" value="<?= $beverageCost ?>">
                                                                 <?php
                                                             }
 
                                                             else {
                                                                 ?>
                                                                     <td style="color: red; font-weight: 500;">Chưa thanh toán</td>
+
+                                                                    <!-- Hidden input to store beverage data -->
+                                                                    <input type="hidden" id="<?= 'beverageType' . $number ?>" value="">
+                                                                    <input type="hidden" id="<?= 'beverageCost' . $number ?>" value="">
                                                                 <?php
                                                             }
                                                         ?>

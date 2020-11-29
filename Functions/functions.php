@@ -325,4 +325,26 @@
             return null;
         }
     }
+
+    function getPaymentByBookingId($bookingId) {
+        $db = getDatabase();
+
+        $sqlQuery = "select * from payments where booking_id = ?";
+
+        $stm = $db ->prepare($sqlQuery);
+        $stm -> bind_param('s', $bookingId);
+        $status = $stm -> execute();
+
+        if ($status) {
+            $data = $stm -> get_result();
+
+            return $data;
+        }
+
+        else {
+            $stm -> close();
+
+            return null;
+        }
+    }
 ?>

@@ -72,11 +72,12 @@
         $groundCost = mysqli_escape_string($db, $groundCost);
         $totalCost = mysqli_escape_string($db, $totalCost);
         $paymentStatus = mysqli_escape_string($db, $paymentStatus);
+        $paymentDate = mysqli_escape_string($db, $bookingDateSelected);
 
         $sqlQuery = "insert into payments 
-                        (payment_id, booking_id, beverage_type, beverage_cost, ground_cost, total_cost, status) 
+                        (payment_id, booking_id, beverage_type, beverage_cost, ground_cost, total_cost, status, payment_date) 
                         values 
-                        ('$paymentId', '$bookingId', '$beverageType', '$beverageCost', '$groundCost', '$totalCost', '$paymentStatus')";
+                        ('$paymentId', '$bookingId', '$beverageType', '$beverageCost', '$groundCost', '$totalCost', '$paymentStatus', '$paymentDate')";
 
         $result = $db -> query($sqlQuery);
 
