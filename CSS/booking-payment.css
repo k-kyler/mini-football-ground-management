@@ -2,7 +2,7 @@
     padding: 1rem;
     color: white;
     background-color: black;
-    opacity: 0.9;
+    opacity: 0.85;
     border-radius: 5px;
     display: flex;
     flex-direction: column;
@@ -47,20 +47,20 @@
     overflow-x: auto;
 }
 
-.booking-list table {
+.booking-list table, .time-grounds-schedule table {
     width: 100%;
     color: white;
     border-collapse: collapse;
     border-spacing: 0;
 }
 
-.booking-list th, td {
+.booking-list th, .booking-list td, .time-grounds-schedule td, .time-grounds-schedule th {
     text-align: left;
     padding: 0.8rem;
     white-space: nowrap;
 }
 
-.booking-list th {
+.booking-list th, .time-grounds-schedule th {
     font-size: 1.1rem;
 }
 
@@ -177,3 +177,23 @@
     width: 3rem;
 }
 
+.time-grounds-status {
+    margin-top: 2rem;
+    padding: 1rem;
+    color: white;
+    background-color: black;
+    opacity: 0.85;
+    border-radius: 5px;
+    height: 100%;
+}
+
+.time-grounds-status-title {
+    text-align: center;
+    font-size: 1.3rem;
+    font-weight: bold;
+}
+
+.time-grounds-schedule {
+    margin-top: 1rem;
+    overflow-x: auto;
+}

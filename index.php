@@ -29,6 +29,7 @@
                     <!-- Content -->
                     <div class="col-8 col-0">
                         <?php
+                            // Processing for user info
                             if (isset($_GET['u'])) {
                                 $sessionUserName = $_SESSION['user_name'];
                                 $db = getDatabase();
@@ -136,6 +137,12 @@
                                 }
                             }
 
+                            // Processing for booking online
+                            else if (isset($_GET['b'])) {
+
+                            }
+
+                            // Processing for main page
                             else {
                                 ?>
                                     <!-- Slider main -->

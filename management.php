@@ -61,7 +61,7 @@
     
                             else {
                                 ?>
-                                    <div class="empty-function-message">Bạn chưa chọn chức năng để hiển thị...</div>
+                                    <div class="empty-function-message">Bạn hãy chọn chức năng để hiển thị...</div>
                                 <?php
                             }
                         ?>

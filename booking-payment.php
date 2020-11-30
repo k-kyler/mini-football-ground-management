@@ -392,14 +392,72 @@
                 // Display error message if no date is chosen
                 else {
                     ?>
-                        <div class="empty-message">Bạn chưa chọn ngày để xem</div>
+                        <div class="empty-message">Bạn hãy chọn ngày để xem...</div>
                     <?php
                 }
             ?>
         </div>
 
+        <?php
+            if (isset($_POST['submit'])) {
+                ?>
+                    <!-- Time & grounds status -->
+                    <div class="time-grounds-status">
+                        <div class="time-grounds-status-title">Tình trạng sân ngày <?= $_POST['dateChoose'] ?></div>
 
-        
+                        <div class="time-grounds-schedule">
+                            <table>
+                                <tr>
+                                    <th></th>
+                                    <th colspan="4">9:00</th>
+                                    <th colspan="4">10:00</th>
+                                    <th colspan="4">11:00</th>
+                                    <th colspan="4">12:00</th>
+                                    <th colspan="4">13:00</th>
+                                    <th colspan="4">14:00</th>
+                                    <th colspan="4">15:00</th>
+                                    <th colspan="4">16:00</th>
+                                    <th colspan="4">17:00</th>
+                                    <th colspan="4">18:00</th>
+                                    <th colspan="4">19:00</th>
+                                    <th colspan="4">20:00</th>
+                                    <th colspan="4">21:00</th>
+                                </tr>
+                                
+                                <?php 
+                                    $groundsData = getGrounds($db);
+
+                                    if ($groundsData != null && $groundsData -> num_rows > 0) {
+                                        while ($data = $groundsData -> fetch_assoc()) {
+                                            $groundName = $data['ground_name'];
+            
+                                            if ($groundName) {
+                                                ?>
+                                                    <tr>
+                                                        <td><?= $groundName ?></td>
+                                                    </tr>
+                                                <?php
+                                            }
+                                        }
+                                    }
+                                ?>
+                            </table>
+                        </div>
+                    </div>
+                <?php
+            }
+
+            else if (isset($_GET['datechoose'])) {
+                ?>
+                    <!-- Time & grounds status -->
+                    <div class="time-grounds-status">
+                        <div class="time-grounds-status-title">Tình trạng sân ngày <?= $_GET['datechoose'] ?></div>
+
+                        
+                    </div>
+                <?php
+            }
+        ?>
 
         <!-- Pay booking form -->
         <div class="pay-booking-form" title="Thanh toán" id="payBookingForm">
@@ -508,7 +566,7 @@
                 <label>Thời gian bắt đầu: </label>
                 <select name="selectTimeStart-1" id="selectTimeStartPay-1">
                     <?php
-                        for ($i = 7; $i <= 21; $i++) { 
+                        for ($i = 9; $i <= 21; $i++) { 
                             ?>
                                 <option><?= $i ?></option>
                             <?php
@@ -519,21 +577,10 @@
                 :
 
                 <select name="selectTimeStart-2" id="selectTimeStartPay-2">
-                    <?php
-                        for ($i=0; $i < 12; $i++) { 
-                            if ($i < 2) {
-                                ?>
-                                    <option><?= "0" . $i * 5 ?></option>
-                                <?php
-                            }
-
-                            else {
-                                ?>
-                                    <option><?= $i * 5 ?></option>
-                                <?php
-                            }
-                        }
-                    ?>
+                    <option>00</option>
+                    <option>15</option>
+                    <option>30</option>
+                    <option>45</option>
                 </select>
 
                 <!-- Select time end -->
@@ -542,7 +589,7 @@
                 <label>Thời gian kết thúc: </label>
                 <select name="selectTimeEnd-1" id="selectTimeEndPay-1"> 
                     <?php
-                        for ($i = 7; $i <= 21; $i++) { 
+                        for ($i = 9; $i <= 21; $i++) { 
                             ?>
                                 <option><?= $i ?></option>
                             <?php
@@ -553,21 +600,10 @@
                 :
 
                 <select name="selectTimeEnd-2" id="selectTimeEndPay-2">
-                    <?php
-                        for ($i=0; $i < 12; $i++) { 
-                            if ($i < 2) {
-                                ?>
-                                    <option><?= "0" . $i * 5 ?></option>
-                                <?php
-                            }
-
-                            else {
-                                ?>
-                                    <option><?= $i * 5 ?></option>
-                                <?php
-                            }
-                        }
-                    ?>
+                    <option>00</option>
+                    <option>15</option>
+                    <option>30</option>
+                    <option>45</option>
                 </select>
 
                 <!-- Total time -->
@@ -830,7 +866,7 @@
                 <label>Thời gian bắt đầu: </label>
                 <select name="selectTimeStart-1" id="selectTimeStart-1">
                     <?php
-                        for ($i = 7; $i <= 21; $i++) { 
+                        for ($i = 9; $i <= 21; $i++) { 
                             ?>
                                 <option><?= $i ?></option>
                             <?php
@@ -841,21 +877,10 @@
                 :
 
                 <select name="selectTimeStart-2" id="selectTimeStart-2">
-                    <?php
-                        for ($i=0; $i < 12; $i++) { 
-                            if ($i < 2) {
-                                ?>
-                                    <option><?= "0" . $i * 5 ?></option>
-                                <?php
-                            }
-
-                            else {
-                                ?>
-                                    <option><?= $i * 5 ?></option>
-                                <?php
-                            }
-                        }
-                    ?>
+                    <option>00</option>
+                    <option>15</option>
+                    <option>30</option>
+                    <option>45</option>
                 </select>
 
                 <!-- Select time end -->
@@ -864,7 +889,7 @@
                 <label>Thời gian kết thúc: </label>
                 <select name="selectTimeEnd-1" id="selectTimeEnd-1"> 
                     <?php
-                        for ($i = 7; $i <= 21; $i++) { 
+                        for ($i = 9; $i <= 21; $i++) { 
                             ?>
                                 <option><?= $i ?></option>
                             <?php
@@ -875,21 +900,10 @@
                 :
 
                 <select name="selectTimeEnd-2" id="selectTimeEnd-2">
-                    <?php
-                        for ($i=0; $i < 12; $i++) { 
-                            if ($i < 2) {
-                                ?>
-                                    <option><?= "0" . $i * 5 ?></option>
-                                <?php
-                            }
-
-                            else {
-                                ?>
-                                    <option><?= $i * 5 ?></option>
-                                <?php
-                            }
-                        }
-                    ?>
+                    <option>00</option>
+                    <option>15</option>
+                    <option>30</option>
+                    <option>45</option>
                 </select>
                 
                 <br>
@@ -974,7 +988,7 @@
                 <label>Thời gian bắt đầu: </label>
                 <select name="selectTimeStart-1">
                     <?php
-                        for ($i = 7; $i <= 21; $i++) { 
+                        for ($i = 9; $i <= 21; $i++) { 
                             ?>
                                 <option><?= $i ?></option>
                             <?php
@@ -985,21 +999,10 @@
                 :
 
                 <select name="selectTimeStart-2">
-                    <?php
-                        for ($i=0; $i < 12; $i++) { 
-                            if ($i < 2) {
-                                ?>
-                                    <option><?= "0" . $i * 5 ?></option>
-                                <?php
-                            }
-
-                            else {
-                                ?>
-                                    <option><?= $i * 5 ?></option>
-                                <?php
-                            }
-                        }
-                    ?>
+                    <option>00</option>
+                    <option>15</option>
+                    <option>30</option>
+                    <option>45</option>
                 </select>
 
                 <!-- Select time end -->
@@ -1008,7 +1011,7 @@
                 <label>Thời gian kết thúc: </label>
                 <select name="selectTimeEnd-1"> 
                     <?php
-                        for ($i = 7; $i <= 21; $i++) { 
+                        for ($i = 9; $i <= 21; $i++) { 
                             ?>
                                 <option><?= $i ?></option>
                             <?php
@@ -1019,21 +1022,10 @@
                 :
 
                 <select name="selectTimeEnd-2">
-                    <?php
-                        for ($i=0; $i < 12; $i++) { 
-                            if ($i < 2) {
-                                ?>
-                                    <option><?= "0" . $i * 5 ?></option>
-                                <?php
-                            }
-
-                            else {
-                                ?>
-                                    <option><?= $i * 5 ?></option>
-                                <?php
-                            }
-                        }
-                    ?>
+                    <option>00</option>
+                    <option>15</option>
+                    <option>30</option>
+                    <option>45</option>
                 </select>
 
                 <br>
@@ -1118,7 +1110,7 @@
                 <label>Thời gian bắt đầu: </label>
                 <select name="selectTimeStart-1">
                     <?php
-                        for ($i = 7; $i <= 21; $i++) { 
+                        for ($i = 9; $i <= 21; $i++) { 
                             ?>
                                 <option><?= $i ?></option>
                             <?php
@@ -1129,21 +1121,10 @@
                 :
 
                 <select name="selectTimeStart-2">
-                    <?php
-                        for ($i=0; $i < 12; $i++) { 
-                            if ($i < 2) {
-                                ?>
-                                    <option><?= "0" . $i * 5 ?></option>
-                                <?php
-                            }
-
-                            else {
-                                ?>
-                                    <option><?= $i * 5 ?></option>
-                                <?php
-                            }
-                        }
-                    ?>
+                    <option>00</option>
+                    <option>15</option>
+                    <option>30</option>
+                    <option>45</option>
                 </select>
 
                 <!-- Select time end -->
@@ -1152,7 +1133,7 @@
                 <label>Thời gian kết thúc: </label>
                 <select name="selectTimeEnd-1"> 
                     <?php
-                        for ($i = 7; $i <= 21; $i++) { 
+                        for ($i = 9; $i <= 21; $i++) { 
                             ?>
                                 <option><?= $i ?></option>
                             <?php
@@ -1163,21 +1144,10 @@
                 :
 
                 <select name="selectTimeEnd-2">
-                    <?php
-                        for ($i=0; $i < 12; $i++) { 
-                            if ($i < 2) {
-                                ?>
-                                    <option><?= "0" . $i * 5 ?></option>
-                                <?php
-                            }
-
-                            else {
-                                ?>
-                                    <option><?= $i * 5 ?></option>
-                                <?php
-                            }
-                        }
-                    ?>
+                    <option>00</option>
+                    <option>15</option>
+                    <option>30</option>
+                    <option>45</option>
                 </select>
                 
                 <br>

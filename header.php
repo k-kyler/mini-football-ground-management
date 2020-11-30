@@ -90,11 +90,11 @@
                 <li>Trang chủ</li>
             </a>
             
-            <a href="#">
+            <a href="index.php?b=bookingonline">
                 <li>Đặt sân ngay</li>
             </a>
 
-            <a href="#">
+            <a href="javascript:void(0)">
                 <li class="nav-item-dropdown">
                     Các loại sân
                     

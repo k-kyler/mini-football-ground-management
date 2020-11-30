@@ -81,10 +81,10 @@
 }
 
 .management {
-    background-color: black;
-    opacity: 0.85;
-    border-radius: 12px;
     height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 }
 
 .empty-function-message {

@@ -146,7 +146,7 @@
             $bookingStartSelected = mysqli_escape_string($db, $timeStart);
             $bookingEndSelected = mysqli_escape_string($db, $timeEnd);
 
-            $bookingDateEdit = mysqli_escape_string($db, $bookingDate);
+            $bookingDateEdit = mysqli_escape_string($db, $bookingDateSelected);
             $userId = mysqli_escape_string($db, $userId);
 
             $sqlQuery = "update bookingdetails 
@@ -163,6 +163,6 @@
         }
 
         // Redirect back
-        header("Location: ../management.php?datechoose=$bookingDate&m=bookingground_payment");
+        header("Location: ../management.php?datechoose=$bookingDateSelected&m=bookingground_payment");
     }
 ?>
