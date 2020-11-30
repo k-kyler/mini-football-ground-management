@@ -45,7 +45,7 @@
                                             // User info
                                             ?>
                                                 <div class="user-info">
-                                                    <div class="user-info-title">Thông tin người dùng</div>
+                                                    <div class="user-info-title">Thông tin cá nhân</div>
 
                                                     <!-- User real name -->
                                                     <br>
@@ -83,8 +83,6 @@
                                                         <table>
                                                             <tr>
                                                                 <th>STT</th>
-                                                                <th>Họ tên</th>
-                                                                <th>Số điện thoại</th>
                                                                 <th>Sân đã đặt</th>
                                                                 <th>Thời gian bắt đầu</th>
                                                                 <th>Thời gian kết thúc</th>
@@ -108,9 +106,7 @@
                                                                         // Get user data
                                                                         $getUserData = getUserById($userId);
                                                                         $userData = $getUserData -> fetch_assoc();
-                                                                        $userRealNameBooking = $userData['user_realname'];
                                                                         $userNameBooking = $userData['user_name'];
-                                                                        $userPhoneBooking = $userData['user_phone'];
 
                                                                         // Get ground data
                                                                         $getGroundData = getGroundById($groundId);
@@ -121,8 +117,6 @@
                                                                             ?>
                                                                                 <tr>
                                                                                     <td><?= $number += 1 ?></td>
-                                                                                    <td><?= $userRealNameBooking ?></td>
-                                                                                    <td><?= $userPhoneBooking ?></td>
                                                                                     <td><?= $groundName ?></td>
                                                                                     <td><?= $bookingStart ?></td>
                                                                                     <td><?= $bookingEnd ?></td>

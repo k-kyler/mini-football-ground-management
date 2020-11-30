@@ -17,7 +17,6 @@
                 <table>
                     <tr>
                         <th>STT</th>
-                        <th>Ảnh</th>
                         <th>Tên người dùng</th>
                         <th>Số điện thoại</th>
                         <th>Email</th>
@@ -41,7 +40,6 @@
                                     ?>
                                         <tr>
                                             <td><?= $number += 1 ?></td>
-                                            <td></td>
                                             <td><?= $userRealName ?></td>
                                             <td><?= $userPhone ?></td>
                                             <td><?= $userEmail ?></td>
