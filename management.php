@@ -5,11 +5,11 @@
 </style>
 
 <?php
-    // Layout
-    require_once('layout.php');
-
     // Config
     require_once('./Config/config.php');
+
+    // Layout
+    require_once('layout.php');
 
     ?>
         <!-- Page background -->

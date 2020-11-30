@@ -7,12 +7,6 @@
 <script src="./JS/close-popup-message.js?v=<?php echo time(); ?>"></script>
 
 <?php
-    // Layout
-    require_once('layout.php');
-
-    // Config
-    require_once('./Config/config.php');
-
     ?>
         <div class="user-management-container">
             <!-- User management processing -->

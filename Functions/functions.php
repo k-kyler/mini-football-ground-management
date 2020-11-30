@@ -58,8 +58,6 @@
             $user_type = $data['user_type'];
 
             if ($user_name == $usernameInput && $user_password == $passwordInput && $usernameInput != "" && $passwordInput != "") {
-                session_start();
-
                 $_SESSION['user_name'] = $user_name;
                 $_SESSION['user_type'] = $user_type;
 

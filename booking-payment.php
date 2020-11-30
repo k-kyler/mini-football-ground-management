@@ -8,12 +8,6 @@
 <script src="./JS/close-popup-message.js?v=<?php echo time(); ?>"></script>
 
 <?php
-    // Layout
-    require_once('layout.php');
-
-    // Config
-    require_once('./Config/config.php');
-
     ?>
         <div class="booking-management-container">
             <!-- Date picker processing -->
@@ -138,9 +132,8 @@
                                                                 ?>
                                                                     <td style="color: rgb(38, 241, 38); font-weight: 500;">Đã thanh toán</td>
 
-                                                                    <!-- Hidden input to store beverage data -->
-                                                                    <input type="hidden" id="<?= 'beverageType' . $number ?>" value="<?= $beverageType ?>">
-                                                                    <input type="hidden" id="<?= 'beverageCost' . $number ?>" value="<?= $beverageCost ?>">
+                                                                    <!-- Hidden input to store isPaid data -->
+                                                                    <input type="hidden" id="<?= 'isPaid' . $number ?>" value="<?= $isPaid ?>">
                                                                 <?php
                                                             }
 
@@ -148,12 +141,15 @@
                                                                 ?>
                                                                     <td style="color: red; font-weight: 500;">Chưa thanh toán</td>
 
-                                                                    <!-- Hidden input to store beverage data -->
-                                                                    <input type="hidden" id="<?= 'beverageType' . $number ?>" value="">
-                                                                    <input type="hidden" id="<?= 'beverageCost' . $number ?>" value="">
+                                                                    <!-- Hidden input to store isPaid data -->
+                                                                    <input type="hidden" id="<?= 'isPaid' . $number ?>" value="">
                                                                 <?php
                                                             }
                                                         ?>
+
+                                                        <!-- Hidden input to store beverage data -->
+                                                        <input type="hidden" id="<?= 'beverageType' . $number ?>" value="<?= $beverageType ?>">
+                                                        <input type="hidden" id="<?= 'beverageCost' . $number ?>" value="<?= $beverageCost ?>">
 
                                                         <!-- Hidden input to store edit & pay data -->
                                                         <input type="hidden" id="<?= 'userRealName' . $number ?>" value="<?= $userRealName ?>">
@@ -310,9 +306,8 @@
                                                                 ?>
                                                                     <td style="color: rgb(38, 241, 38); font-weight: 500;">Đã thanh toán</td>
 
-                                                                    <!-- Hidden input to store beverage data -->
-                                                                    <input type="hidden" id="<?= 'beverageType' . $number ?>" value="<?= $beverageType ?>">
-                                                                    <input type="hidden" id="<?= 'beverageCost' . $number ?>" value="<?= $beverageCost ?>">
+                                                                    <!-- Hidden input to store isPaid data -->
+                                                                    <input type="hidden" id="<?= 'isPaid' . $number ?>" value="<?= $isPaid ?>">
                                                                 <?php
                                                             }
 
@@ -320,12 +315,15 @@
                                                                 ?>
                                                                     <td style="color: red; font-weight: 500;">Chưa thanh toán</td>
 
-                                                                    <!-- Hidden input to store beverage data -->
-                                                                    <input type="hidden" id="<?= 'beverageType' . $number ?>" value="">
-                                                                    <input type="hidden" id="<?= 'beverageCost' . $number ?>" value="">
+                                                                    <!-- Hidden input to store isPaid data -->
+                                                                    <input type="hidden" id="<?= 'isPaid' . $number ?>" value="">
                                                                 <?php
                                                             }
                                                         ?>
+
+                                                        <!-- Hidden input to store beverage data -->
+                                                        <input type="hidden" id="<?= 'beverageType' . $number ?>" value="<?= $beverageType ?>">
+                                                        <input type="hidden" id="<?= 'beverageCost' . $number ?>" value="<?= $beverageCost ?>">
 
                                                         <!-- Hidden input to store edit data -->
                                                         <input type="hidden" id="<?= 'userRealName' . $number ?>" value="<?= $userRealName ?>">
@@ -581,7 +579,7 @@
                 <!-- Beverage name and cost -->
                 <br>
                 <br>
-                <label>Phí nước uống: </label>
+                <label>Thêm đồ uống: </label>
                 <select name="selectBeverage" id="selectBeverage">
                     <option selected="true" value="">(Thêm nước uống)</option>
 

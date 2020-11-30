@@ -6,11 +6,11 @@
 </style>
 
 <?php
-    // Layout
-    require_once('layout.php');
-
     // Config
     require_once('./Config/config.php');
+
+    // Layout
+    require_once('layout.php');
 
     ?>
         <div class="wrapper">
@@ -28,41 +28,157 @@
 
                     <!-- Content -->
                     <div class="col-8 col-0">
-                        <!-- Slider main -->
-                        <div class="slider-container">
-                            <div class="slider-main" id="sliderMain">
-                                <!-- Slideshow images -->
-                                <?php        
-                                    $db = getDatabase();
-                                    $res = getImages($db);
+                        <?php
+                            if (isset($_GET['u'])) {
+                                $sessionUserName = $_SESSION['user_name'];
+                                $db = getDatabase();
+                                $users = getUsers($db);
 
-                                    if ($res != null && $res -> num_rows > 0) {
-                                        while ($data = $res -> fetch_assoc()) {
-                                            $imageSrc = $data['image_src'];
-                                            $imageType = $data['image_type'];
+                                if ($users != null && $users -> num_rows > 0) {
+                                    while ($userData = $users -> fetch_assoc()) {
+                                        $userRealName = $userData['user_realname'];
+                                        $userName = $userData['user_name'];
+                                        $userPhone = $userData['user_phone'];
+                                        $userEmail = $userData['user_email'];
 
-                                            if ($imageType == "slide") {
-                                                ?>
-                                                    <div class="slide fade">
-                                                        <img src="<?= $imageSrc ?>">
+                                        if ($userName == $sessionUserName) {
+                                            // User info
+                                            ?>
+                                                <div class="user-info">
+                                                    <div class="user-info-title">Thông tin người dùng</div>
+
+                                                    <!-- User real name -->
+                                                    <br>
+                                                    <br>
+                                                    <br>
+                                                    <label>Họ tên: </label>
+                                                    <input disabled value="<?= $userRealName ?>" type="text">
+
+                                                    <!-- User name -->
+                                                    <br>
+                                                    <br>
+                                                    <label>Tên người dùng: </label>
+                                                    <input disabled value="<?= $userName ?>" type="text">
+
+                                                    <!-- User phone -->
+                                                    <br>
+                                                    <br>
+                                                    <label>Số điện thoại: </label>
+                                                    <input disabled value="<?= $userPhone ?>" type="tel" pattern="[0-9]{10}">
+
+                                                    <!-- User email -->
+                                                    <br>
+                                                    <br>
+                                                    <label>Email: </label>
+                                                    <input disabled value="<?= $userEmail ?>" type="email">
+                                                </div>
+                                            <?php
+
+                                            // Booking history
+                                            ?>
+                                                <div class="booking-history">
+                                                    <div class="booking-history-title">Lịch sử đặt sân</div>
+
+                                                    <div class="booking-history-list">
+                                                        <table>
+                                                            <tr>
+                                                                <th>STT</th>
+                                                                <th>Họ tên</th>
+                                                                <th>Số điện thoại</th>
+                                                                <th>Sân đã đặt</th>
+                                                                <th>Thời gian bắt đầu</th>
+                                                                <th>Thời gian kết thúc</th>
+                                                                <th>Ngày đặt</th>
+                                                            </tr>
+
+                                                            <?php
+                                                                $bookingDetailsData = getBookingDetails($db);
+
+                                                                if ($bookingDetailsData != null && $bookingDetailsData -> num_rows > 0) {
+                                                                    $number = 0;
+                                                                    
+                                                                    while ($data = $bookingDetailsData -> fetch_assoc()) {
+                                                                        $bookingId = $data['booking_id'];
+                                                                        $userId = $data['user_id'];
+                                                                        $groundId = $data['ground_id'];
+                                                                        $bookingStart = $data['booking_start'];
+                                                                        $bookingEnd = $data['booking_end'];
+                                                                        $bookingDate = $data['booking_date'];
+
+                                                                        // Get user data
+                                                                        $getUserData = getUserById($userId);
+                                                                        $userData = $getUserData -> fetch_assoc();
+                                                                        $userRealNameBooking = $userData['user_realname'];
+                                                                        $userNameBooking = $userData['user_name'];
+                                                                        $userPhoneBooking = $userData['user_phone'];
+
+                                                                        // Get ground data
+                                                                        $getGroundData = getGroundById($groundId);
+                                                                        $groundData = $getGroundData -> fetch_assoc();
+                                                                        $groundName = $groundData['ground_name'];
+
+                                                                        if ($userNameBooking == $sessionUserName) {
+                                                                            ?>
+                                                                                <tr>
+                                                                                    <td><?= $number += 1 ?></td>
+                                                                                    <td><?= $userRealNameBooking ?></td>
+                                                                                    <td><?= $userPhoneBooking ?></td>
+                                                                                    <td><?= $groundName ?></td>
+                                                                                    <td><?= $bookingStart ?></td>
+                                                                                    <td><?= $bookingEnd ?></td>
+                                                                                    <td><?= $bookingDate ?></td>
+                                                                                </tr>
+                                                                            <?php
+                                                                        }
+                                                                    }
+                                                                }
+                                                            ?>
+                                                        </table>
                                                     </div>
-                                                <?php
-                                            }
+                                                </div>
+                                            <?php
                                         }
                                     }
+                                }
+                            }
+
+                            else {
                                 ?>
+                                    <!-- Slider main -->
+                                    <div class="slider-container">
+                                        <div class="slider-main" id="sliderMain">
+                                            <!-- Slideshow images -->
+                                            <?php        
+                                                $db = getDatabase();
+                                                $res = getImages($db);
 
-                                <!-- Slider navigation -->
-                                <div class="slider-nav">
-                                    <span class="nav-dot"></span>   
-                                    <span class="nav-dot"></span>   
-                                    <span class="nav-dot"></span>   
-                                </div>
-                            </div>
-                        </div>
-                        <!-- ----- -->
+                                                if ($res != null && $res -> num_rows > 0) {
+                                                    while ($data = $res -> fetch_assoc()) {
+                                                        $imageSrc = $data['image_src'];
+                                                        $imageType = $data['image_type'];
 
-                        
+                                                        if ($imageType == "slide") {
+                                                            ?>
+                                                                <div class="slide fade">
+                                                                    <img src="<?= $imageSrc ?>">
+                                                                </div>
+                                                            <?php
+                                                        }
+                                                    }
+                                                }
+                                            ?>
+
+                                            <!-- Slider navigation -->
+                                            <div class="slider-nav">
+                                                <span class="nav-dot"></span>   
+                                                <span class="nav-dot"></span>   
+                                                <span class="nav-dot"></span>   
+                                            </div>
+                                        </div>
+                                    </div>
+                                <?php
+                            }
+                        ?>
                     </div>
 
                     <div class="col-2">

@@ -54,6 +54,10 @@
                                 <img src="./Images/user-logo.png">
             
                                 <div class="user-detail">
+                                    <a href="index.php?u=userinfo">
+                                        <div>Thông tin</div>
+                                    </a>
+
                                     <a href="logout.php">
                                         <div>Đăng xuất</div>
                                     </a>

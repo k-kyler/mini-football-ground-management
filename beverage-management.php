@@ -7,12 +7,6 @@
 <script src="./JS/close-popup-message.js?v=<?php echo time(); ?>"></script>
 
 <?php
-    // Layout
-    require_once('layout.php');
-
-    // Config
-    require_once('./Config/config.php');
-
     ?>
         <div class="beverage-management-container">
             <!-- Beverage management processing -->

@@ -35,8 +35,9 @@ $(document).ready(function() {
         let bookingEnd = $("#bookingEnd" + i).val();
         let totalTime = $("#totalTime" + i).val();
         let groundCost = $("#groundCost" + i).val();
-        let beverageCost = $("#beverageCost" + i).val();
-        let beverageType = $("#beverageType" + i).val();
+        // let beverageCost = $("#beverageCost" + i).val();
+        // let beverageType = $("#beverageType" + i).val();
+        // let isPaid = $("#isPaid" + i).val();
 
         temp.push(userRealNameAndPhone);
         temp.push(groundName);
@@ -44,8 +45,9 @@ $(document).ready(function() {
         temp.push(bookingEnd);
         temp.push(totalTime);
         temp.push(groundCost);
-        temp.push(beverageCost);
-        temp.push(beverageType);
+        // temp.push(beverageCost);
+        // temp.push(beverageType);
+        // temp.push(isPaid);
 
         totalBookingUsersList.push(temp);
     }
@@ -70,11 +72,17 @@ $(document).ready(function() {
 
                     $("#totalCost").val(Intl.NumberFormat().format(totalBookingUsersList[i][5]) + ' VNĐ');
 
-                    // Calculate beverage cost of each
-                    let tempBeverageCost = totalBookingUsersList[i][6] / parseInt(totalBookingUsersList[i][7].split(" x ")[1]);
+                    // // Calculate beverage cost of each
+                    // let tempBeverageCost = totalBookingUsersList[i][6] / parseInt(totalBookingUsersList[i][7].split(" x ")[1]);
 
-                    $("#selectBeverage").val(totalBookingUsersList[i][7].split(" x ")[0] + ' - ' + Intl.NumberFormat().format(tempBeverageCost)).trigger('change');
-                    $("#beverageNumber").val(totalBookingUsersList[i][7].split(" x ")[1]);
+                    // $("#selectBeverage").val(totalBookingUsersList[i][7].split(" x ")[0] + ' - ' + Intl.NumberFormat().format(tempBeverageCost)).trigger('change');
+                    // $("#beverageNumber").val(totalBookingUsersList[i][7].split(" x ")[1]);
+                    
+                    // // Disable pay button if isPaid
+                    // if (totalBookingUsersList[i][8] == "1") {
+                    //     $("#paySubmit").prop('disabled', true);
+                    //     $("#paySubmit").val("Đã thanh toán");
+                    // }
                 }
             }
         }
@@ -82,20 +90,6 @@ $(document).ready(function() {
 
     // Change cost when choosing beverages
     $("#selectBeverage").change(function() {
-        let selectBeverage = $("#selectBeverage").val();
-        let beverageNumber = $("#beverageNumber").val();
-        let groundCost = $("#groundCostTemp").val();
-
-        let beverageCost = parseInt(selectBeverage.split(" - ")[1]);
-        let reCalculateTotalCost = parseInt(groundCost) + beverageCost * parseInt(beverageNumber) * 1000;
-
-        if (selectBeverage != "") {
-            $("#totalCost").val(Intl.NumberFormat().format(reCalculateTotalCost) + ' VNĐ');
-        }
-    });
-
-    // Change cost when it is selected
-    $("#selectBeverage").select(function() {
         let selectBeverage = $("#selectBeverage").val();
         let beverageNumber = $("#beverageNumber").val();
         let groundCost = $("#groundCostTemp").val();
