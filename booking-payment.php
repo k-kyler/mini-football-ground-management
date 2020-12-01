@@ -126,27 +126,8 @@
                                                         <td><?= $bookingStart ?></td>
                                                         <td><?= $bookingEnd ?></td>
                                                         <td><?= $bookingTotaltime ?></td>
-
-                                                        <?php
-                                                            if ($isPaid) {
-                                                                ?>
-                                                                    <td style="color: rgb(38, 241, 38); font-weight: 500;">Đã thanh toán</td>
-
-                                                                    <!-- Hidden input to store isPaid data -->
-                                                                    <input type="hidden" id="<?= 'isPaid' . $number ?>" value="<?= $isPaid ?>">
-                                                                <?php
-                                                            }
-
-                                                            else {
-                                                                ?>
-                                                                    <td style="color: red; font-weight: 500;">Chưa thanh toán</td>
-
-                                                                    <!-- Hidden input to store isPaid data -->
-                                                                    <input type="hidden" id="<?= 'isPaid' . $number ?>" value="">
-                                                                <?php
-                                                            }
-                                                        ?>
-
+                                                        <td class="booking-status">Chưa thanh toán</td>
+                                                                
                                                         <!-- Hidden input to store beverage data -->
                                                         <input type="hidden" id="<?= 'beverageType' . $number ?>" value="<?= $beverageType ?>">
                                                         <input type="hidden" id="<?= 'beverageCost' . $number ?>" value="<?= $beverageCost ?>">
@@ -189,28 +170,6 @@
                                     <i class="fas fa-coins"></i>
                                 </a>
                             </div>
-                            
-                            <?php
-                                if (isset($totalDayProfit)) {
-                                    ?>
-                                        <!-- Display day profit -->
-                                        <div class="day-profit">
-                                            Tổng doanh thu của ngày: 
-                                            <span><?= number_format($totalDayProfit) ?>đ</span>
-                                        </div>
-                                    <?php
-                                }
-
-                                else {
-                                    ?>
-                                    <!-- Display day profit -->
-                                    <div class="day-profit">
-                                        Tổng doanh thu của ngày: 
-                                        <span>0đ</span>
-                                    </div>
-                                <?php
-                                }
-                            ?>
                         </div>
                     <?php
                 }
@@ -300,26 +259,7 @@
                                                         <td><?= $bookingStart ?></td>
                                                         <td><?= $bookingEnd ?></td>
                                                         <td><?= $bookingTotaltime ?></td>
-                                                        
-                                                        <?php
-                                                            if ($isPaid) {
-                                                                ?>
-                                                                    <td style="color: rgb(38, 241, 38); font-weight: 500;">Đã thanh toán</td>
-
-                                                                    <!-- Hidden input to store isPaid data -->
-                                                                    <input type="hidden" id="<?= 'isPaid' . $number ?>" value="<?= $isPaid ?>">
-                                                                <?php
-                                                            }
-
-                                                            else {
-                                                                ?>
-                                                                    <td style="color: red; font-weight: 500;">Chưa thanh toán</td>
-
-                                                                    <!-- Hidden input to store isPaid data -->
-                                                                    <input type="hidden" id="<?= 'isPaid' . $number ?>" value="">
-                                                                <?php
-                                                            }
-                                                        ?>
+                                                        <td class="booking-status">Chưa thanh toán</td>
 
                                                         <!-- Hidden input to store beverage data -->
                                                         <input type="hidden" id="<?= 'beverageType' . $number ?>" value="<?= $beverageType ?>">
@@ -363,28 +303,6 @@
                                     <i class="fas fa-coins"></i>
                                 </a>
                             </div>
-                            
-                            <?php
-                                if (isset($totalDayProfit)) {
-                                    ?>
-                                        <!-- Display day profit -->
-                                        <div class="day-profit">
-                                            Tổng doanh thu của ngày: 
-                                            <span><?= number_format($totalDayProfit) ?>đ</span>
-                                        </div>
-                                    <?php
-                                }
-
-                                else {
-                                    ?>
-                                    <!-- Display day profit -->
-                                    <div class="day-profit">
-                                        Tổng doanh thu của ngày: 
-                                        <span>0đ</span>
-                                    </div>
-                                <?php
-                                }
-                            ?>
                         </div>
                     <?php
                 }
@@ -453,7 +371,44 @@
                     <div class="time-grounds-status">
                         <div class="time-grounds-status-title">Tình trạng sân ngày <?= $_GET['datechoose'] ?></div>
 
-                        
+                        <div class="time-grounds-schedule">
+                            <table>
+                                <tr>
+                                    <th></th>
+                                    <th colspan="4">9:00</th>
+                                    <th colspan="4">10:00</th>
+                                    <th colspan="4">11:00</th>
+                                    <th colspan="4">12:00</th>
+                                    <th colspan="4">13:00</th>
+                                    <th colspan="4">14:00</th>
+                                    <th colspan="4">15:00</th>
+                                    <th colspan="4">16:00</th>
+                                    <th colspan="4">17:00</th>
+                                    <th colspan="4">18:00</th>
+                                    <th colspan="4">19:00</th>
+                                    <th colspan="4">20:00</th>
+                                    <th colspan="4">21:00</th>
+                                </tr>
+                                
+                                <?php 
+                                    $groundsData = getGrounds($db);
+
+                                    if ($groundsData != null && $groundsData -> num_rows > 0) {
+                                        while ($data = $groundsData -> fetch_assoc()) {
+                                            $groundName = $data['ground_name'];
+            
+                                            if ($groundName) {
+                                                ?>
+                                                    <tr>
+                                                        <td><?= $groundName ?></td>
+                                                    </tr>
+                                                <?php
+                                            }
+                                        }
+                                    }
+                                ?>
+                            </table>
+                        </div>
                     </div>
                 <?php
             }
@@ -663,7 +618,7 @@
         </div>
         
         <!-- Delete booking form -->
-        <div class="delete-booking-form" title="Hủy lịch đặt sân" id="deleteBookingForm">
+        <div class="delete-booking-form" title="Xóa lịch đặt sân" id="deleteBookingForm">
             <form method="POST" action="API/delete-booking.php">
                 <!-- Select user real name -->
                 <br>
@@ -1149,7 +1104,7 @@
                     <option>30</option>
                     <option>45</option>
                 </select>
-                
+
                 <br>
                 <br>
                 <input type="submit" onclick="return confirm('Thêm lịch đặt?');" name="oldSubmit" id="oldSubmit" class="old-submit" value="Xác nhận">

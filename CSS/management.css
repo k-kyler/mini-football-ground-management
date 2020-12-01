@@ -88,9 +88,12 @@
 }
 
 .empty-function-message {
+    background-color: black;
+    opacity: 0.85;
+    border-radius: 6px;
     color: white;
     text-align: center;
-    padding: 3rem 0;
+    padding: 5rem 0;
     font-size: 1.2rem;
     font-weight: bold;
 }

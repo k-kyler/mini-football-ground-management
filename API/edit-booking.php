@@ -149,14 +149,23 @@
             $bookingDateEdit = mysqli_escape_string($db, $bookingDateSelected);
             $userId = mysqli_escape_string($db, $userId);
 
-            $sqlQuery = "update bookingdetails 
+            $sqlQuery1 = "update bookingdetails 
                         set
                             ground_id = '$groundIdSelected', 
                             booking_start = '$bookingStartSelected', 
                             booking_end = '$bookingEndSelected'
                         where user_id = '$userId' and booking_date = '$bookingDateEdit'";
 
-            $result = $db -> query($sqlQuery);
+            $result1 = $db -> query($sqlQuery1);
+
+            $sqlQuery2 = "update bookinghistories 
+                        set
+                            ground_id = '$groundIdSelected', 
+                            booking_start = '$bookingStartSelected', 
+                            booking_end = '$bookingEndSelected'
+                        where user_id = '$userId' and booking_date = '$bookingDateEdit'";
+
+            $result2 = $db -> query($sqlQuery2);
 
             // Announcement session
             $_SESSION['booking-success'] = "Cập nhật thông tin thành công!";

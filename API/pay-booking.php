@@ -61,9 +61,6 @@
         // Total cost for insert
         $totalCost = $beverageCost + $groundCost;
 
-        // Payment status
-        $paymentStatus = 'isPaid';
-
         // Insert into database
         $paymentId = mysqli_escape_string($db, $paymentId);
         $insertBookingId = mysqli_escape_string($db, $insertBookingId);
@@ -74,12 +71,16 @@
         $paymentStatus = mysqli_escape_string($db, $paymentStatus);
         $paymentDate = mysqli_escape_string($db, $bookingDateSelected);
 
-        $sqlQuery = "insert into payments 
-                        (payment_id, booking_id, beverage_type, beverage_cost, ground_cost, total_cost, status, payment_date) 
+        $sqlQuery1 = "insert into payments 
+                        (payment_id, booking_id, beverage_type, beverage_cost, ground_cost, total_cost, payment_date) 
                         values 
-                        ('$paymentId', '$bookingId', '$beverageType', '$beverageCost', '$groundCost', '$totalCost', '$paymentStatus', '$paymentDate')";
+                        ('$paymentId', '$insertBookingId', '$beverageType', '$beverageCost', '$groundCost', '$totalCost', '$paymentDate')";
 
-        $result = $db -> query($sqlQuery);
+        $result1 = $db -> query($sqlQuery1);
+
+        $sqlQuery2 = "delete from bookingdetails where booking_id = '$insertBookingId'";
+
+        $result2 = $db -> query($sqlQuery2);
 
         // Announcement session
         $_SESSION['booking-success'] = "Thanh toán thành công!";

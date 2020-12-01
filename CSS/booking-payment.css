@@ -3,7 +3,7 @@
     color: white;
     background-color: black;
     opacity: 0.85;
-    border-radius: 5px;
+    border-radius: 6px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -177,13 +177,18 @@
     width: 3rem;
 }
 
+.booking-status {
+    font-weight: 500;
+    color: red;
+}
+
 .time-grounds-status {
     margin-top: 2rem;
     padding: 1rem;
     color: white;
     background-color: black;
     opacity: 0.85;
-    border-radius: 5px;
+    border-radius: 6px;
     height: 100%;
 }
 
@@ -197,3 +202,4 @@
     margin-top: 1rem;
     overflow-x: auto;
 }
+

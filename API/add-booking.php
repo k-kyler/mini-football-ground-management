@@ -21,6 +21,9 @@
             // Generate booking id
             $bookingId = uniqid();
 
+            // Generate booking history id
+            $historyId = uniqid();
+
             // Get user id
             $getUserData = getIdByUserPhone($userPhone);
             $userData = $getUserData -> fetch_assoc();
@@ -35,13 +38,14 @@
             $timeStart = $_POST['selectTimeStart-1'] . ":" . $_POST['selectTimeStart-2'];
             $timeEnd = $_POST['selectTimeEnd-1'] . ":" . $_POST['selectTimeEnd-2'];
 
-            // Check time start & end
+            // Check time start & end, check for unique phone in booking
             $checkBookingTimes = true;
             $checkBookingPhone = true;
             $bookingDetailsData = getBookingDetails($db);
 
             if ($bookingDetailsData != null && $bookingDetailsData -> num_rows > 0) {
                 while ($data = $bookingDetailsData -> fetch_assoc()) {
+                    $bookingIdInDatabase = $data['booking_id'];
                     $groundId = $data['ground_id'];
                     $userIdInDatabase = $data['user_id'];
                     $bookingStart = $data['booking_start'];
@@ -57,19 +61,19 @@
                         $checkBookingTimes = false;
                     }
 
-                    else if ($bookingDate == $bookingDateSelected && $groundName == $groundNameSelected && strtotime($timeStart) > strtotime($bookingStart) && strtotime($timeStart) < strtotime($bookingEnd) && strtotime($timeEnd) > strtotime($bookingStart) && strtotime($timeEnd) > strtotime($bookingEnd)) {
+                    else if ($bookingDate == $bookingDateSelected && $groundName == $groundNameSelected && strtotime($timeStart) >= strtotime($bookingStart) && strtotime($timeStart) <= strtotime($bookingEnd) && strtotime($timeEnd) >= strtotime($bookingStart) && strtotime($timeEnd) >= strtotime($bookingEnd)) {
                         $checkBookingTimes = false;
                     }
     
-                    else if ($bookingDate == $bookingDateSelected && $groundName == $groundNameSelected && strtotime($timeEnd) > strtotime($bookingStart) && strtotime($timeEnd) < strtotime($bookingEnd) && strtotime($timeStart) < strtotime($bookingStart) && strtotime($timeStart) < strtotime($bookingEnd)) {
+                    else if ($bookingDate == $bookingDateSelected && $groundName == $groundNameSelected && strtotime($timeEnd) >= strtotime($bookingStart) && strtotime($timeEnd) <= strtotime($bookingEnd) && strtotime($timeStart) <= strtotime($bookingStart) && strtotime($timeStart) <= strtotime($bookingEnd)) {
                         $checkBookingTimes = false;
                     }
 
-                    else if ($bookingDate == $bookingDateSelected && $groundName == $groundNameSelected && strtotime($timeStart) < strtotime($bookingStart) && strtotime($timeEnd) > strtotime($bookingEnd)) {
+                    else if ($bookingDate == $bookingDateSelected && $groundName == $groundNameSelected && strtotime($timeStart) <= strtotime($bookingStart) && strtotime($timeEnd) >= strtotime($bookingEnd)) {
                         $checkBookingTimes = false;
                     }
     
-                    else if ($bookingDate == $bookingDateSelected && $groundName == $groundNameSelected && strtotime($timeStart) > strtotime($bookingStart) && strtotime($timeEnd) < strtotime($bookingEnd)) {
+                    else if ($bookingDate == $bookingDateSelected && $groundName == $groundNameSelected && strtotime($timeStart) >= strtotime($bookingStart) && strtotime($timeEnd) <= strtotime($bookingEnd)) {
                         $checkBookingTimes = false;
                     }
 
@@ -94,6 +98,7 @@
             }
 
             else {
+                $historyId = mysqli_escape_string($db, $historyId);
                 $bookingId = mysqli_escape_string($db, $bookingId);
                 $userId = mysqli_escape_string($db, $userId);
                 $groundIdSelected = mysqli_escape_string($db, $groundIdSelected);
@@ -101,9 +106,13 @@
                 $bookingEndSelected = mysqli_escape_string($db, $timeEnd);
                 $bookingDateSelected = mysqli_escape_string($db, $bookingDateSelected);
 
-                $sqlQuery = "insert into bookingdetails (booking_id, user_id, ground_id, booking_start, booking_end, booking_date) values ('$bookingId', '$userId', '$groundIdSelected', '$bookingStartSelected', '$bookingEndSelected', '$bookingDateSelected')";
+                $sqlQuery1 = "insert into bookingdetails (booking_id, user_id, ground_id, booking_start, booking_end, booking_date) values ('$bookingId', '$userId', '$groundIdSelected', '$bookingStartSelected', '$bookingEndSelected', '$bookingDateSelected')";
                 
-                $result = $db -> query($sqlQuery);
+                $result1 = $db -> query($sqlQuery1);
+
+                $sqlQuery2 = "insert into bookinghistories (history_id, booking_id, user_id, ground_id, booking_start, booking_end, booking_date) values ('$historyId', '$bookingId', '$userId', '$groundIdSelected', '$bookingStartSelected', '$bookingEndSelected', '$bookingDateSelected')";
+                
+                $result2 = $db -> query($sqlQuery2);
 
                 $_SESSION['booking-success'] = "Đặt sân thành công!";
             }
@@ -142,6 +151,9 @@
             // Generate booking id
             $bookingId = uniqid();
 
+            // Generate booking history id
+            $historyId = uniqid();
+
             // Get ground id
             $getGroundDataSelected = getIdByGroundName($groundNameSelected);
             $groundDataSelected = $getGroundDataSelected -> fetch_assoc();
@@ -173,19 +185,19 @@
                         $checkBookingTimes = false;
                     }
 
-                    else if ($bookingDate == $bookingDateSelected && $groundName == $groundNameSelected && strtotime($timeStart) > strtotime($bookingStart) && strtotime($timeStart) < strtotime($bookingEnd) && strtotime($timeEnd) > strtotime($bookingStart) && strtotime($timeEnd) > strtotime($bookingEnd)) {
+                    else if ($bookingDate == $bookingDateSelected && $groundName == $groundNameSelected && strtotime($timeStart) >= strtotime($bookingStart) && strtotime($timeStart) <= strtotime($bookingEnd) && strtotime($timeEnd) >= strtotime($bookingStart) && strtotime($timeEnd) >= strtotime($bookingEnd)) {
                         $checkBookingTimes = false;
                     }
     
-                    else if ($bookingDate == $bookingDateSelected && $groundName == $groundNameSelected && strtotime($timeEnd) > strtotime($bookingStart) && strtotime($timeEnd) < strtotime($bookingEnd) && strtotime($timeStart) < strtotime($bookingStart) && strtotime($timeStart) < strtotime($bookingEnd)) {
+                    else if ($bookingDate == $bookingDateSelected && $groundName == $groundNameSelected && strtotime($timeEnd) >= strtotime($bookingStart) && strtotime($timeEnd) <= strtotime($bookingEnd) && strtotime($timeStart) <= strtotime($bookingStart) && strtotime($timeStart) <= strtotime($bookingEnd)) {
                         $checkBookingTimes = false;
                     }
 
-                    else if ($bookingDate == $bookingDateSelected && $groundName == $groundNameSelected && strtotime($timeStart) < strtotime($bookingStart) && strtotime($timeEnd) > strtotime($bookingEnd)) {
+                    else if ($bookingDate == $bookingDateSelected && $groundName == $groundNameSelected && strtotime($timeStart) <= strtotime($bookingStart) && strtotime($timeEnd) >= strtotime($bookingEnd)) {
                         $checkBookingTimes = false;
                     }
     
-                    else if ($bookingDate == $bookingDateSelected && $groundName == $groundNameSelected && strtotime($timeStart) > strtotime($bookingStart) && strtotime($timeEnd) < strtotime($bookingEnd)) {
+                    else if ($bookingDate == $bookingDateSelected && $groundName == $groundNameSelected && strtotime($timeStart) >= strtotime($bookingStart) && strtotime($timeEnd) <= strtotime($bookingEnd)) {
                         $checkBookingTimes = false;
                     }
 
@@ -223,15 +235,20 @@
                 $addNewResult = $db -> query($addNewUserQuery);
 
                 // Insert new booking detail
+                $historyId = mysqli_escape_string($db, $historyId);
                 $bookingId = mysqli_escape_string($db, $bookingId);
                 $groundIdSelected = mysqli_escape_string($db, $groundIdSelected);
                 $bookingStartSelected = mysqli_escape_string($db, $timeStart);
                 $bookingEndSelected = mysqli_escape_string($db, $timeEnd);
                 $bookingDateSelected = mysqli_escape_string($db, $bookingDateSelected);
 
-                $sqlQuery = "insert into bookingdetails (booking_id, user_id, ground_id, booking_start, booking_end, booking_date) values ('$bookingId', '$newUserId', '$groundIdSelected', '$bookingStartSelected', '$bookingEndSelected', '$bookingDateSelected')";
+                $sqlQuery1 = "insert into bookingdetails (booking_id, user_id, ground_id, booking_start, booking_end, booking_date) values ('$bookingId', '$newUserId', '$groundIdSelected', '$bookingStartSelected', '$bookingEndSelected', '$bookingDateSelected')";
                 
-                $result = $db -> query($sqlQuery);
+                $result1 = $db -> query($sqlQuery1);
+
+                $sqlQuery2 = "insert into bookinghistories (history_id, booking_id, user_id, ground_id, booking_start, booking_end, booking_date) values ('$historyId', '$bookingId', '$newUserId', '$groundIdSelected', '$bookingStartSelected', '$bookingEndSelected', '$bookingDateSelected')";
+                
+                $result2 = $db -> query($sqlQuery2);
 
                 $_SESSION['booking-success'] = "Đặt sân thành công!";
             }
