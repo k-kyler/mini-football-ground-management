@@ -97,7 +97,7 @@
     margin-right: 1rem;
 }
 
-.add-booking-form, .edit-booking-form, .delete-booking-form, .pay-booking-form, #addNew, #addOld {
+.add-booking-form, .edit-booking-form, .delete-booking-form, .pay-booking-form, .pay-booking-history, #addNew, #addOld {
     display: none;
 }
 
@@ -180,6 +180,10 @@
 .booking-status {
     font-weight: 500;
     color: red;
+}
+
+.select2-results .select2-disabled, .select2-results__option[aria-disabled=true] { 
+    display: none;
 }
 
 .time-grounds-status {

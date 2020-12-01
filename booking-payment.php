@@ -68,7 +68,6 @@
 
                                     if ($bookingDetailsData != null && $bookingDetailsData -> num_rows > 0) {
                                         $number = 0;
-                                        $totalDayProfit = 0;
                                         
                                         while ($data = $bookingDetailsData -> fetch_assoc()) {
                                             $bookingId = $data['booking_id'];
@@ -98,24 +97,6 @@
                                             $groundData = $getGroundData -> fetch_assoc();
                                             $groundName = $groundData['ground_name'];
 
-                                            // Get payment data
-                                            $getPaymentData = getPaymentByBookingId($bookingId);
-                                            $isPaid = false;
-
-                                            if ($getPaymentData != null && $getPaymentData -> num_rows > 0) {
-                                                $paymentData = $getPaymentData -> fetch_assoc();
-                                                $beverageType = $paymentData['beverage_type'];
-                                                $beverageCost = $paymentData['beverage_cost'];
-                                                $totalCostInPayment = $paymentData['total_cost'];
-                                                $paymentStatus = $paymentData['status'];
-                                                $paymentDate = $paymentData['payment_date'];
-
-                                                if ($paymentStatus == "isPaid" && $paymentDate == $_POST['dateChoose']) {
-                                                    $isPaid = true;
-                                                    $totalDayProfit += $totalCostInPayment;
-                                                }
-                                            }
-
                                             if ($bookingDate == $_POST['dateChoose']) {
                                                 ?>
                                                     <tr>
@@ -127,10 +108,6 @@
                                                         <td><?= $bookingEnd ?></td>
                                                         <td><?= $bookingTotaltime ?></td>
                                                         <td class="booking-status">Chưa thanh toán</td>
-                                                                
-                                                        <!-- Hidden input to store beverage data -->
-                                                        <input type="hidden" id="<?= 'beverageType' . $number ?>" value="<?= $beverageType ?>">
-                                                        <input type="hidden" id="<?= 'beverageCost' . $number ?>" value="<?= $beverageCost ?>">
 
                                                         <!-- Hidden input to store edit & pay data -->
                                                         <input type="hidden" id="<?= 'userRealName' . $number ?>" value="<?= $userRealName ?>">
@@ -169,6 +146,10 @@
                                 <a id="payButton" class="controller-button" href="javascript:void(0)">
                                     <i class="fas fa-coins"></i>
                                 </a>
+
+                                <a id="payHistoryButton" class="controller-button" href="javascript:void(0)">
+                                    <i class="fas fa-history"></i>
+                                </a>
                             </div>
                         </div>
                     <?php
@@ -201,7 +182,6 @@
 
                                     if ($bookingDetailsData != null && $bookingDetailsData -> num_rows > 0) {
                                         $number = 0;
-                                        $totalDayProfit = 0;
                                         
                                         while ($data = $bookingDetailsData -> fetch_assoc()) {
                                             $bookingId = $data['booking_id'];
@@ -230,24 +210,6 @@
                                             $getGroundData = getGroundById($groundId);
                                             $groundData = $getGroundData -> fetch_assoc();
                                             $groundName = $groundData['ground_name'];
-
-                                            // Get payment data
-                                            $getPaymentData = getPaymentByBookingId($bookingId);
-                                            $isPaid = false;
-
-                                            if ($getPaymentData != null && $getPaymentData -> num_rows > 0) {
-                                                $paymentData = $getPaymentData -> fetch_assoc();
-                                                $beverageType = $paymentData['beverage_type'];
-                                                $beverageCost = $paymentData['beverage_cost'];
-                                                $totalCostInPayment = $paymentData['total_cost'];
-                                                $paymentStatus = $paymentData['status'];
-                                                $paymentDate = $paymentData['payment_date'];
-
-                                                if ($paymentStatus == "isPaid" && $paymentDate == $_GET['datechoose']) {
-                                                    $isPaid = true;
-                                                    $totalDayProfit += $totalCostInPayment;
-                                                }
-                                            }
                                             
                                             if ($bookingDate == $_GET['datechoose']) {
                                                 ?>
@@ -260,10 +222,6 @@
                                                         <td><?= $bookingEnd ?></td>
                                                         <td><?= $bookingTotaltime ?></td>
                                                         <td class="booking-status">Chưa thanh toán</td>
-
-                                                        <!-- Hidden input to store beverage data -->
-                                                        <input type="hidden" id="<?= 'beverageType' . $number ?>" value="<?= $beverageType ?>">
-                                                        <input type="hidden" id="<?= 'beverageCost' . $number ?>" value="<?= $beverageCost ?>">
 
                                                         <!-- Hidden input to store edit data -->
                                                         <input type="hidden" id="<?= 'userRealName' . $number ?>" value="<?= $userRealName ?>">
@@ -301,6 +259,10 @@
 
                                 <a id="payButton" class="controller-button" href="javascript:void(0)">
                                     <i class="fas fa-coins"></i>
+                                </a>
+
+                                <a id="payHistoryButton" class="controller-button" href="javascript:void(0)">
+                                    <i class="fas fa-history"></i>
                                 </a>
                             </div>
                         </div>
@@ -413,6 +375,201 @@
                 <?php
             }
         ?>
+
+        <!-- Pay booking history -->
+        <div class="pay-booking-history" title="Lịch sử đặt sân và thanh toán" id="payBookingHistory">
+            <!-- Select user real name -->
+            <br>
+            <select required name="selectUserRealName" id="selectUserRealNameHistory" style="width: 100%;">
+                <option selected="true" value="">(Chọn tên)</option>
+                
+                <?php
+                    $bookingHistoriesData = getBookingHistories($db);
+                    $count = 0;
+
+                    if (isset($_POST['dateChoose'])) {
+                        if ($bookingHistoriesData != null && $bookingHistoriesData -> num_rows > 0) {
+                            while ($data = $bookingHistoriesData -> fetch_assoc()) {
+                                $userIdHistory = $data['user_id'];
+                                $bookingIdHistory = $data['booking_id'];
+                                $bookingStartHistory = $data['booking_start'];
+                                $bookingEndHistory = $data['booking_end'];
+                                $groundIdHistory = $data['ground_id'];
+
+                                // Get user detail by id
+                                $getUserData = getUserById($userIdHistory);
+                                $userData = $getUserData -> fetch_assoc();
+                                $userRealName = $userData['user_realname'];
+                                $userPhone = $userData['user_phone'];
+
+                                // Get payment detail by id
+                                $getPaymentData = getPaymentByBookingId($bookingIdHistory);
+                                $paymentDate = '';
+                                
+                                if ($getPaymentData != null && $getPaymentData -> num_rows > 0) {
+                                    $paymentData = $getPaymentData -> fetch_assoc();
+                                    $paymentDate = $paymentData['payment_date'];
+                                    $paymentBeverageType = $paymentData['beverage_type'];
+                                    $paymentBeverageCost = $paymentData['beverage_cost'];
+                                    $paymentGroundCost = $paymentData['ground_cost'];
+                                    $paymentTotalCost = $paymentData['total_cost'];
+                                }
+
+                                if ($paymentDate == $_POST['dateChoose']) {
+                                    $count += 1;
+
+                                    ?>
+                                        <option><?= $userRealName . " - " . $userPhone ?></option>
+
+                                        <!-- Store data to hidden option -->
+                                        <option  disabled id="<?= 'userRealNameUsed' . $count ?>" value="<?= $userRealName ?>"></option>
+                                        <option  disabled id="<?= 'userPhoneUsed' . $count ?>" value="<?= $userPhone ?>"></option>
+                                        <option  disabled id="<?= 'groundNameUsed' . $count ?>" value="<?= $groundName ?>"></option>
+                                        <option  disabled id="<?= 'bookingStartHistory' . $count ?>" value="<?= $bookingStartHistory ?>"></option>
+                                        <option  disabled id="<?= 'bookingEndHistory' . $count ?>" value="<?= $bookingEndHistory ?>"></option>
+                                        <option  disabled id="<?= 'paymentGroundCost' . $count ?>" value="<?= $paymentGroundCost ?>"></option>
+                                        <option  disabled id="<?= 'paymentBeverageType' . $count ?>" value="<?= $paymentBeverageType ?>"></option>
+                                        <option  disabled id="<?= 'paymentBeverageCost' . $count ?>" value="<?= $paymentBeverageCost ?>"></option>
+                                        <option  disabled id="<?= 'paymentTotalCost' . $count ?>" value="<?= $paymentTotalCost ?>"></option>
+                                    <?php
+                                }
+                            }
+                        }
+                    }
+                    
+                    else if (isset($_GET['datechoose'])) {
+                        if ($bookingHistoriesData != null && $bookingHistoriesData -> num_rows > 0) {
+                            while ($data = $bookingHistoriesData -> fetch_assoc()) {
+                                $userIdHistory = $data['user_id'];
+                                $bookingIdHistory = $data['booking_id'];
+                                $bookingStartHistory = $data['booking_start'];
+                                $bookingEndHistory = $data['booking_end'];
+                                $groundIdHistory = $data['ground_id'];
+
+                                // Get user detail by id
+                                $getUserData = getUserById($userIdHistory);
+                                $userData = $getUserData -> fetch_assoc();
+                                $userRealName = $userData['user_realname'];
+                                $userPhone = $userData['user_phone'];
+
+                                // Get payment detail by id
+                                $getPaymentData = getPaymentByBookingId($bookingIdHistory);
+                                $paymentDate = '';
+                                
+                                if ($getPaymentData != null && $getPaymentData -> num_rows > 0) {
+                                    $paymentData = $getPaymentData -> fetch_assoc();
+                                    $paymentDate = $paymentData['payment_date'];
+                                    $paymentBeverageType = $paymentData['beverage_type'];
+                                    $paymentBeverageCost = $paymentData['beverage_cost'];
+                                    $paymentGroundCost = $paymentData['ground_cost'];
+                                    $paymentTotalCost = $paymentData['total_cost'];
+                                }
+
+                                // Get ground data
+                                $getGroundData = getGroundById($groundIdHistory);
+                                $groundData = $getGroundData -> fetch_assoc();
+                                $groundName = $groundData['ground_name'];
+
+                                if ($paymentDate == $_GET['datechoose']) {
+                                    $count += 1;
+
+                                    ?>
+                                        <option><?= $userRealName . " - " . $userPhone ?></option>
+
+                                        <!-- Store data to hidden option -->
+                                        <option  disabled id="<?= 'userRealNameUsed' . $count ?>" value="<?= $userRealName ?>"></option>
+                                        <option  disabled id="<?= 'userPhoneUsed' . $count ?>" value="<?= $userPhone ?>"></option>
+                                        <option  disabled id="<?= 'groundNameUsed' . $count ?>" value="<?= $groundName ?>"></option>
+                                        <option  disabled id="<?= 'bookingStartHistory' . $count ?>" value="<?= $bookingStartHistory ?>"></option>
+                                        <option  disabled id="<?= 'bookingEndHistory' . $count ?>" value="<?= $bookingEndHistory ?>"></option>
+                                        <option  disabled id="<?= 'paymentGroundCost' . $count ?>" value="<?= $paymentGroundCost ?>"></option>
+                                        <option  disabled id="<?= 'paymentBeverageType' . $count ?>" value="<?= $paymentBeverageType ?>"></option>
+                                        <option  disabled id="<?= 'paymentBeverageCost' . $count ?>" value="<?= $paymentBeverageCost ?>"></option>
+                                        <option  disabled id="<?= 'paymentTotalCost' . $count ?>" value="<?= $paymentTotalCost ?>"></option>
+                                    <?php
+                                }
+                            }
+                        }
+                    }
+                ?>
+            </select>
+
+            <!-- Hidden input to store total payment history -->
+            <input type="hidden" id="totalPaymentUsers" value="<?= $count ?>">
+
+            <!-- Pay date -->
+            <br>
+            <br>
+            <label>Ngày đặt: </label>
+            <?php 
+                if (isset($_POST['submit'])) {
+                    ?>
+                        <input type="text" required placeholder="dd/mm/yyyy" class="date" autocomplete="off" name="dateChooseForm" value="<?= $_POST['dateChoose'] ?>">
+                    <?php
+                }
+
+                else if (isset($_GET['datechoose'])) {
+                    ?>
+                        <input type="text" required placeholder="dd/mm/yyyy" class="date" autocomplete="off" name="dateChooseForm" value="<?= $_GET['datechoose'] ?>">
+                    <?php
+                }
+
+                else {
+                    ?>
+                        <input type="text" required placeholder="dd/mm/yyyy" class="date" autocomplete="off" name="dateChooseForm">
+                    <?php
+                }
+            ?>
+
+            <!-- Ground -->
+            <br>
+            <br>
+            <label>Sân đã dùng: </label>
+            <span id="groundUsed"></span>
+
+            <!-- Time start -->
+            <br>
+            <br>
+            <label>Thời gian bắt đầu: </label>
+            <span id="timeStartUsed"></span>
+          
+            <!-- Select time end -->
+            <br>
+            <br>
+            <label>Thời gian kết thúc: </label>
+            <span id="timeEndUsed"></span>
+
+            <!-- Beverage name and cost -->
+            <br>
+            <br>
+            <label>Đồ uống: </label>
+            <span id="beverageUsed"></span>
+
+            <!-- Beverage number -->
+            <br>
+            <br>
+            <label>Số lượng: </label>
+            <span id="beverageNumberUsed"></span>
+            
+            <!-- Beverage cost -->
+            <br>
+            <br>
+            <label>Phí đồ uống: </label>
+            <span id="beverageCostUsed"></span>
+
+            <!-- Ground cost -->
+            <br>
+            <br>
+            <label>Phí đặt sân: </label>
+            <span id="groundCostUsed"></span>
+            <input type="hidden" name="groundCostTemp" id="groundCostUsedTemp">
+
+            <!-- Total cost -->
+            <br>
+            <br>
+            <label>Tổng chi phí: </label>
+            <span id="totalCostUsed"></span>
+        </div>
 
         <!-- Pay booking form -->
         <div class="pay-booking-form" title="Thanh toán" id="payBookingForm">
@@ -1142,3 +1299,4 @@
 <script src="./JS/edit-booking-form.js?v=<?php echo time(); ?>"></script>
 <script src="./JS/delete-booking-form.js?v=<?php echo time(); ?>"></script>
 <script src="./JS/pay-booking-form.js?v=<?php echo time(); ?>"></script>
+<script src="./JS/pay-booking-history.js?v=<?php echo time(); ?>"></script>

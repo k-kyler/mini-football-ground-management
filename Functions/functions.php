@@ -345,4 +345,10 @@
             return null;
         }
     }
+
+    function getBookingHistories($db) {
+        $sqlQuery = "select * from bookinghistories";
+
+        return $db -> query($sqlQuery);
+    }
 ?>
