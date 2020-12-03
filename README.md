@@ -10,9 +10,10 @@ Mini football's ground management website is a website for dealing with booking 
 4. Copy jquery-3.5.1.js of jQuery package to Libraries/jQuery.
 5. Copy images/, jquery-ui.js, jquery-ui.css and jquery-ui.theme.css of jQuery UI package to Libraries/jQuery.
 6. Copy select2.full.min.js and select2.min.css of jQuery Select2 package to Libraries/jQuery.
-7. Finally, clone the project and paste the Libraries folder to it.
+7. Clone the project and paste the Libraries folder to it.
+8. Enjoyed!
 
-## Usage
+## Usage of libraries
 
 ```html
 <!-- Font Awesome -->
