@@ -97,3 +97,118 @@
     font-size: 1.2rem;
     font-weight: bold;
 }
+
+
+/*----- Responsive settings -----*/
+
+/* Small phone responsive */
+@media (max-width: 600px) {
+    .management-header {
+        flex-direction: column;
+        height: 13rem;
+    }  
+    
+    .management-title {
+        font-size: 0.95rem;
+    }
+
+    .management-options a {
+        font-size: 0.55rem;
+        padding: 0.2rem 0;
+    }
+
+    .header-control:hover .management-options {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .empty-function-message {
+        font-size: 1rem;
+    }
+}
+
+/* Portrait tablet/large phone responsive */
+@media (min-width: 600px) {
+    .management-header {
+        flex-direction: column;
+        height: 15rem;
+    }  
+    
+    .management-options a {
+        font-size: 0.7rem;
+        padding: 0.2rem 0;
+    }
+
+    .management-title {
+        font-size: 1.3rem;
+    }
+
+    .header-control:hover .management-options {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .empty-function-message {
+        font-size: 1rem;
+    }
+}
+
+/* Landscape tablet/large phone responsive */
+@media (min-width: 1024px) { 
+	.management-title {
+        font-size: 1.3rem;
+    }
+
+    .management-header {
+        height: 5rem;
+        flex-direction: row;
+        justify-content: space-between;
+    }
+
+    .header-control:hover .management-options {
+        display: block;
+    }
+
+    .management-options {
+        padding-left: 1rem;
+    }
+
+    .management-options a {
+        font-size: 0.7rem;
+        padding-left: 0.3rem;
+    }
+
+    .empty-function-message {
+        font-size: 1.2rem;
+    }
+}
+
+/* Desktop/laptop responsive */
+@media (min-width: 1200px) {
+    .management-title {
+        font-size: 1.5rem;
+    }
+
+    .management-header {
+        height: 5rem;
+        flex-direction: row;
+        justify-content: space-between;
+    }
+
+    .header-control:hover .management-options {
+        display: block;
+    }
+
+    .management-options {
+        padding-left: 1rem;
+    }
+
+    .management-options a {
+        font-size: 1rem;
+        padding-left: 0.5rem;
+    }
+
+    .empty-function-message {
+        font-size: 1.2rem;
+    }
+}

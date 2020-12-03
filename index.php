@@ -1,3 +1,8 @@
+<?php
+    // Config
+    require_once('./Config/config.php');
+?>
+
 <style>
     <?php 
         require_once('./CSS/slider-main.css');
@@ -6,9 +11,6 @@
 </style>
 
 <?php
-    // Config
-    require_once('./Config/config.php');
-
     // Layout
     require_once('layout.php');
 

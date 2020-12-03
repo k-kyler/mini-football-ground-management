@@ -1,3 +1,8 @@
+<?php
+    // Config
+    require_once('./Config/config.php');
+?>
+
 <style>
     <?php 
         require_once('./CSS/management.css');
@@ -5,9 +10,6 @@
 </style>
 
 <?php
-    // Config
-    require_once('./Config/config.php');
-
     // Layout
     require_once('layout.php');
 
@@ -32,7 +34,7 @@
                     <a href="management.php?m=bookingground_payment">Quản lý đặt sân và thanh toán</a>
                     <a href="management.php?m=usermanagement">Quản lý người dùng</a>
                     <a href="management.php?m=beveragemanagement">Quản lý đồ uống</a>
-                    <a href="management.php?m=profitreport">Thống kê doanh thu</a>
+                    <a href="management.php?m=statisticprofit">Thống kê doanh thu</a>
                     <a href="index.php">Về trang chủ</a>
                     <a href="logout.php">Đăng xuất</a>
                 </div>
@@ -56,6 +58,10 @@
 
                                 else if ($_GET['m'] == "beveragemanagement") {
                                     require_once('./beverage-management.php');
+                                }
+
+                                else if ($_GET['m'] == "statisticprofit") {
+
                                 }
                             }
     
