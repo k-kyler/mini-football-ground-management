@@ -39,6 +39,7 @@
 
 .empty-message {
     flex-grow: 1;
+    margin-top: 1rem;
 }
 
 .booking-list {
@@ -62,11 +63,6 @@
 
 .booking-list th, .time-grounds-schedule th {
     font-size: 1.1rem;
-}
-
-.table-empty-message {
-    padding-bottom: 1%;
-    text-align: center;    
 }
 
 .management-controller {
@@ -207,3 +203,16 @@
     overflow-x: auto;
 }
 
+
+/*----- Responsive settings -----*/
+
+/* Small phone responsive */
+@media (max-width: 600px) {
+    .date-picker input[type="text"] {
+        width: 7rem;
+    }
+
+    .empty-message, .date-picker label {
+        font-size: 0.9rem;
+    }
+}
