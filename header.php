@@ -84,7 +84,26 @@
         </a>
     </div>
 
+    <!-- Header nav for mobile -->
+    <div class="header-nav-mobile-down">
+        <ul class="nav-items">
+            <a href="javascript:void(0)">
+                <i class="fas fa-angle-down"></i>
+            </a>
+        </ul>
+    </div>
+
+    <div class="header-nav-mobile-up clicked-active">
+        <ul class="nav-items">
+            <a href="javascript:void(0)">
+                <i class="fas fa-angle-up"></i>
+            </a>
+        </ul>
+    </div>
+
+    <!-- Header nav for normal -->
     <div class="header-nav">
+        <!-- Nav items for normal -->
         <ul class="nav-items">
             <a href="index.php">
                 <li>Trang chủ</li>
@@ -124,3 +143,9 @@
         </ul>
     </div>
 </div>
+
+<script>
+    <?php
+        require_once('./JS/mobile-dropdown.js');
+    ?>
+</script>

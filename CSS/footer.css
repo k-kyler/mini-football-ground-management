@@ -1,6 +1,5 @@
 .footer {
 	background-color: #1a1f16;
-	padding: 2rem;
 	flex-shrink: 0;
 }
 
@@ -26,6 +25,7 @@
 }
 
 .footer-item {
+	padding-bottom: 0.5rem;
 	display: flex;
 	flex-direction: column;
 	align-items: center;
@@ -78,7 +78,7 @@
 }
 
 .footer-content-2 {
-	padding: 0 10rem;
+	padding: 1rem 10rem;
 }
 
 .footer-license {

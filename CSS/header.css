@@ -1,4 +1,4 @@
-.header-nav .nav-items {
+.header-nav .nav-items, .header-nav-mobile-down, .header-nav-mobile-up {
     list-style-type: none;
     display: flex;
     justify-content: center;
@@ -11,7 +11,7 @@
     padding-left: 0;
 }
 
-.header-nav .nav-items a {
+.header-nav .nav-items a, .header-nav-mobile-down .nav-items a, .header-nav-mobile-up .nav-items a {
     text-decoration: none;
     color: white;
     font-weight: 600;
@@ -21,11 +21,11 @@
     padding: 0.7rem 1.5rem;
 }
 
-.header-nav {
+.header-nav, .header-nav-mobile-down, .header-nav-mobile-up {
     position: relative;
     background-color: #50D96D;
 }
-.header-nav ul a:hover {
+.header-nav ul a:hover, .header-nav-mobile-down ul a:hover, .header-nav-mobile-up ul a:hover {
     color: #FDF23D;
 }
 
@@ -130,4 +130,84 @@
 
 .login i {
     padding-right: 0.5rem;
+}
+
+.clicked-active {
+    display: none;
+}
+
+
+/*----- Responsive settings -----*/
+
+/* Small phone responsive */
+@media (max-width: 600px) {
+    .header-banner {
+        flex-direction: column;
+    }
+
+    .banner img {
+        height: 10rem;
+    }
+
+    .banner-text {
+        font-size: 2rem;
+    }
+
+    .nav-items {
+        flex-direction: column;
+    }    
+
+    .ground-type-dropdown {
+        position: relative;
+    }
+
+    .header-banner {
+        padding-top: 2rem;
+        padding-bottom: 5rem;
+    }
+
+    .login:hover .user-detail {
+        display: flex;
+    }
+
+    .user-detail a div:first-child {
+        margin-right: 1rem;
+    }
+
+    .header-nav {
+        display: none;
+    }
+}
+
+/* Portrait tablet/large phone responsive */
+@media (min-width: 600px) {
+	.header-nav-mobile-down, .header-nav-mobile-up {
+        display: none;
+    }
+
+    .header-nav li {
+        font-size: 0.7rem;
+    }
+}
+
+/* Landscape tablet/large phone responsive */
+@media (min-width: 1024px) { 
+	.header-nav-mobile-down, .header-nav-mobile-up {
+        display: none;
+    }
+
+    .header-nav li {
+        font-size: 1rem;
+    }
+}
+
+/* Desktop/laptop responsive */
+@media (min-width: 1200px) {
+    .header-nav-mobile-down, .header-nav-mobile-up {
+        display: none;
+    }
+
+    .header-nav li {
+        font-size: 1rem;
+    }
 }

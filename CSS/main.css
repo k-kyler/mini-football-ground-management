@@ -84,3 +84,27 @@
     font-size: 1.1rem;
 }
 
+
+
+
+/*----- Responsive settings -----*/
+
+/* Small phone responsive */
+@media (max-width: 600px) {
+	
+}
+
+/* Portrait tablet/large phone responsive */
+@media (min-width: 600px) {
+	
+}
+
+/* Landscape tablet/large phone responsive */
+@media (min-width: 1024px) { 
+	
+}
+
+/* Desktop/laptop responsive */
+@media (min-width: 1200px) {
+	
+}
