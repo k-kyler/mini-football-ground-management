@@ -89,54 +89,126 @@
     function checkAndUploadRegisterData($usernameInput, $passwordInput, $emailInput, $phoneInput, $realName) {
         $db = getDatabase();
 
-        $userIdGenerate = uniqid();
+        // Check for used to booking user
+        if ($realName == "") {
+            // Check and update database
+            $checkExistedAccount = true;
 
-        $ui = mysqli_escape_string($db, $userIdGenerate);
-        $u = mysqli_escape_string($db, $usernameInput);
-        $p = mysqli_escape_string($db, $passwordInput);
-        $e = mysqli_escape_string($db, $emailInput);
-        $ph = mysqli_escape_string($db, $phoneInput);
-        $r = mysqli_escape_string($db, $realName);
+            $u = mysqli_escape_string($db, $usernameInput);
+            $p = mysqli_escape_string($db, $passwordInput);
+            $e = mysqli_escape_string($db, $emailInput);
+            $ph = mysqli_escape_string($db, $phoneInput);
 
-        $getUserByUserName = $db -> query("select user_name from users where user_name = '$u'");
-        $getUserEmail = $db -> query("select user_email from users where user_email = '$e'");
-        $getUserPhone = $db -> query("select user_phone from users where user_phone = '$ph'");
+            $getUserName = $db -> query("select user_name from users where user_name = '$u'");
+            $getUserEmail = $db -> query("select user_email from users where user_email = '$e'");
+            $getUserDataByPhone = $db -> query("select * from users where user_phone = '$ph'");
 
-        if ($getUserName -> num_rows > 0) {
-            ?>
-                <style>
-                    .register-username-input::placeholder {
-                        color: red;
-                    }
-                </style>
-            <?php
+            if ($getUserName -> num_rows > 0) {
+                ?>
+                    <style>
+                        .register-username-input::placeholder {
+                            color: red;
+                        }
+                    </style>
+                <?php
+            }
+
+            else if ($getUserEmail -> num_rows > 0) {
+                ?>
+                    <style>
+                        .register-email-input::placeholder {
+                            color: red;
+                        }
+                    </style>
+                <?php
+            }
+
+            else if ($getUserDataByPhone -> num_rows > 0) {
+                // Get user data by phone
+                $userData = $getUserDataByPhone -> fetch_assoc();
+                $userNameInDb = $userData['user_name'];
+                $userEmailInDb = $userData['user_email'];
+
+                if ($userNameInDb == "" && $userEmailInDb == "") {
+                    $checkExistedAccount = false;
+                }
+
+                else {
+                    ?>
+                        <style>
+                            .register-phone-input::placeholder {
+                                color: red;
+                            }
+                        </style>
+                    <?php
+                }
+            }
+
+            if ($checkExistedAccount == false) {
+                $updateRegisterData = "update users set 
+                                            user_name = '$u', 
+                                            user_password = '$p', 
+                                            user_email = '$e'
+                                        where user_phone = '$ph'";             
+                $result = $db -> query($updateRegisterData);
+
+                header("Location: login.php");
+            }
         }
 
-        else if ($getUserEmail -> num_rows > 0) {
-            ?>
-                <style>
-                    .register-email-input::placeholder {
-                        color: red;
-                    }
-                </style>
-            <?php
-        }
-
-        else if ($getUserPhone -> num_rows > 0) {
-            ?>
-                <style>
-                    .register-phone-input::placeholder {
-                        color: red;
-                    }
-                </style>
-            <?php
-        }
-
+        // New user
         else {
-            $uploadRegisterData = "insert into users (user_id, user_name, user_password, user_email, user_phone, user_realname) values ('$ui', '$u', '$p', '$e', '$ph', '$r')";
-            $result = $db -> query($uploadRegisterData);
+            // Generate new user id
+            $userIdGenerate = uniqid();
 
-            header("Location: login.php");
+            // Check and insert into database
+            $ui = mysqli_escape_string($db, $userIdGenerate);
+            $u = mysqli_escape_string($db, $usernameInput);
+            $p = mysqli_escape_string($db, $passwordInput);
+            $e = mysqli_escape_string($db, $emailInput);
+            $ph = mysqli_escape_string($db, $phoneInput);
+            $r = mysqli_escape_string($db, $realName);
+
+            $getUserName = $db -> query("select user_name from users where user_name = '$u'");
+            $getUserEmail = $db -> query("select user_email from users where user_email = '$e'");
+            $getUserPhone = $db -> query("select user_phone from users where user_phone = '$ph'");
+
+            if ($getUserName -> num_rows > 0) {
+                ?>
+                    <style>
+                        .register-username-input::placeholder {
+                            color: red;
+                        }
+                    </style>
+                <?php
+            }
+
+            else if ($getUserEmail -> num_rows > 0) {
+                ?>
+                    <style>
+                        .register-email-input::placeholder {
+                            color: red;
+                        }
+                    </style>
+                <?php
+            }
+
+            else if ($getUserPhone -> num_rows > 0) {
+                ?>
+                    <style>
+                        .register-phone-input::placeholder {
+                            color: red;
+                        }
+                    </style>
+                <?php
+            }
+
+            else {
+                $uploadRegisterData = "insert into users (user_id, user_name, user_password, user_email, user_phone, user_realname) values ('$ui', '$u', '$p', '$e', '$ph', '$r')";
+                $result = $db -> query($uploadRegisterData);
+
+                header("Location: login.php");
+            }
         }
     }
 

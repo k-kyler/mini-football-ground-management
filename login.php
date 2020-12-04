@@ -51,7 +51,9 @@
 
                 <input type="submit" value="Đăng nhập" name="submit">
 
-                <a href="register.php">Chưa có tài khoản?</a>
+                <a href="register.php?r=usedtobooking">Đã từng đặt sân</a>
+                <br>
+                <a href="register.php">Đăng ký mới</a>
             </form>
         </div>
 

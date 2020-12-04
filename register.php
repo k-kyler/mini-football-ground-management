@@ -35,6 +35,26 @@
         $_SESSION['register-success'] = "Đăng ký thành công!";
     }
 
+    else if (isset($_POST['usedSubmit'])) {
+        // Data from form
+        $usernameInput = $_POST['username'];
+        $passwordInput = $_POST['password'];
+        $emailInput = $_POST['email'];
+        $phoneInput = $_POST['phone'];
+
+        // Set empty real name
+        $realNameInput = "";
+
+        // Validate register data
+        $usernameInput = userNameValidate($usernameInput);
+        $passwordInput = passwordValidate($passwordInput);
+
+        // Check and upload data to database
+        checkAndUploadRegisterData($usernameInput, $passwordInput, $emailInput, $phoneInput, $realNameInput);
+
+        $_SESSION['register-success'] = "Đăng ký thành công!";
+    }
+
     ?>
         <!-- Register page background -->
         <div class="register-background"></div>
@@ -45,28 +65,60 @@
 
             <h1>Đăng ký tại đây!</h1>
 
-            <form method="POST">
-                <p>Họ tên</p>
-                <input required type="text" name="realname">
+            <?php
+                if (isset($_GET['r'])) {
+                    ?>
+                        <form method="POST">
+                            <p>Số điện thoại đã đặt sân</p>
+                            <input required type="tel" pattern="[0-9]{10}" name="phone" placeholder="Số điện thoại đã được sử dụng" class="register-phone-input">
 
-                <p>Tên đăng nhập</p>
-                <input required type="text" name="username" placeholder="Tên đăng nhập đã tồn tại" class="register-username-input">
+                            <p>Tên đăng nhập</p>
+                            <input required type="text" name="username" placeholder="Tên đăng nhập đã tồn tại" class="register-username-input">
 
-                <p>Mật khẩu</p>
-                <input required type="password" name="password" class="register-password-input">
+                            <p>Mật khẩu</p>
+                            <input required type="password" name="password" class="register-password-input">
 
-                <p>Email</p>
-                <input required type="email" name="email" placeholder="Email đã được sử dụng" class="register-email-input">
+                            <p>Email</p>
+                            <input required type="email" name="email" placeholder="Email đã được sử dụng" class="register-email-input">
 
-                <p>Số điện thoại</p>
-                <input required type="tel" pattern="[0-9]{10}" name="phone" placeholder="Số điện thoại đã được sử dụng" class="register-phone-input">
+                            <input type="submit" value="Đăng ký" name="usedSubmit">
 
-                <input type="submit" value="Đăng ký" name="submit">
+                            <span>
+                                Đã có tài khoản? 
+                                <a href="login.php">Đăng nhập.</a>
+                            </span>
+                        </form>
+                    <?php
+                }
 
-                <span>Đã có tài khoản? 
-                    <a href="login.php">Đăng nhập.</a>
-                </span>
-            </form>
+                else {
+                    ?>
+                        <form method="POST">
+                            <p>Họ tên</p>
+                            <input required type="text" name="realname">
+
+                            <p>Tên đăng nhập</p>
+                            <input required type="text" name="username" placeholder="Tên đăng nhập đã tồn tại" class="register-username-input">
+
+                            <p>Mật khẩu</p>
+                            <input required type="password" name="password" class="register-password-input">
+
+                            <p>Email</p>
+                            <input required type="email" name="email" placeholder="Email đã được sử dụng" class="register-email-input">
+
+                            <p>Số điện thoại</p>
+                            <input required type="tel" pattern="[0-9]{10}" name="phone" placeholder="Số điện thoại đã được sử dụng" class="register-phone-input">
+
+                            <input type="submit" value="Đăng ký" name="submit">
+
+                            <span>
+                                Đã có tài khoản? 
+                                <a href="login.php">Đăng nhập.</a>
+                            </span>
+                        </form>
+                    <?php
+                }
+            ?>
         </div>
     <?php
 ?>
