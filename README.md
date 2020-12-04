@@ -42,11 +42,13 @@ Mini football's ground management website is a website for dealing with booking 
 ```
 
 ## Usage
-1. Setup [XAMPP](https://www.apachefriends.org/download.html) app.
+1. Setup and run [XAMPP](https://www.apachefriends.org/download.html) app.
 
-2. Start Apache server and MySQL server.
+2. Start Apache Server and MySQL Server.
 
-3. Run and enjoyed the project.
+3. Import [database](https://drive.google.com/drive/folders/1pzWbaX5YuUl_BEZl7MmooVd9hZTH9i3X?usp=sharing) to MySQL Server
+
+4. Run and enjoyed the project.
 
 ## Functions
 
