@@ -33,107 +33,109 @@
                         <?php
                             // Processing for user info
                             if (isset($_GET['u'])) {
-                                $sessionUserName = $_SESSION['user_name'];
-                                $db = getDatabase();
-                                $users = getUsers($db);
+                                if (isset($_SESSION['user_name'])) {
+                                    $sessionUserName = $_SESSION['user_name'];
+                                    $db = getDatabase();
+                                    $users = getUsers($db);
 
-                                if ($users != null && $users -> num_rows > 0) {
-                                    while ($userData = $users -> fetch_assoc()) {
-                                        $userRealName = $userData['user_realname'];
-                                        $userName = $userData['user_name'];
-                                        $userPhone = $userData['user_phone'];
-                                        $userEmail = $userData['user_email'];
+                                    if ($users != null && $users -> num_rows > 0) {
+                                        while ($userData = $users -> fetch_assoc()) {
+                                            $userRealName = $userData['user_realname'];
+                                            $userName = $userData['user_name'];
+                                            $userPhone = $userData['user_phone'];
+                                            $userEmail = $userData['user_email'];
 
-                                        if ($userName == $sessionUserName) {
-                                            // User info
-                                            ?>
-                                                <div class="user-info">
-                                                    <div class="user-info-title">Thông tin cá nhân</div>
+                                            if ($userName == $sessionUserName) {
+                                                // User info
+                                                ?>
+                                                    <div class="user-info">
+                                                        <div class="user-info-title">Thông tin cá nhân</div>
 
-                                                    <!-- User real name -->
-                                                    <br>
-                                                    <br>
-                                                    <br>
-                                                    <label>Họ tên: </label>
-                                                    <input disabled value="<?= $userRealName ?>" type="text">
+                                                        <!-- User real name -->
+                                                        <br>
+                                                        <br>
+                                                        <br>
+                                                        <label>Họ tên: </label>
+                                                        <input disabled value="<?= $userRealName ?>" type="text">
 
-                                                    <!-- User name -->
-                                                    <br>
-                                                    <br>
-                                                    <label>Tên người dùng: </label>
-                                                    <input disabled value="<?= $userName ?>" type="text">
+                                                        <!-- User name -->
+                                                        <br>
+                                                        <br>
+                                                        <label>Tên người dùng: </label>
+                                                        <input disabled value="<?= $userName ?>" type="text">
 
-                                                    <!-- User phone -->
-                                                    <br>
-                                                    <br>
-                                                    <label>Số điện thoại: </label>
-                                                    <input disabled value="<?= $userPhone ?>" type="tel" pattern="[0-9]{10}">
+                                                        <!-- User phone -->
+                                                        <br>
+                                                        <br>
+                                                        <label>Số điện thoại: </label>
+                                                        <input disabled value="<?= $userPhone ?>" type="tel" pattern="[0-9]{10}">
 
-                                                    <!-- User email -->
-                                                    <br>
-                                                    <br>
-                                                    <label>Email: </label>
-                                                    <input disabled value="<?= $userEmail ?>" type="email">
-                                                </div>
-                                            <?php
+                                                        <!-- User email -->
+                                                        <br>
+                                                        <br>
+                                                        <label>Email: </label>
+                                                        <input disabled value="<?= $userEmail ?>" type="email">
+                                                    </div>
+                                                <?php
 
-                                            // Booking history
-                                            ?>
-                                                <div class="booking-history">
-                                                    <div class="booking-history-title">Lịch sử đặt sân</div>
+                                                // Booking history
+                                                ?>
+                                                    <div class="booking-history">
+                                                        <div class="booking-history-title">Lịch sử đặt sân</div>
 
-                                                    <div class="booking-history-list">
-                                                        <table>
-                                                            <tr>
-                                                                <th>STT</th>
-                                                                <th>Sân đã đặt</th>
-                                                                <th>Thời gian bắt đầu</th>
-                                                                <th>Thời gian kết thúc</th>
-                                                                <th>Ngày đặt</th>
-                                                            </tr>
+                                                        <div class="booking-history-list">
+                                                            <table>
+                                                                <tr>
+                                                                    <th>STT</th>
+                                                                    <th>Sân đã đặt</th>
+                                                                    <th>Thời gian bắt đầu</th>
+                                                                    <th>Thời gian kết thúc</th>
+                                                                    <th>Ngày đặt</th>
+                                                                </tr>
 
-                                                            <?php
-                                                                $bookingDetailsData = getBookingDetails($db);
+                                                                <?php
+                                                                    $bookingDetailsData = getBookingDetails($db);
 
-                                                                if ($bookingDetailsData != null && $bookingDetailsData -> num_rows > 0) {
-                                                                    $number = 0;
-                                                                    
-                                                                    while ($data = $bookingDetailsData -> fetch_assoc()) {
-                                                                        $bookingId = $data['booking_id'];
-                                                                        $userId = $data['user_id'];
-                                                                        $groundId = $data['ground_id'];
-                                                                        $bookingStart = $data['booking_start'];
-                                                                        $bookingEnd = $data['booking_end'];
-                                                                        $bookingDate = $data['booking_date'];
+                                                                    if ($bookingDetailsData != null && $bookingDetailsData -> num_rows > 0) {
+                                                                        $number = 0;
+                                                                        
+                                                                        while ($data = $bookingDetailsData -> fetch_assoc()) {
+                                                                            $bookingId = $data['booking_id'];
+                                                                            $userId = $data['user_id'];
+                                                                            $groundId = $data['ground_id'];
+                                                                            $bookingStart = $data['booking_start'];
+                                                                            $bookingEnd = $data['booking_end'];
+                                                                            $bookingDate = $data['booking_date'];
 
-                                                                        // Get user data
-                                                                        $getUserData = getUserById($userId);
-                                                                        $userData = $getUserData -> fetch_assoc();
-                                                                        $userNameBooking = $userData['user_name'];
+                                                                            // Get user data
+                                                                            $getUserData = getUserById($userId);
+                                                                            $userData = $getUserData -> fetch_assoc();
+                                                                            $userNameBooking = $userData['user_name'];
 
-                                                                        // Get ground data
-                                                                        $getGroundData = getGroundById($groundId);
-                                                                        $groundData = $getGroundData -> fetch_assoc();
-                                                                        $groundName = $groundData['ground_name'];
+                                                                            // Get ground data
+                                                                            $getGroundData = getGroundById($groundId);
+                                                                            $groundData = $getGroundData -> fetch_assoc();
+                                                                            $groundName = $groundData['ground_name'];
 
-                                                                        if ($userNameBooking == $sessionUserName) {
-                                                                            ?>
-                                                                                <tr>
-                                                                                    <td><?= $number += 1 ?></td>
-                                                                                    <td><?= $groundName ?></td>
-                                                                                    <td><?= $bookingStart ?></td>
-                                                                                    <td><?= $bookingEnd ?></td>
-                                                                                    <td><?= $bookingDate ?></td>
-                                                                                </tr>
-                                                                            <?php
+                                                                            if ($userNameBooking == $sessionUserName) {
+                                                                                ?>
+                                                                                    <tr>
+                                                                                        <td><?= $number += 1 ?></td>
+                                                                                        <td><?= $groundName ?></td>
+                                                                                        <td><?= $bookingStart ?></td>
+                                                                                        <td><?= $bookingEnd ?></td>
+                                                                                        <td><?= $bookingDate ?></td>
+                                                                                    </tr>
+                                                                                <?php
+                                                                            }
                                                                         }
                                                                     }
-                                                                }
-                                                            ?>
-                                                        </table>
+                                                                ?>
+                                                            </table>
+                                                        </div>
                                                     </div>
-                                                </div>
-                                            <?php
+                                                <?php
+                                            }
                                         }
                                     }
                                 }
