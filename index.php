@@ -14,6 +14,11 @@
     // Layout
     require_once('layout.php');
 
+    // Require date picker 
+    ?>
+        <script src="./JS/date-picker.js?v=<?php echo time(); ?>"></script>
+    <?php
+
     ?>
         <div class="wrapper">
             <!-- Header -->
@@ -142,8 +147,117 @@
                             }
 
                             // Processing for booking online
-                            else if (isset($_GET['b'])) {
+                            else if (isset($_GET['bo'])) {
 
+                            }
+
+                            // Processing for viewing ground status
+                            else if (isset($_GET['s'])) {
+                                $db = getDatabase();
+
+                                ?>
+                                    <!-- Date picker processing -->
+                                    <div class="date-picker">
+                                        <form action="" method="POST" name="dateChooseInput">
+                                            <label>Chọn ngày:</label>
+                            
+                                            <?php 
+                                                if (isset($_POST['submit'])) {
+                                                    ?>
+                                                        <input type="text" required placeholder="dd/mm/yyyy" class="date" id="dateChoose" autocomplete="off" name="dateChoose" value="<?= $_POST['dateChoose'] ?>">
+                                                    <?php
+                                                }
+
+                                                else {
+                                                    ?>
+                                                        <input type="text" required placeholder="dd/mm/yyyy" class="date" id="dateChoose" autocomplete="off" name="dateChoose">
+                                                    <?php
+                                                }
+                                            ?>
+                                            
+                                            <input type="submit" value="Chọn" name="submit">
+                                        </form>
+                                    </div>
+                                <?php
+
+                                // Processing for displaying ground status table
+                                if (isset($_POST['submit'])) {
+                                    ?>
+                                        <!-- Time & grounds status -->
+                                        <div class="time-grounds-status">
+                                            <div class="time-grounds-status-title">Tình trạng sân ngày <?= $_POST['dateChoose'] ?></div>
+                    
+                                            <div class="time-grounds-schedule">
+                                                <table>
+                                                    <tr>
+                                                        <th></th>
+                                                        <th>Khung giờ đã được đặt</th>
+                                                        <th>Tình trạng</th>
+                                                    </tr>
+                                                    
+                                                    <?php 
+                                                        $groundsData = getGrounds($db);
+                                                        $tempGroundIdCheck = "";
+                    
+                                                        if ($groundsData != null && $groundsData -> num_rows > 0) {                                        
+                                                            while ($data = $groundsData -> fetch_assoc()) {
+                                                                $groundId = $data['ground_id'];
+                                                                $groundName = $data['ground_name'];
+                    
+                                                                ?>
+                                                                    <tr>
+                                                                        <td><?= $groundName ?></td>
+                    
+                                                                        <!-- Processing for displaying booking duration time -->
+                                                                        <?php
+                                                                            // Get booking detail data
+                                                                            $combineTimes = "";
+                                                                            $timesArray = array();
+                                                                            $getBookingDetailsData = getBookingDetailByGroundIdAndDate($groundId, $_POST['dateChoose']);
+                    
+                                                                            if ($getBookingDetailsData != null && $getBookingDetailsData -> num_rows > 0) {
+                                                                                while ($bookingDetailData = $getBookingDetailsData -> fetch_assoc()) {
+                                                                                    $bookingStartDetail = $bookingDetailData['booking_start'];
+                                                                                    $bookingEndDetail = $bookingDetailData['booking_end'];
+                    
+                                                                                    // Combine to display duration time
+                                                                                    $combineTimes = $bookingStartDetail . " - " . $bookingEndDetail;
+                    
+                                                                                    // Store times to array
+                                                                                    array_push($timesArray, $combineTimes);
+                                                                                }
+                                                                            }
+                                                                        ?>
+                    
+                                                                        <!-- Processing to display ground status -->
+                                                                        <?php
+                                                                            if (count($timesArray) == 1) {
+                                                                                ?>
+                                                                                    <td class="is-booking-time"><?= $timesArray[0] ?></td>
+                                                                                    <td class="is-using-ground">Đang hoạt động</td>
+                                                                                <?php
+                                                                            }
+                    
+                                                                            else if (count($timesArray) > 1) {
+                                                                                ?>
+                                                                                    <td class="is-booking-time">
+                                                                                        <?= implode(", ", $timesArray) ?>
+                                                                                    </td>
+                    
+                                                                                    <td class="is-using-ground">Đang hoạt động</td>
+                                                                                <?php
+                                                                            }
+                                                                        ?>
+                                                                    </tr>
+                                                                <?php
+                                                            }
+                                                        }
+                                                    ?>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    <?php
+                                }
                             }
 
                             // Processing for main page

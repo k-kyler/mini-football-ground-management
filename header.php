@@ -109,7 +109,7 @@
                 <li>Trang chủ</li>
             </a>
             
-            <a href="index.php?b=bookingonline">
+            <a href="index.php?bo=bookingonline">
                 <li>Đặt sân ngay</li>
             </a>
 
@@ -133,7 +133,7 @@
                 </li>
             </a>
 
-            <a href="#">
+            <a href="index.php?s=groundstatus">
                 <li>Tình trạng sân hiện tại</li>
             </a>
 

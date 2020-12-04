@@ -1,3 +1,4 @@
+/* Styles for login success popup message */
 .login-success {
     background-color: #d4edda;
     color: #155724;
@@ -23,6 +24,7 @@
     opacity: 0.8;
 }
 
+/* Styles for user information and booking history */
 .user-info {
     height: 28rem;
     background-color: black;
@@ -79,6 +81,71 @@
 
 .booking-history-list th {
     font-size: 1.1rem;
+}
+
+/* Styles for time grounds status table */
+.time-grounds-status {
+    margin-top: 2rem;
+    padding: 1rem;
+    color: black;
+    background-color: #d3e3d26e;
+    border-radius: 8px;
+    height: 30rem;
+}
+
+.time-grounds-status-title {
+    padding: 1rem 0;
+    text-align: center;
+    font-size: 1.3rem;
+    font-weight: bold;
+}
+
+.time-grounds-schedule {
+    overflow-x: auto;
+}
+
+.is-using-ground {
+    color: rgb(42, 190, 55);
+}
+
+.is-booking-time {
+    color: #1d8ac2;
+}
+
+.time-grounds-schedule td, .time-grounds-schedule th {
+    text-align: left;
+    padding: 0.8rem 7rem 0.8rem 0.8rem;
+    white-space: nowrap;
+}
+
+.time-grounds-schedule td {
+    font-weight: 450;
+}
+
+.time-grounds-schedule th {
+    font-size: 1.1rem;
+}
+
+/* Styles for date picker */
+.date-picker label {
+    font-weight: 500;
+}
+
+.date-picker input[type="submit"], .date-picker input[type="text"] {
+    padding: 0.3rem;
+    border: none;
+    border-radius: 2px;
+}
+
+.date-picker input[type="submit"] {
+    background-color: #1d8ac2;
+    color: white;
+    cursor: pointer;
+}
+
+.date-picker input[type="submit"]:hover {
+    opacity: 0.8;
+    transition: all 0.4s;
 }
 
 

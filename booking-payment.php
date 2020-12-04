@@ -279,6 +279,7 @@
         </div>
         
         <?php
+            // Processing for displaying ground status table
             if (isset($_POST['submit'])) {
                 ?>
                     <!-- Time & grounds status -->
@@ -288,7 +289,7 @@
                         <div class="time-grounds-schedule">
                             <table>
                                 <tr>
-                                    <th colspan="2">Sân</th>
+                                    <th colspan="2"></th>
                                     <th colspan="4">Khung giờ đã được đặt</th>
                                     <th>Tình trạng</th>
                                 </tr>
@@ -357,6 +358,7 @@
                 <?php
             }
 
+            // Processing for displaying ground status table after using API
             else if (isset($_GET['datechoose'])) {
                 ?>
                     <!-- Time & grounds status -->
@@ -366,7 +368,7 @@
                         <div class="time-grounds-schedule">
                         <table>
                                 <tr>
-                                    <th colspan="2">Sân</th>
+                                    <th colspan="2"></th>
                                     <th colspan="4">Khung giờ đã được đặt</th>
                                     <th>Tình trạng</th>
                                 </tr>
