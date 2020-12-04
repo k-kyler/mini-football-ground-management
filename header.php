@@ -54,7 +54,7 @@
                                 <img src="./Images/user-logo.png">
             
                                 <div class="user-detail">
-                                    <a href="index.php?u=userinfo">
+                                    <a href="index.php?ui=userinfo">
                                         <div>Thông tin</div>
                                     </a>
 
@@ -133,11 +133,11 @@
                 </li>
             </a>
 
-            <a href="index.php?s=groundstatus">
+            <a href="index.php?gs=groundstatus">
                 <li>Tình trạng sân hiện tại</li>
             </a>
 
-            <a href="#">
+            <a href="index.php?gcat=groundcostandactivitytimes">
                 <li>Chi phí & khung giờ hoạt động</li>
             </a>
         </ul>

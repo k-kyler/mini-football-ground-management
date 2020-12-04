@@ -37,7 +37,7 @@
                     <div class="col-8 col-0 col-mobile">
                         <?php
                             // Processing for user info
-                            if (isset($_GET['u'])) {
+                            if (isset($_GET['ui'])) {
                                 if (isset($_SESSION['user_name'])) {
                                     $sessionUserName = $_SESSION['user_name'];
                                     $db = getDatabase();
@@ -144,6 +144,19 @@
                                         }
                                     }
                                 }
+
+                                else {
+                                    ?>
+                                        <!-- Add style for footer -->
+                                        <style>
+                                            .footer {
+                                                margin-top: 30rem;
+                                            }
+                                        </style>
+
+                                        <div class='ui-error-message'>Hãy đăng nhập để xem thông tin</div>
+                                    <?php
+                                }
                             }
 
                             // Processing for booking online
@@ -152,10 +165,17 @@
                             }
 
                             // Processing for viewing ground status
-                            else if (isset($_GET['s'])) {
+                            else if (isset($_GET['gs'])) {
                                 $db = getDatabase();
 
                                 ?>
+                                    <!-- Add style for footer -->
+                                    <style>
+                                        .footer {
+                                            margin-top: 30rem;
+                                        }
+                                    </style>
+
                                     <!-- Date picker processing -->
                                     <div class="date-picker">
                                         <form action="" method="POST" name="dateChooseInput">
@@ -190,7 +210,7 @@
                                             <div class="time-grounds-schedule">
                                                 <table>
                                                     <tr>
-                                                        <th></th>
+                                                        <th>Tên sân</th>
                                                         <th>Khung giờ đã được đặt</th>
                                                         <th>Tình trạng</th>
                                                     </tr>
@@ -258,6 +278,27 @@
                                         </div>
                                     <?php
                                 }
+                            }
+
+                            // Processing for viewing ground cost and activity time
+                            else if (isset($_GET['gcat'])) {
+                                ?>
+                                    <!-- Add style for footer -->
+                                    <style>
+                                        .footer {
+                                            margin-top: 30rem;
+                                        }
+                                    </style>
+
+                                    <div class="ground-cost-and-activity-times">
+                                        <h2>Chi phí khi sử dụng sân</h2>
+                                        <p>1 phút = 3,000 đồng.</p>
+
+                                        <h2>Khung giờ hoạt động</h2>
+                                        <p>Mở cửa từ thứ 2 đến thứ 7 trong tuần, ngoại trừ chủ nhật.</p>
+                                        <p>Từ 9h00 sáng đến 21h00 tối.</p>
+                                    </div>
+                                <?php
                             }
 
                             // Processing for main page

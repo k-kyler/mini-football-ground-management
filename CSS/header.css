@@ -186,7 +186,15 @@
     }
 
     .header-nav li {
-        font-size: 0.7rem;
+        font-size: 0.8rem;
+    }
+
+    .banner img {
+        height: 13rem;
+    }
+
+    .banner-text {
+        font-size: 2rem;
     }
 }
 
@@ -199,6 +207,14 @@
     .header-nav li {
         font-size: 1rem;
     }
+
+    .banner img {
+        height: 100%;
+    }
+
+    .banner-text {
+        font-size: 2.7rem;
+    }
 }
 
 /* Desktop/laptop responsive */
@@ -209,5 +225,13 @@
 
     .header-nav li {
         font-size: 1rem;
+    }
+
+    .banner img {
+        height: 100%;
+    }
+
+    .banner-text {
+        font-size: 2.7rem;
     }
 }

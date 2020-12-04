@@ -25,6 +25,10 @@
 }
 
 /* Styles for user information and booking history */
+.ui-error-message {
+    text-align: center;
+}
+
 .user-info {
     height: 28rem;
     background-color: #d3e3d26e;
