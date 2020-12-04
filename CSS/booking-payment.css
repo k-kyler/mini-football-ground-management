@@ -202,6 +202,14 @@
     overflow-x: auto;
 }
 
+.is-using-ground {
+    color: rgb(42, 190, 55);
+}
+
+.is-booking-time {
+    color: yellow;
+}
+
 
 /*----- Responsive settings -----*/
 

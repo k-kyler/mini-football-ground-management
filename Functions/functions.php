@@ -423,4 +423,26 @@
 
         return $db -> query($sqlQuery);
     }
+
+    function getBookingDetailByGroundIdAndDate($groundId, $bookingDate) {
+        $db = getDatabase();
+
+        $sqlQuery = "select * from bookingdetails where ground_id = ? and booking_date = ?";
+
+        $stm = $db ->prepare($sqlQuery);
+        $stm -> bind_param('ss', $groundId, $bookingDate);
+        $status = $stm -> execute();
+
+        if ($status) {
+            $data = $stm -> get_result();
+
+            return $data;
+        }
+
+        else {
+            $stm -> close();
+
+            return null;
+        }
+    }
 ?>

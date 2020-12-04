@@ -288,36 +288,66 @@
                         <div class="time-grounds-schedule">
                             <table>
                                 <tr>
-                                    <th></th>
-                                    <th colspan="4">9:00</th>
-                                    <th colspan="4">10:00</th>
-                                    <th colspan="4">11:00</th>
-                                    <th colspan="4">12:00</th>
-                                    <th colspan="4">13:00</th>
-                                    <th colspan="4">14:00</th>
-                                    <th colspan="4">15:00</th>
-                                    <th colspan="4">16:00</th>
-                                    <th colspan="4">17:00</th>
-                                    <th colspan="4">18:00</th>
-                                    <th colspan="4">19:00</th>
-                                    <th colspan="4">20:00</th>
-                                    <th colspan="4">21:00</th>
+                                    <th colspan="2">Sân</th>
+                                    <th colspan="4">Khung giờ đã được đặt</th>
+                                    <th>Tình trạng</th>
                                 </tr>
                                 
                                 <?php 
                                     $groundsData = getGrounds($db);
+                                    $tempGroundIdCheck = "";
 
-                                    if ($groundsData != null && $groundsData -> num_rows > 0) {
+                                    if ($groundsData != null && $groundsData -> num_rows > 0) {                                        
                                         while ($data = $groundsData -> fetch_assoc()) {
+                                            $groundId = $data['ground_id'];
                                             $groundName = $data['ground_name'];
-            
-                                            if ($groundName) {
-                                                ?>
-                                                    <tr>
-                                                        <td><?= $groundName ?></td>
-                                                    </tr>
-                                                <?php
-                                            }
+
+                                            ?>
+                                                <tr>
+                                                    <td colspan="2"><?= $groundName ?></td>
+
+                                                    <!-- Processing for displaying booking duration time -->
+                                                    <?php
+                                                        // Get booking detail data
+                                                        $combineTimes = "";
+                                                        $timesArray = array();
+                                                        $getBookingDetailsData = getBookingDetailByGroundIdAndDate($groundId, $_POST['dateChoose']);
+
+                                                        if ($getBookingDetailsData != null && $getBookingDetailsData -> num_rows > 0) {
+                                                            while ($bookingDetailData = $getBookingDetailsData -> fetch_assoc()) {
+                                                                $bookingStartDetail = $bookingDetailData['booking_start'];
+                                                                $bookingEndDetail = $bookingDetailData['booking_end'];
+
+                                                                // Combine to display duration time
+                                                                $combineTimes = $bookingStartDetail . " - " . $bookingEndDetail;
+
+                                                                // Store times to array
+                                                                array_push($timesArray, $combineTimes);
+                                                            }
+                                                        }
+                                                    ?>
+
+                                                    <!-- Processing to display ground status -->
+                                                    <?php
+                                                        if (count($timesArray) == 1) {
+                                                            ?>
+                                                                <td colspan="4" class="is-booking-time"><?= $timesArray[0] ?></td>
+                                                                <td class="is-using-ground">Đang hoạt động</td>
+                                                            <?php
+                                                        }
+
+                                                        else if (count($timesArray) > 1) {
+                                                            ?>
+                                                                <td colspan="4" class="is-booking-time">
+                                                                    <?= implode(", ", $timesArray) ?>
+                                                                </td>
+
+                                                                <td class="is-using-ground">Đang hoạt động</td>
+                                                            <?php
+                                                        }
+                                                    ?>
+                                                </tr>
+                                            <?php
                                         }
                                     }
                                 ?>
@@ -334,38 +364,68 @@
                         <div class="time-grounds-status-title">Tình trạng sân ngày <?= $_GET['datechoose'] ?></div>
 
                         <div class="time-grounds-schedule">
-                            <table>
+                        <table>
                                 <tr>
-                                    <th></th>
-                                    <th colspan="4">9:00</th>
-                                    <th colspan="4">10:00</th>
-                                    <th colspan="4">11:00</th>
-                                    <th colspan="4">12:00</th>
-                                    <th colspan="4">13:00</th>
-                                    <th colspan="4">14:00</th>
-                                    <th colspan="4">15:00</th>
-                                    <th colspan="4">16:00</th>
-                                    <th colspan="4">17:00</th>
-                                    <th colspan="4">18:00</th>
-                                    <th colspan="4">19:00</th>
-                                    <th colspan="4">20:00</th>
-                                    <th colspan="4">21:00</th>
+                                    <th colspan="2">Sân</th>
+                                    <th colspan="4">Khung giờ đã được đặt</th>
+                                    <th>Tình trạng</th>
                                 </tr>
                                 
                                 <?php 
                                     $groundsData = getGrounds($db);
+                                    $tempGroundIdCheck = "";
 
-                                    if ($groundsData != null && $groundsData -> num_rows > 0) {
+                                    if ($groundsData != null && $groundsData -> num_rows > 0) {                                        
                                         while ($data = $groundsData -> fetch_assoc()) {
+                                            $groundId = $data['ground_id'];
                                             $groundName = $data['ground_name'];
-            
-                                            if ($groundName) {
-                                                ?>
-                                                    <tr>
-                                                        <td><?= $groundName ?></td>
-                                                    </tr>
-                                                <?php
-                                            }
+
+                                            ?>
+                                                <tr>
+                                                    <td colspan="2"><?= $groundName ?></td>
+
+                                                    <!-- Processing for displaying booking duration time -->
+                                                    <?php
+                                                        // Get booking detail data
+                                                        $combineTimes = "";
+                                                        $timesArray = array();
+                                                        $getBookingDetailsData = getBookingDetailByGroundIdAndDate($groundId, $_GET['datechoose']);
+
+                                                        if ($getBookingDetailsData != null && $getBookingDetailsData -> num_rows > 0) {
+                                                            while ($bookingDetailData = $getBookingDetailsData -> fetch_assoc()) {
+                                                                $bookingStartDetail = $bookingDetailData['booking_start'];
+                                                                $bookingEndDetail = $bookingDetailData['booking_end'];
+
+                                                                // Combine to display duration time
+                                                                $combineTimes = $bookingStartDetail . " - " . $bookingEndDetail;
+
+                                                                // Store times to array
+                                                                array_push($timesArray, $combineTimes);
+                                                            }
+                                                        }
+                                                    ?>
+
+                                                    <!-- Processing to display ground status -->
+                                                    <?php
+                                                        if (count($timesArray) == 1) {
+                                                            ?>
+                                                                <td colspan="4" class="is-booking-time"><?= $timesArray[0] ?></td>
+                                                                <td class="is-using-ground">Đang hoạt động</td>
+                                                            <?php
+                                                        }
+
+                                                        else if (count($timesArray) > 1) {
+                                                            ?>
+                                                                <td colspan="4" class="is-booking-time">
+                                                                    <?= implode(", ", $timesArray) ?>
+                                                                </td>
+
+                                                                <td class="is-using-ground">Đang hoạt động</td>
+                                                            <?php
+                                                        }
+                                                    ?>
+                                                </tr>
+                                            <?php
                                         }
                                     }
                                 ?>
