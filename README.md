@@ -16,11 +16,9 @@ Mini football's ground management website is a website for dealing with booking 
 
 6. Copy select2.full.min.js and select2.min.css of jQuery Select2 package to Libraries/jQuery.
 
-7. Clone the project and paste the Libraries folder to it.
+7. Finally, clone the project and paste the Libraries folder to it.
 
-8. Enjoyed!
-
-## Usage of libraries
+## Setting libraries in project
 
 ```html
 <!-- Font Awesome -->
@@ -42,6 +40,13 @@ Mini football's ground management website is a website for dealing with booking 
 <!-- jQuery Select2 -->
 <script src="./Libraries/jQuery/select2.full.min.js"></script>
 ```
+
+## Usage
+1. Setup [XAMPP](https://www.apachefriends.org/download.html) app.
+
+2. Start Apache server and MySQL server.
+
+3. Run and enjoyed the project.
 
 ## Functions
 
