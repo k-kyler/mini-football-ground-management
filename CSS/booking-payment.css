@@ -37,9 +37,8 @@
     font-weight: bold;
 }
 
-.empty-message {
-    flex-grow: 1;
-    margin-top: 1rem;
+.booking-title {
+    padding: 1rem 0;
 }
 
 .booking-list {
@@ -193,13 +192,13 @@
 }
 
 .time-grounds-status-title {
+    padding: 1rem 0;
     text-align: center;
     font-size: 1.3rem;
     font-weight: bold;
 }
 
 .time-grounds-schedule {
-    margin-top: 1rem;
     overflow-x: auto;
 }
 

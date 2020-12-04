@@ -98,6 +98,11 @@
     font-weight: bold;
 }
 
+.empty-message {
+    padding-top: 2rem;
+    padding-bottom: 4rem;
+}
+
 
 /*----- Responsive settings -----*/
 
