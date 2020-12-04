@@ -29,7 +29,7 @@
                     </div>
 
                     <!-- Content -->
-                    <div class="col-8 col-0">
+                    <div class="col-8 col-0 col-mobile">
                         <?php
                             // Processing for user info
                             if (isset($_GET['u'])) {

@@ -67,3 +67,42 @@
         opacity: 1;
     }
 }
+
+
+/*----- Responsive settings -----*/
+
+/* Small phone responsive */
+@media (max-width: 600px) {
+	.col-mobile {
+        padding: 1.5rem !important;
+    }
+
+    .col-2 {
+        padding: 0 !important;
+    }
+
+    .slide img {
+        height: 14rem;
+    }
+}
+
+/* Portrait tablet/large phone responsive */
+@media (min-width: 600px) {
+	.slide img {
+        height: 16rem;
+    }
+}
+
+/* Landscape tablet/large phone responsive */
+@media (min-width: 1024px) { 
+	.slide img {
+        height: 20rem;
+    }
+}
+
+/* Desktop/laptop responsive */
+@media (min-width: 1200px) {
+	.slide img {
+        height: 27rem;
+    }
+}
