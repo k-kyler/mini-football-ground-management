@@ -164,6 +164,60 @@
 
                             }
 
+                            // Processing for viewing ground types
+                            else if (isset($_GET['gt'])) {
+                                if ($_GET['gt'] == "groundtype5") {
+                                    ?>
+                                        <!-- Add style for footer -->
+                                        <style>
+                                            .footer {
+                                                margin-top: 20rem;
+                                            }
+                                        </style>
+
+                                        <div class="ground-type-5">
+                                            <h2>Sân 5 người</h2>
+                                            <p>Số lượng: 4 sân.</p>
+                                            <p>Sân hiện có: sân số 1, sân số 2, sân số 3, sân số 4</p>
+                                        </div>
+                                    <?php
+                                }
+
+                                else if ($_GET['gt'] == "groundtype7") {
+                                    ?>
+                                        <!-- Add style for footer -->
+                                        <style>
+                                            .footer {
+                                                margin-top: 20rem;
+                                            }
+                                        </style>
+                                        
+                                        <div class="ground-type-5">
+                                            <h2>Sân 7 người</h2>
+                                            <p>Số lượng: 2 sân.</p>
+                                            <p>Sân hiện có: sân số 5, sân số 6</p>
+                                        </div>
+                                    <?php
+                                }
+
+                                else if ($_GET['gt'] == "groundtype11") {
+                                    ?>
+                                        <!-- Add style for footer -->
+                                        <style>
+                                            .footer {
+                                                margin-top: 20rem;
+                                            }
+                                        </style>
+                                        
+                                        <div class="ground-type-5">
+                                            <h2>Sân 11 người</h2>
+                                            <p>Số lượng: 1 sân.</p>
+                                            <p>Sân hiện có: sân số 7</p>
+                                        </div>
+                                    <?php
+                                }
+                            }
+
                             // Processing for viewing ground status
                             else if (isset($_GET['gs'])) {
                                 $db = getDatabase();
@@ -172,7 +226,7 @@
                                     <!-- Add style for footer -->
                                     <style>
                                         .footer {
-                                            margin-top: 30rem;
+                                            margin-top: 20rem;
                                         }
                                     </style>
 
@@ -286,7 +340,7 @@
                                     <!-- Add style for footer -->
                                     <style>
                                         .footer {
-                                            margin-top: 30rem;
+                                            margin-top: 20rem;
                                         }
                                     </style>
 

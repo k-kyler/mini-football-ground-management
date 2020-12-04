@@ -118,16 +118,16 @@
                     Các loại sân
                     
                     <ul class="ground-type-dropdown">
-                        <a href="#">
+                        <a href="index.php?gt=groundtype5">
                             <li>Sân 5 người</li>
                         </a>
                         
-                        <a href="#">
+                        <a href="index.php?gt=groundtype7">
                             <li>Sân 7 người</li>
                         </a>
 
-                        <a href="#">
-                            <li>Sân 9 người</li>
+                        <a href="index.php?gt=groundtype11">
+                            <li>Sân 11 người</li>
                         </a>
                     </ul>
                 </li>
