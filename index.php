@@ -14,7 +14,7 @@
     // Layout
     require_once('layout.php');
 
-    // Require date picker 
+    // Require date picker for using view ground status site
     ?>
         <script src="./JS/date-picker.js?v=<?php echo time(); ?>"></script>
     <?php

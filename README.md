@@ -18,7 +18,7 @@ Mini football's ground management website is a website for dealing with booking 
 
 7. Finally, clone the project and paste the Libraries folder to it.
 
-## Setting libraries in project
+## Setting libraries in project layout
 
 ```html
 <!-- Font Awesome -->
