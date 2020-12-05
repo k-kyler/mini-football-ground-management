@@ -30,7 +30,14 @@
         // Announcement session
         $_SESSION['booking-success'] = "Đã xóa lịch đặt sân!";
 
-        // Redirect back
-        header("Location: ../management.php?datechoose=$bookingDate&m=bookingground_payment");
+        if (isset($_GET['typebooking'])) {
+            // Redirect back
+            header("Location: ../index.php?datechoose=$bookingDate&bo=bookingonline");
+        }
+
+        else {
+            // Redirect back
+            header("Location: ../management.php?datechoose=$bookingDate&m=bookingground_payment");
+        }
     }
 ?>

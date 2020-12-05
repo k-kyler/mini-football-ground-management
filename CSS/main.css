@@ -156,6 +156,133 @@
     transition: all 0.4s;
 }
 
+/* Styles for booking online */
+.user-controller {
+    padding: 0.5rem;
+    display: flex;
+}
+
+.controller-button {
+    text-decoration: none;
+    color: black;
+}
+
+.controller-button:hover {
+    opacity: 0.7;
+    transition: all 0.4s;
+}
+
+.controller-button:not(:last-child) {
+    margin-right: 1rem;
+}
+
+.booking-online {
+    display: flex;
+    flex-direction: column;
+    background-color: #d3e3d26e;
+    border-radius: 8px;
+    padding: 2rem;
+}
+
+.old-submit, .edit-submit, .delete-submit {
+    background-color: #dc3545;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+    color: white;
+    cursor: pointer;
+}
+
+.edit-submit {
+    background-color: rgb(115, 39, 214);
+}
+
+.delete-submit {
+    background-color: #dc3545;
+}
+
+.old-submit:hover, .edit-submit:hover, .delete-submit:hover {
+    opacity: 0.85;
+    transition: all 0.4s;
+}
+
+.add-booking-form, .edit-booking-form, .delete-booking-form {
+    display: none;
+}
+
+.booking-online-title {
+    padding: 1rem 0;
+    text-align: center;
+    font-size: 1.3rem;
+    font-weight: bold;
+}
+
+.booking-online-empty {
+    text-align: center;
+    padding: 4rem 0;
+}
+
+.booking-list td, .booking-list th {
+    text-align: left;
+    padding: 0.8rem;
+    white-space: nowrap;
+}
+
+.booking-list td {
+    font-weight: 450;
+}
+
+.booking-list th {
+    font-size: 1.1rem;
+}
+
+.booking-list table {
+    width: 100%;
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+
+.booking-list {
+    height: 14rem;
+    overflow-x: auto;
+}
+
+#editBookingForm input[type="tel"],
+#editBookingForm input[name="editRealName"] {
+    width: 11rem;
+}
+
+.booking-error, .booking-success {
+    background-color: #f8d7da;
+    color: #721c24;
+    border-color: #f5c6cb;
+    width: 20rem;
+    display: flex;
+    border-radius: 4px;
+    padding: 0rem 0.7rem;
+    font-size: 1.1rem;
+    font-weight: 400;
+    justify-content: space-between;
+    align-items: center;
+    position: fixed;
+    bottom: 0.6rem;
+    right: 0.6rem;
+}
+
+.booking-success {
+    background-color: #d4edda;
+    color: #155724;
+    border-color: #c3e6cb;
+}
+
+.booking-error span, .booking-success span {
+    cursor: pointer;
+}
+
+.booking-error span:hover, .booking-success span:hover {
+    opacity: 0.7;
+}
+
 
 /*----- Responsive settings -----*/
 

@@ -171,7 +171,14 @@
             $_SESSION['booking-success'] = "Cập nhật thông tin thành công!";
         }
 
-        // Redirect back
-        header("Location: ../management.php?datechoose=$bookingDateSelected&m=bookingground_payment");
+        if (isset($_GET['typebooking'])) {
+            // Redirect back
+            header("Location: ../index.php?datechoose=$bookingDateSelected&bo=bookingonline");
+        }
+
+        else {
+            // Redirect back
+            header("Location: ../management.php?datechoose=$bookingDateSelected&m=bookingground_payment");
+        }
     }
 ?>
