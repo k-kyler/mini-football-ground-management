@@ -22,6 +22,9 @@
         // Generate payment id
         $paymentId = uniqid();
 
+        // Generate profit id
+        $profitId = uniqid();
+
         // Get booking id
         $insertBookingId = '';
         $bookingDetailsData = getBookingDetails($db);
@@ -63,6 +66,7 @@
 
         // Insert into database
         $paymentId = mysqli_escape_string($db, $paymentId);
+        $profitId = mysqli_escape_string($db, $profitId);
         $insertBookingId = mysqli_escape_string($db, $insertBookingId);
         $beverageType = mysqli_escape_string($db, $beverageType);
         $beverageCost = mysqli_escape_string($db, $beverageCost);
@@ -75,12 +79,13 @@
                         (payment_id, booking_id, beverage_type, beverage_cost, ground_cost, total_cost, payment_date) 
                         values 
                         ('$paymentId', '$insertBookingId', '$beverageType', '$beverageCost', '$groundCost', '$totalCost', '$paymentDate')";
-
         $result1 = $db -> query($sqlQuery1);
 
         $sqlQuery2 = "delete from bookingdetails where booking_id = '$insertBookingId'";
-
         $result2 = $db -> query($sqlQuery2);
+
+        $sqlQuery3 = "insert into profits (profit_id, payment_id) values ('$profitId', '$paymentId')";
+        $result3 = $db -> query($sqlQuery3);
 
         // Announcement session
         $_SESSION['booking-success'] = "Thanh toán thành công!";

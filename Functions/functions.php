@@ -445,4 +445,32 @@
             return null;
         }
     }
+
+    function getPaymentById($paymentId) {
+        $db = getDatabase();
+
+        $sqlQuery = "select * from payments where payment_id = ?";
+
+        $stm = $db ->prepare($sqlQuery);
+        $stm -> bind_param('s', $paymentId);
+        $status = $stm -> execute();
+
+        if ($status) {
+            $data = $stm -> get_result();
+
+            return $data;
+        }
+
+        else {
+            $stm -> close();
+
+            return null;
+        }
+    }
+
+    function getProfits($db){
+        $sqlQuery = "select * from profits";
+
+        return $db -> query($sqlQuery);
+    }
 ?>

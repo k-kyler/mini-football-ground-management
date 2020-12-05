@@ -1,0 +1,49 @@
+.statistic-profit-container {
+    padding: 1rem;
+    color: white;
+    background-color: black;
+    opacity: 0.9;
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+}
+
+.statistic-profit-title {
+    text-align: center;
+    font-size: 1.3rem;
+    font-weight: bold;
+    padding: 1rem 0;
+}
+
+.profits-list {
+    overflow-y: scroll;
+    height: 16rem;
+    overflow-x: auto;
+}
+
+.profits-list table {
+    width: 100%;
+    color: white;
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+
+.profits-list th, td {
+    text-align: left;
+    padding: 0.8rem 7rem 0.8rem 0.8rem;
+    white-space: nowrap;
+}
+
+.profits-list th {
+    font-size: 1.1rem;
+}
+
+.total-profit {
+    padding: 1rem 0.5rem 1rem 0.5rem;
+}
+
+.total-profit span {
+    color: rgb(46, 197, 46);
+}

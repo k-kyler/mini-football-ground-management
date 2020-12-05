@@ -66,7 +66,7 @@
                                         }
 
                                         else if ($_GET['m'] == "statisticprofit") {
-
+                                            require_once('./statistic-profit.php');
                                         }
                                     }
             
