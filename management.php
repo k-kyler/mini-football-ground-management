@@ -35,14 +35,32 @@
                             <i class="fas fa-chevron-down"></i>
                         </div>
 
-                        <div class="management-options">
-                            <a href="management.php?m=bookingground_payment">Quản lý đặt sân và thanh toán</a>
-                            <a href="management.php?m=usermanagement">Quản lý người dùng</a>
-                            <a href="management.php?m=beveragemanagement">Quản lý đồ uống</a>
-                            <a href="management.php?m=statisticprofit">Thống kê doanh thu</a>
-                            <a href="index.php">Về trang chủ</a>
-                            <a href="logout.php">Đăng xuất</a>
-                        </div>
+                        <?php
+                            if ($_SESSION['user_type'] == "admin") {
+                                ?>
+                                    <div class="management-options">
+                                        <a href="management.php?m=bookingground_payment">Quản lý đặt sân và thanh toán</a>
+                                        <a href="management.php?m=usermanagement">Quản lý người dùng</a>
+                                        <a href="management.php?m=beveragemanagement">Quản lý đồ uống</a>
+                                        <a href="management.php?m=statisticprofit">Thống kê doanh thu</a>
+                                        <a href="index.php">Về trang chủ</a>
+                                        <a href="logout.php">Đăng xuất</a>
+                                    </div>
+                                <?php
+                            }
+
+                            else if ($_SESSION['user_type'] == "staff") {
+                                ?>
+                                    <div class="management-options">
+                                        <a href="management.php?m=bookingground_payment">Quản lý đặt sân và thanh toán</a>
+                                        <a href="management.php?m=usermanagement">Quản lý người dùng</a>
+                                        <a href="management.php?m=beveragemanagement">Quản lý đồ uống</a>
+                                        <a href="index.php">Về trang chủ</a>
+                                        <a href="logout.php">Đăng xuất</a>
+                                    </div>
+                                <?php
+                            }
+                        ?>
                     </div>
                 </div>
 
