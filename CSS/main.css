@@ -1,3 +1,23 @@
+/* Styles for main page */
+.main-content {
+    margin-top: 2rem;
+    margin-bottom: 10rem;
+}
+
+.quality-content, .discount-content {
+    margin-top: 2rem;
+}
+
+.experience-link {
+    text-decoration: none;
+    color: rgb(20, 175, 85);
+}
+
+.experience-link:hover {
+    opacity: 0.7;
+    transition: all 0.4s;
+}
+
 /* Styles for login success popup message */
 .login-success {
     background-color: #d4edda;
@@ -288,20 +308,11 @@
 
 /* Small phone responsive */
 @media (max-width: 600px) {
+    .date-picker input[type="text"] {
+        width: 7rem;
+    }
 
-}
-
-/* Portrait tablet/large phone responsive */
-@media (min-width: 600px) {
-	
-}
-
-/* Landscape tablet/large phone responsive */
-@media (min-width: 1024px) { 
-	
-}
-
-/* Desktop/laptop responsive */
-@media (min-width: 1200px) {
-	
+    .empty-message, .date-picker label {
+        font-size: 0.9rem;
+    }
 }

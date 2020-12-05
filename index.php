@@ -1031,9 +1031,22 @@
                                     </div>
 
                                     <!-- Main Content -->
-                                    <!-- <div class="main-content">
-                                        <div class="main-title"></div>
-                                    </div> -->
+                                    <div class="main-content">
+                                        <!-- Introduction -->
+                                        <h2>Giới thiệu</h2>
+                                        <p>Sân bóng mini KHV, trang cung cấp dịch vụ cho thuê sân bóng mini trực tuyến.</p>
+                                        <p>Đặt sân dễ dàng, nhanh chóng và trải nghiệm dịch vụ chuyên nghiệp.</p>
+                                        
+                                        <!-- Quality -->
+                                        <h2 class="quality-content">Chất lượng</h2>
+                                        <p>Các sân bóng mini được đảm bảo tiêu chuẩn chất lượng cao.</p>
+                                        <p>Luôn được bảo dưỡng định kỳ hằng tháng để mang lại cho khách hàng trải nghiệm một sân bóng xịn sò.</p>
+
+                                        <!-- Discount -->
+                                        <h2 class="discount-content">Ưu đãi</h2>
+                                        <p>Miễn phí nước khi khách hàng đến đặt sân lần đầu.</p>
+                                        <p>Hãy cùng đến trải nghiệm dịch vụ <a href="index.php?bo=bookingonline" class="experience-link">tại đây</a>.</p>
+                                    </div>
                                 <?php
                             }
                         ?>

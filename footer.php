@@ -15,15 +15,15 @@
             <div class="footer-item col-4">
                 <h6 class="item-title">Dịch vụ</h6>
                 <p>Sân bóng mini chất lượng</p>
-                <p>Phục vụ nước miễn phí khi đặt sân</p>
+                <p>Miễn phí nước khi đặt sân lần đầu</p>
                 <p>Đặt sân trực tuyến</p>
             </div>
 
             <div class="footer-item col-4">
                 <h6 class="item-title">Liên hệ</h6>
-                <p>093-802-8109</p>
                 <p>khvground@gmail.com</p>
                 <p>19 Nguyễn Hữu Thọ, quận 7, TPHCM</p>
+                <p>093-802-8109</p>
             </div>
         </div>
     </div>
