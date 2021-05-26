@@ -1,6 +1,6 @@
 # Mini football's ground management website
 
-Mini football's ground management system is a website help dealing with booking mini football's ground situations.
+Mini football's ground management system is a website helps dealing with booking mini football's ground situations.
 
 ## Installation
 
