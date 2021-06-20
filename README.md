@@ -1,6 +1,6 @@
 # Mini football's ground management website
 
-Mini football's ground management system is my school project in learning the software development course. My system might not be good but it helped me understanding a lot of how a booking and managing system working.
+Mini football's ground management system is my school project in learning the software development course, it have given me lots of knowledge of how a booking and managing system working.
 
 ## Installation
 
