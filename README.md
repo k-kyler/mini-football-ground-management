@@ -46,7 +46,7 @@ Mini football's ground management system is my school project in learning the so
 
 2. Start Apache Server and MySQL Server.
 
-3. Import [database](https://drive.google.com/drive/folders/1pzWbaX5YuUl_BEZl7MmooVd9hZTH9i3X?usp=sharing) to MySQL Server
+3. Import [database](https://github.com/k-kyler/mini-football-ground-management/blob/master/mini_football_ground_management.sql) to MySQL Server
 
 4. Run and enjoyed the project.
 
